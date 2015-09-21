@@ -1,0 +1,9 @@
+representaçao de grafos:
+
+-lista de adjacências
+
+-tabela de adjacências
+
+
+ADT for graphs:
+-estrutura link para criar uma ligacao de nós na lista de adjacências

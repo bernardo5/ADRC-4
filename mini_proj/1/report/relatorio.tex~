@@ -19,9 +19,7 @@
 }
 
 \tableofcontents
-
 \pagenumbering{gobble}
-
 \pagebreak
 
 \pagenumbering{arabic}

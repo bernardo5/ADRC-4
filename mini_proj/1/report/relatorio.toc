@@ -1,0 +1,4 @@
+\select@language {portuguese}
+\contentsline {section}{\numberline {1}Descri\IeC {\c c}\IeC {\~a}o do problema}{1}{section.1}
+\contentsline {section}{\numberline {2}Resumo da abordagem ao problema}{1}{section.2}
+\contentsline {section}{\numberline {3}Considera\IeC {\c c}\IeC {\~o}es finais}{1}{section.3}

@@ -14,12 +14,6 @@ node* Initialize_node(){
 	return n;
 }
 
-void create_node(node*new, node*just_created){
-	new=just_created;
-	return;
-}
-
-
 
 void ReadTable(char*table_txt){
 	
@@ -50,7 +44,25 @@ void ReadTable(char*table_txt){
 			root->next_hop=next_hop;
 			printf("Next hop root is: %d\n", root->next_hop);
 		}else{
-			
+			int bit=0;
+			node*auxiliar=root;
+			while(bit<strlen(prefix)){
+				if(prefix[bit]=='0'){
+					
+					if((auxiliar->zero)==NULL) 
+						(auxiliar->zero)=Initialize_node();
+						
+					auxiliar=auxiliar->zero;
+				}else{
+					if((auxiliar->one)==NULL) 
+						(auxiliar->one)=Initialize_node();
+						
+					auxiliar=auxiliar->one;
+				}
+				bit++;
+			}
+			auxiliar->next_hop=next_hop;
+			printf("next_hop=%d\n", auxiliar->next_hop);
 		}
 	}
 	

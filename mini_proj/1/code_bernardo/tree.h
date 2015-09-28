@@ -6,8 +6,6 @@ typedef struct _node{
 	struct _node*one;
 }node;
 
-void create_node(node*new, node*just_created);
-
 node*Init_tree();
 
 node* Initialize_node();

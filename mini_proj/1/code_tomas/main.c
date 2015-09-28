@@ -1,4 +1,5 @@
 #include "file.h"
+#include "tree.h"
 
 int main(int argc, char *argv[]){
 	
@@ -13,8 +14,16 @@ int main(int argc, char *argv[]){
 	fp=fopen(table_txt, "r");
 	if(fp==NULL){printf("Error: %s\n",strerror(errno)); exit(1);}
 	
+	node * root;
+	
 	while((get_table_line(fp, &prefix, &next_hop)==0)){
-		printf("%s %d\n", prefix, next_hop);
+		/*root*/
+		if(strncmp(prefix,"*",1)==0){
+			root = initialize_node();
+			creates_root(root, next_hop);
+		}else{
+			receive_node(root, prefix, next_hop);
+		}
 	}
 	
 	exit(0);

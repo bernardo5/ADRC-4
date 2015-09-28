@@ -6,9 +6,9 @@ CC= gcc
 TARGET= main
 CFLAGS= -g -Wall -ansi
 
-SRCFILES= main.c file.c
-INCFILES= file.h
-OBJFILES= main.o file.o
+SRCFILES= main.c file.c tree.c
+INCFILES= file.h tree.h
+OBJFILES= main.o file.o tree.o
 
 default: $(TARGET)
 
@@ -21,3 +21,5 @@ clean:
 main.o: main.c
 
 file.o: file.c file.h
+
+tree.o: tree.c tree.h

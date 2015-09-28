@@ -3,4 +3,4 @@
 #include <string.h>
 #include <errno.h>
 
-void get_table_line(char**prefix, int*next_hop, FILE*fp);
+int get_table_line(char**prefix, int*next_hop, FILE*fp);

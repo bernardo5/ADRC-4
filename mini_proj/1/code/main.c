@@ -12,9 +12,10 @@ int main(){
 		exit ( 1 );
     }
 	
-	get_table_line(&prefix, &next_hop, fp);
+	while(get_table_line(&prefix, &next_hop, fp)==0){
+		printf("%s\t%d\n", prefix, next_hop);
+	}
 	
-	printf("%s\t%d\t\n", prefix, next_hop);
 	
 	fclose(fp);
 	

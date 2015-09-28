@@ -1,4 +1,4 @@
-#include "file.h"
+#include "tree.h"
 
 int main(int argc, char *argv[]){
 	
@@ -7,12 +7,17 @@ int main(int argc, char *argv[]){
 		exit(-1);
 	}
 	
-	char *table_txt=argv[1];
+	//char *table_txt=argv[1];
 	
-	char *prefix=malloc(10*sizeof(char));
-	int next_hop;
-	FILE*fp;
+	//char *prefix=malloc(10*sizeof(char));
+	//int next_hop;
+	//FILE*fp;
 	
+	node*root=Init_tree();
+	
+	if(root==NULL)printf("Era suposto\n");
+	//test only
+	/*
 	fp = fopen( table_txt , "r");
 	if ( fp == NULL ) {
 		fprintf ( stderr, "Error, cannot open file: %s!\n", table_txt);
@@ -25,6 +30,6 @@ int main(int argc, char *argv[]){
 	
 	
 	fclose(fp);
-	
+	*/
 	exit(0);
 }

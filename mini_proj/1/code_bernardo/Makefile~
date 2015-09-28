@@ -1,2 +1,2 @@
 main: 
-	gcc main.c file.c
+	gcc main.c file.c tree.c -o main

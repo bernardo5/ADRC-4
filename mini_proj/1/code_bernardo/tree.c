@@ -1,5 +1,10 @@
-#include "file.h"
 #include "tree.h"
+
+node*Init_tree(){
+	node*aux=NULL;
+	return aux;
+}
+
 
 node* Initialize_node(){
 	node*n=malloc(sizeof(node));

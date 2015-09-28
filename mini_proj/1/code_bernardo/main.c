@@ -9,7 +9,7 @@ int main(int argc, char *argv[]){
 	
 	char *table_txt=argv[1];
 	
-	
+	ReadTable(table_txt);
 	
 	
 	

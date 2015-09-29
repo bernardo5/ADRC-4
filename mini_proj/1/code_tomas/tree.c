@@ -28,7 +28,9 @@ void receive_node(node * root, char * prefix, int next_hop){
 	
 	node * n;
 	node * temp;
+	node * blank_node;
 	n=initialize_node();
+	n->next_hop=next_hop;
 	
 	temp=root;
 	
@@ -36,19 +38,43 @@ void receive_node(node * root, char * prefix, int next_hop){
 	
 		/*ser um 0*/
 		if(prefix[i]==48){
-			if(temp->zero==NULL){
-				temp->zero=n;
+			if(prefix[i+1]>49 || prefix[i+1]<48){
+					temp->zero=n;
 			}else{
-				temp=temp->zero;
+				if(temp->zero==NULL){
+					blank_node=initialize_node();
+					temp->zero=blank_node;
+					temp=blank_node;
+				}else{
+					temp=temp->zero;
+				}
 			}
 			
 		/*ser um 1*/
 		}else if(prefix[i]==49){
-			if(temp->one==NULL){
+			if(prefix[i+1]>49 || prefix[i+1]<48){
 				temp->one=n;
 			}else{
-				temp=temp->one;
+				if(temp->one==NULL){
+					blank_node=initialize_node();
+					temp->one=blank_node;
+					temp=blank_node;
+				}else{
+					temp=temp->one;
+				}
 			}
 		}		
 	}
+}
+
+void print_tree_vec(node * root){
+	
+	node * temp=root;
+	
+	while((temp->one!=NULL)&&(temp->zero!=NULL)){
+	
+	
+	
+	}
+	
 }

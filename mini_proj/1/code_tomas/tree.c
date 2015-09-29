@@ -66,15 +66,3 @@ void receive_node(node * root, char * prefix, int next_hop){
 		}		
 	}
 }
-
-void print_tree_vec(node * root){
-	
-	node * temp=root;
-	
-	while((temp->one!=NULL)&&(temp->zero!=NULL)){
-	
-	
-	
-	}
-	
-}

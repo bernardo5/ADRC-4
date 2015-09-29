@@ -13,9 +13,18 @@ int main(int argc, char *argv[]){
 	
 	if(root==NULL)printf("Table successfully initialized\n");
 	
-	
-	
 	ReadTable(&root, table_txt);
+	
+	AddPrefix(&root, "001", 10);
+	printf("001 next hop is: %d\n", root->zero->zero->one->next_hop);
+	printf("00 next hop is: %d\n", root->zero->zero->next_hop);
+	printf("0 next hop is: %d\n", root->zero->next_hop);
+	
+	DeletePrefix(&root, "000");
+	
+	DeletePrefix(&root, "*");
+	
+	DeletePrefix(&root, "00");
 	
 	exit(0);
 }

@@ -19,30 +19,42 @@ void AddPrefix(node**root, char*prefix, int next_hop){
 		 * or a bit sequence*/
 		 printf("%s\t%d\n", prefix, next_hop);
 		if(strcmp(prefix, "*")==0){
-			printf("empty prefix\n");
 			(*root)->next_hop=next_hop;
-			printf("Next hop root is: %d\n", (*root)->next_hop);
 		}else{
 			int bit=0;
 			node*auxiliar=(*root);
 			while(bit<strlen(prefix)){
 				if(prefix[bit]=='0'){
 					
-					if((auxiliar->zero)==NULL) 
-						(auxiliar->zero)=Initialize_node();
-						
+					if((auxiliar->zero)==NULL){
+						if(next_hop!=-1){
+							(auxiliar->zero)=Initialize_node();
+						}else{
+							printf("Prefix does not exist\n");
+							return;
+						}
+					}
 					auxiliar=auxiliar->zero;
 				}else{
-					if((auxiliar->one)==NULL) 
-						(auxiliar->one)=Initialize_node();
-						
+					if((auxiliar->one)==NULL){
+						if(next_hop!=-1){
+							(auxiliar->one)=Initialize_node();
+						}else{
+							printf("Prefix does not exist\n");
+							return;
+						}
+					}	
 					auxiliar=auxiliar->one;
 				}
 				bit++;
 			}
 			auxiliar->next_hop=next_hop;
-			printf("next_hop=%d\n", auxiliar->next_hop);
 		}
+	return;
+}
+
+void DeletePrefix(node**root, char*prefix){
+	AddPrefix(root, prefix, -1);
 	return;
 }
 
@@ -67,7 +79,6 @@ void ReadTable(node**root, char*table_txt){
 	while(get_table_line(&prefix, &next_hop, fp)==0){
 		AddPrefix(root, prefix, next_hop);
 	}
-	printf("00 next hop is: %d\n", ((*root)->zero)->next_hop);
 	fclose(fp);
 	return;
 }

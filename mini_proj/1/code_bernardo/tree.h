@@ -10,5 +10,7 @@ node*Init_tree();
 
 node* Initialize_node();
 
+void AddPrefix(node**root, char*prefix, int next_hop);
+
 void ReadTable(node**root, char*table_txt);
 

@@ -15,7 +15,7 @@ node* Initialize_node(){
 }
 
 
-void ReadTable(char*table_txt){
+void ReadTable(node**root, char*table_txt){
 	
 	char *prefix=malloc(10*sizeof(char));
 	int next_hop;
@@ -27,13 +27,10 @@ void ReadTable(char*table_txt){
 		fprintf ( stderr, "Error, cannot open file: %s!\n", table_txt);
 		exit ( 1 );
     }
-	
+
 	/*Tree initialization with the root pointer*/
-	node*root=Init_tree();
 	
-	if(root==NULL)printf("Table successfully initialized\n");
-	
-	root = Initialize_node();	
+	(*root) = Initialize_node();	
 	
 	while(get_table_line(&prefix, &next_hop, fp)==0){
 		/*the prefix read can be * for empty prefixes
@@ -41,11 +38,11 @@ void ReadTable(char*table_txt){
 		 printf("%s\t%d\n", prefix, next_hop);
 		if(strcmp(prefix, "*")==0){
 			printf("empty prefix\n");
-			root->next_hop=next_hop;
-			printf("Next hop root is: %d\n", root->next_hop);
+			(*root)->next_hop=next_hop;
+			printf("Next hop root is: %d\n", (*root)->next_hop);
 		}else{
 			int bit=0;
-			node*auxiliar=root;
+			node*auxiliar=(*root);
 			while(bit<strlen(prefix)){
 				if(prefix[bit]=='0'){
 					
@@ -65,7 +62,7 @@ void ReadTable(char*table_txt){
 			printf("next_hop=%d\n", auxiliar->next_hop);
 		}
 	}
-	
+	printf("00 next hop is: %d\n", ((*root)->zero)->zero->next_hop);
 	fclose(fp);
 	return;
 }

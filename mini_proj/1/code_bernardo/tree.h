@@ -10,3 +10,5 @@ node*Init_tree();
 
 node* Initialize_node();
 
+void ReadTable(node**root, char*table_txt);
+

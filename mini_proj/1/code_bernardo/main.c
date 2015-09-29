@@ -9,11 +9,13 @@ int main(int argc, char *argv[]){
 	
 	char *table_txt=argv[1];
 	
-	ReadTable(table_txt);
+	node*root=Init_tree();
+	
+	if(root==NULL)printf("Table successfully initialized\n");
 	
 	
 	
-	
+	ReadTable(&root, table_txt);
 	
 	exit(0);
 }

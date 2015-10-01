@@ -17,7 +17,7 @@ void Free_Node(node*base_node);
 
 void AddPrefix(node**root, char*prefix, int next_hop);
 
-void DeletePrefix(node**root, char*prefix);
+int DeletePrefix(node**root, char*prefix);
 
 void ReadTable(node**root, char*table_txt);
 

@@ -71,37 +71,52 @@ void AddPrefix(node**root, char*prefix, int next_hop){
 	return;
 }
 
-void DeletePrefix(node**base_node, char*prefix){
+int DeletePrefix(node**base_node, char*prefix){
 	
 	/*AddPrefix(root, prefix, -1); versao apagar sem frees*/
 	
-	if(strlen(prefix)==0){
+	if(strlen(prefix)>0){
+	
+		if(prefix[0]=='0'){
+			prefix=NewPrefix(prefix);
+			/*verificar que existe no*/
+			if((*base_node)->zero!=NULL){
+				if((DeletePrefix((&(*base_node)->zero), prefix))==1){
+					(*base_node)->zero=NULL;
+				}
+			}
+			else{
+				printf("Prefix doesn't exist\n");
+				exit(1);
+			}
+			
+			
+			
+		}else if(prefix[0]=='1'){
+			prefix=NewPrefix(prefix);
+			if((*base_node)->one!=NULL){
+				if((DeletePrefix((&(*base_node)->one), prefix)==1)){
+					(*base_node)->one=NULL;
+				}
+			}else{
+				printf("Prefix doesn't exist\n");
+				exit(1);
+			}
+		}
+	}
+	
+	
+	else if(strlen(prefix)==0){
 	/*chegamos ao destino*/
 		if((*base_node)->zero==NULL && (*base_node)->one==NULL){
 			Free_Node(*base_node);
+			return 1;
 		}else{
 			(*base_node)->next_hop=-1;
 		}	
 	}
-	if(prefix[0]=='0'){
-		prefix=NewPrefix(prefix);
-		if((*base_node)->zero!=NULL){
-			DeletePrefix((&(*base_node)->zero), prefix);
-		}else{
-			printf("Prefix doesn't exist\n");
-			exit(1);
-		}
-	}else if(prefix[0]=='1'){
-		prefix=NewPrefix(prefix);
-		if((*base_node)->one!=NULL){
-			DeletePrefix((&(*base_node)->one), prefix);
-		}else{
-			printf("Prefix doesn't exist\n");
-			exit(1);
-		}
-	}
 	
-	return;
+	return 0;
 }
 
 

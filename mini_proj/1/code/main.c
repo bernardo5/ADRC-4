@@ -1,4 +1,4 @@
-#include "file.h"
+#include "tree.h"
 
 int main(int argc, char *argv[]){
 	
@@ -9,22 +9,24 @@ int main(int argc, char *argv[]){
 	
 	char *table_txt=argv[1];
 	
-	char *prefix=malloc(10*sizeof(char));
-	int next_hop;
-	FILE*fp;
+	node*root=Init_tree();
 	
-	fp = fopen( table_txt , "r");
-	if ( fp == NULL ) {
-		fprintf ( stderr, "Error, cannot open file: %s!\n", table_txt);
-		exit ( 1 );
-    }
+	if(root==NULL)printf("Table successfully initialized\n");
 	
-	while(get_table_line(&prefix, &next_hop, fp)==0){
-		printf("%s\t%d\n", prefix, next_hop);
-	}
+	ReadTable(&root, table_txt);
 	
+	AddPrefix(&root, "001", 10);
+	printf("001 next hop is: %d\n", root->zero->zero->one->next_hop);
+	printf("00 next hop is: %d\n", root->zero->zero->next_hop);
+	printf("0 next hop is: %d\n", root->zero->next_hop);
 	
-	fclose(fp);
+	DeletePrefix(&root, "000");
+	
+	DeletePrefix(&root, "*");
+	
+	DeletePrefix(&root, "00");
+	
+	PrintTable(root);
 	
 	exit(0);
 }

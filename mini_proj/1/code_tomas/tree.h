@@ -1,11 +1,25 @@
+#include "file.h"
+
 typedef struct _node{
-	
 	int next_hop;
-	struct _node * zero;
-	struct _node * one;
-	
+	char * prefix;
+	struct _node*zero;
+	struct _node*one;
 }node;
 
-node * initialize_node();
-void creates_root(node * n, int next_hop);
-void receive_node(node * root, char * prefix, int next_hop);
+node*Init_tree();
+
+node*Initialize_node();
+
+char*NewPrefix(char*prefix);
+
+void Free_Node(node*base_node);
+
+void AddPrefix(node**root, char*prefix, int next_hop);
+
+void DeletePrefix(node**root, char*prefix);
+
+void ReadTable(node**root, char*table_txt);
+
+void PrintTable(node*base_node);
+

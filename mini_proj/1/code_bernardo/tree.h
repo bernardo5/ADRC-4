@@ -9,11 +9,15 @@ typedef struct _node{
 
 node*Init_tree();
 
-node* Initialize_node();
+node*Initialize_node();
 
 void AddPrefix(node**root, char*prefix, int next_hop);
 
-void DeletePrefix(node**root, char*prefix);
+char*NewPrefix(char*prefix);
+
+void Free_Node(node*base_node);
+
+int DeletePrefix(node**root, char*prefix);
 
 void ReadTable(node**root, char*table_txt);
 

@@ -17,7 +17,6 @@ node* Initialize_node(){
 void AddPrefix(node**root, char*prefix, int next_hop){
 	/*the prefix read can be * for empty prefixes
 		 * or a bit sequence*/
-		 /*printf("%s\t%d\n", prefix, next_hop);*/
 		if(strcmp(prefix, "*")==0){
 			(*root)->next_hop=next_hop;
 			(*root)->prefix=malloc(sizeof(char)*strlen(prefix)+1);
@@ -57,9 +56,67 @@ void AddPrefix(node**root, char*prefix, int next_hop){
 	return;
 }
 
-void DeletePrefix(node**root, char*prefix){
-	AddPrefix(root, prefix, -1);
+void Free_Node(node*base_node){
+	
+	free(base_node->prefix);
+	free(base_node);
+	
 	return;
+}
+
+char*NewPrefix(char*prefix){
+	
+	prefix++;
+	
+	return prefix;
+}
+
+int DeletePrefix(node**base_node, char*prefix){
+	
+	/*AddPrefix(root, prefix, -1); versao apagar sem frees*/
+	
+	if(strlen(prefix)>0){
+	
+		if(prefix[0]=='0'){
+			prefix=NewPrefix(prefix);
+			/*verificar que existe no*/
+			if((*base_node)->zero!=NULL){
+				if((DeletePrefix((&(*base_node)->zero), prefix))==1){
+					(*base_node)->zero=NULL;
+				}
+			}
+			else{
+				printf("Prefix doesn't exist\n");
+				return -1;
+			}
+			
+			
+			
+		}else if(prefix[0]=='1'){
+			prefix=NewPrefix(prefix);
+			if((*base_node)->one!=NULL){
+				if((DeletePrefix((&(*base_node)->one), prefix)==1)){
+					(*base_node)->one=NULL;
+				}
+			}else{
+				printf("Prefix doesn't exist\n");
+				return -1;
+			}
+		}
+	}
+	
+	
+	else if(strlen(prefix)==0){
+	/*chegamos ao destino*/
+		if((*base_node)->zero==NULL && (*base_node)->one==NULL){
+			Free_Node(*base_node);
+			return 1;
+		}else{
+			(*base_node)->next_hop=-1;
+		}	
+	}
+	
+	return 0;
 }
 
 

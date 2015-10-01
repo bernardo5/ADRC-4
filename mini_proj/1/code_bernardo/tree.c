@@ -17,9 +17,11 @@ node* Initialize_node(){
 void AddPrefix(node**root, char*prefix, int next_hop){
 	/*the prefix read can be * for empty prefixes
 		 * or a bit sequence*/
-		 printf("%s\t%d\n", prefix, next_hop);
+		 /*printf("%s\t%d\n", prefix, next_hop);*/
 		if(strcmp(prefix, "*")==0){
 			(*root)->next_hop=next_hop;
+			(*root)->prefix=malloc(sizeof(char)*strlen(prefix)+1);
+			strcpy((*root)->prefix, prefix);
 		}else{
 			int bit=0;
 			node*auxiliar=(*root);
@@ -49,6 +51,8 @@ void AddPrefix(node**root, char*prefix, int next_hop){
 				bit++;
 			}
 			auxiliar->next_hop=next_hop;
+			auxiliar->prefix=malloc(sizeof(char)*strlen(prefix)+1);
+			strcpy(auxiliar->prefix, prefix);
 		}
 	return;
 }
@@ -80,6 +84,19 @@ void ReadTable(node**root, char*table_txt){
 		AddPrefix(root, prefix, next_hop);
 	}
 	fclose(fp);
+	return;
+}
+
+void PrintTable(node*base_node){
+	if((base_node->next_hop)!=-1){
+		printf("%s\t%d\n", base_node->prefix, base_node->next_hop);
+	}
+	if(base_node->zero!=NULL){
+		PrintTable(base_node->zero);
+	}
+	if(base_node->one!=NULL){
+		PrintTable(base_node->one);
+	}
 	return;
 }
 

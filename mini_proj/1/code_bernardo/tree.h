@@ -2,6 +2,7 @@
 
 typedef struct _node{
 	int next_hop;
+	char * prefix;
 	struct _node*zero;
 	struct _node*one;
 }node;
@@ -15,4 +16,6 @@ void AddPrefix(node**root, char*prefix, int next_hop);
 void DeletePrefix(node**root, char*prefix);
 
 void ReadTable(node**root, char*table_txt);
+
+void PrintTable(node*base_node);
 

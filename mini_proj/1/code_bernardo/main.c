@@ -26,5 +26,7 @@ int main(int argc, char *argv[]){
 	
 	DeletePrefix(&root, "00");
 	
+	PrintTable(root);
+	
 	exit(0);
 }

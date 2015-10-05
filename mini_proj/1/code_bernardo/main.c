@@ -37,5 +37,7 @@ int main(int argc, char *argv[]){
 	
 	printf("next_hop:\t%d\n",AddressLookUp(root, "1110101010101"));
 	
+	printf("next_hop:\t%d\n",AddressLookUp(root, "1110101010101f"));
+	
 	exit(0);
 }

@@ -24,7 +24,7 @@ int main(int argc, char *argv[]){
 	
 	//DeletePrefix(&root, "*");
 	
-	//DeletePrefix(&root, "10");
+	DeletePrefix(&root, "10");
 	
 	
 	

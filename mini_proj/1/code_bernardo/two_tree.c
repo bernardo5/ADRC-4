@@ -51,7 +51,7 @@ void convert_tree(node**base_node, int next_hop){
 		}
 		convert_tree(&((*base_node)->zero), update_next_hop(*base_node, next_hop));
 		convert_tree(&((*base_node)->one), update_next_hop(*base_node, next_hop));
+		free(new_prefix);
 	}
-	
 	return;
 }

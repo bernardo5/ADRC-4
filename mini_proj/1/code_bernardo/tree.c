@@ -5,13 +5,6 @@ node*Init_tree(){
 	return aux;
 }
 
-char* concatenate_prefix(char*prefix, char*number){
-	char*new_prefix=malloc(sizeof(char)*(strlen(prefix)+strlen(number)+1));
-	strcpy(new_prefix, prefix);
-	strcat(new_prefix, number);
-	return new_prefix;
-}
-
 node* Initialize_node(char*prefix){
 	node*n=malloc(sizeof(node));
 	n->next_hop=-1; /*no hop specified*/
@@ -64,6 +57,7 @@ void AddPrefix(node**root, char*prefix, int next_hop){
 			auxiliar->prefix=malloc(sizeof(char)*strlen(prefix)+1);
 			strcpy(auxiliar->prefix, prefix);
 		}
+	free(current_prefix);
 	return;
 }
 

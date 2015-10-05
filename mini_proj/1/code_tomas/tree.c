@@ -33,52 +33,49 @@ char*NewPrefix(char*prefix){
 	return prefix;
 }
 
-char*concatenate_prefix(char*prefix, char*number){
-
-	char*newprefix=malloc(sizeof(char)*(strlen(prefix)+strlen(number)+1));
-	strcpy(newprefix, prefix);
-	strcat(newprefix, number);
-	
-	return newprefix;
-}
 
 void AddPrefix(node**root, char*prefix, int next_hop){
 	/*the prefix read can be * for empty prefixes
 		 * or a bit sequence*/
-		if(strcmp(prefix, "*")==0){
-			(*root)->next_hop=next_hop;
-			(*root)->prefix=malloc(sizeof(char)*strlen(prefix)+1);
-			strcpy((*root)->prefix, prefix);
-		}else{
-			int bit=0;
-			node*auxiliar=(*root);
-			while(bit<strlen(prefix)){
-				if(prefix[bit]=='0'){
-					
-					if((auxiliar->zero)==NULL){
-						if(next_hop!=-1){
-							(auxiliar->zero)=Initialize_node();
-						}else{
-							printf("Prefix does not exist\n");
-							return;
-						}
+	char*current_prefix=malloc(sizeof(char)*(strlen(prefix)+1));
+	 
+	if(strcmp(prefix, "*")==0){
+		(*root)->next_hop=next_hop;
+		(*root)->prefix=malloc(sizeof(char)*strlen(prefix)+1);
+		strcpy((*root)->prefix, prefix);
+	}else{
+		int bit=0;
+		node*auxiliar=(*root);
+		while(bit<strlen(prefix)){
+			if(prefix[bit]=='0'){
+				strcat(current_prefix, "0");
+				if((auxiliar->zero)==NULL){
+					if(next_hop!=-1){
+						(auxiliar->zero)=Initialize_node(current_prefix);
+					}else{
+						printf("Prefix does not exist\n");
+						return;
 					}
-					auxiliar=auxiliar->zero;
-				}else{
-					if((auxiliar->one)==NULL){
-						if(next_hop!=-1){
-							(auxiliar->one)=Initialize_node();
-						}else{
-							printf("Prefix does not exist\n");
-							return;
-						}
-					}	
-					auxiliar=auxiliar->one;
 				}
-				bit++;
+				auxiliar=auxiliar->zero;
+			}else{
+				strcat(current_prefix, "1");
+				if((auxiliar->one)==NULL){
+					if(next_hop!=-1){
+						(auxiliar->one)=Initialize_node(current_prefix);
+					}else{
+						printf("Prefix does not exist\n");
+						return;
+					}
+				}	
+				auxiliar=auxiliar->one;
 			}
-			auxiliar->next_hop=next_hop;
+			bit++;
 		}
+		auxiliar->next_hop=next_hop;
+		auxiliar->prefix=malloc(sizeof(char)*strlen(prefix)+1);
+		strcpy(auxiliar->prefix, prefix);		
+	}
 	return;
 }
 

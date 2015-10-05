@@ -9,7 +9,7 @@ typedef struct _node{
 
 node*Init_tree();
 
-node*Initialize_node();
+node* Initialize_node(char*prefix);
 
 void AddPrefix(node**root, char*prefix, int next_hop);
 

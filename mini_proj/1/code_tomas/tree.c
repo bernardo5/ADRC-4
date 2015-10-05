@@ -50,23 +50,13 @@ void AddPrefix(node**root, char*prefix, int next_hop){
 			if(prefix[bit]=='0'){
 				strcat(current_prefix, "0");
 				if((auxiliar->zero)==NULL){
-					if(next_hop!=-1){
-						(auxiliar->zero)=Initialize_node(current_prefix);
-					}else{
-						printf("Prefix does not exist\n");
-						return;
-					}
+					(auxiliar->zero)=Initialize_node(current_prefix);
 				}
 				auxiliar=auxiliar->zero;
 			}else{
 				strcat(current_prefix, "1");
 				if((auxiliar->one)==NULL){
-					if(next_hop!=-1){
-						(auxiliar->one)=Initialize_node(current_prefix);
-					}else{
-						printf("Prefix does not exist\n");
-						return;
-					}
+					(auxiliar->one)=Initialize_node(current_prefix);
 				}	
 				auxiliar=auxiliar->one;
 			}
@@ -76,6 +66,7 @@ void AddPrefix(node**root, char*prefix, int next_hop){
 		auxiliar->prefix=malloc(sizeof(char)*strlen(prefix)+1);
 		strcpy(auxiliar->prefix, prefix);		
 	}
+	free(current_prefix);
 	return;
 }
 

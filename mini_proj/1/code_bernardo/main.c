@@ -1,4 +1,4 @@
-#include "tree.h"
+#include "two_tree.h"
 
 int main(int argc, char *argv[]){
 	
@@ -20,11 +20,17 @@ int main(int argc, char *argv[]){
 	printf("00 next hop is: %d\n", root->zero->zero->next_hop);
 	printf("0 next hop is: %d\n", root->zero->next_hop);
 	*/
-	DeletePrefix(&root, "010");	
+	//DeletePrefix(&root, "010");	
 	
 	/*DeletePrefix(&root, "*");*/
 	
 	//DeletePrefix(&root, "10");
+	
+	
+	
+	PrintTable(root);
+	
+	convert_tree(&root, root->next_hop);
 	
 	PrintTable(root);
 	

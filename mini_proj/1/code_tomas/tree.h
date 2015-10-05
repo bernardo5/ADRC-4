@@ -9,11 +9,13 @@ typedef struct _node{
 
 node*Init_tree();
 
-node*Initialize_node();
+node*Initialize_node(char*prefix);
 
 char*NewPrefix(char*prefix);
 
 void Free_Node(node*base_node);
+
+char*concatenate_prefix(char*prefix, char*number);
 
 void AddPrefix(node**root, char*prefix, int next_hop);
 

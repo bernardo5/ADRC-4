@@ -6,12 +6,16 @@ node*Init_tree(){
 }
 
 
-node*Initialize_node(){
+node*Initialize_node(char*prefix){
+	
 	node*n=malloc(sizeof(node));
 	n->next_hop=-1; /*no hop specified*/
+	n->prefix=malloc(sizeof(char)*strlen(prefix)+1);
+	strcpy(n->prefix, prefix);
 	n->zero=NULL;
 	n->one=NULL;
 	return n;
+	
 }
 
 void Free_Node(node*base_node){
@@ -27,6 +31,15 @@ char*NewPrefix(char*prefix){
 	prefix++;
 	
 	return prefix;
+}
+
+char*concatenate_prefix(char*prefix, char*number){
+
+	char*newprefix=malloc(sizeof(char)*(strlen(prefix)+strlen(number)+1));
+	strcpy(newprefix, prefix);
+	strcat(newprefix, number);
+	
+	return newprefix;
 }
 
 void AddPrefix(node**root, char*prefix, int next_hop){
@@ -65,8 +78,6 @@ void AddPrefix(node**root, char*prefix, int next_hop){
 				bit++;
 			}
 			auxiliar->next_hop=next_hop;
-			auxiliar->prefix=malloc(sizeof(char)*strlen(prefix)+1);
-			strcpy(auxiliar->prefix, prefix);
 		}
 	return;
 }
@@ -135,7 +146,7 @@ void ReadTable(node**root, char*table_txt){
 
 	/*Tree initialization with the root pointer*/
 	
-	(*root) = Initialize_node();	
+	(*root) = Initialize_node("*");	
 	
 	while(get_table_line(&prefix, &next_hop, fp)==0){
 		AddPrefix(root, prefix, next_hop);

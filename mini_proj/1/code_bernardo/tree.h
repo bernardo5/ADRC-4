@@ -1,7 +1,7 @@
 #include "file.h"
 
 typedef struct _node{
-	int next_hop;
+	int next_hop;/*value if it has info, -1 if its just a path node*/
 	char * prefix;
 	struct _node*zero;
 	struct _node*one;

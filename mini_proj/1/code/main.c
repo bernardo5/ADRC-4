@@ -22,9 +22,9 @@ int main(int argc, char *argv[]){
 	*/
 	//DeletePrefix(&root, "010");	
 	
-	DeletePrefix(&root, "*");
+	//DeletePrefix(&root, "*");
 	
-	//DeletePrefix(&root, "10");
+	DeletePrefix(&root, "10");
 	
 	
 	

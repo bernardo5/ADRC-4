@@ -37,11 +37,16 @@ void convert_tree(node**base_node, int next_hop){
 		}
 	}else{ /*middle node case*/
 		int check=child_check(*base_node);
+		char*new_prefix=malloc(sizeof(char)*(strlen((*base_node)->prefix)+strlen("1")+1));
 		if(check==0){
-			(*base_node)->zero=Initialize_node();
+			strcpy(new_prefix, (*base_node)->prefix);
+			strcat(new_prefix, "0");
+			(*base_node)->zero=Initialize_node(new_prefix);
 		}else{
 			if(check==1){
-				(*base_node)->one=Initialize_node();
+				strcpy(new_prefix, (*base_node)->prefix);
+				strcat(new_prefix, "1");
+				(*base_node)->one=Initialize_node(new_prefix);
 			}
 		}
 		convert_tree(&((*base_node)->zero), update_next_hop(*base_node, next_hop));

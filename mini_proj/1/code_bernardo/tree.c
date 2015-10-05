@@ -25,6 +25,8 @@ node* Initialize_node(char*prefix){
 void AddPrefix(node**root, char*prefix, int next_hop){
 	/*the prefix read can be * for empty prefixes
 		 * or a bit sequence*/
+		char* current_prefix=malloc(sizeof(char)*(strlen(prefix)+1));
+		
 		if(strcmp(prefix, "*")==0){
 			(*root)->next_hop=next_hop;
 			(*root)->prefix=malloc(sizeof(char)*strlen(prefix)+1);
@@ -34,10 +36,10 @@ void AddPrefix(node**root, char*prefix, int next_hop){
 			node*auxiliar=(*root);
 			while(bit<strlen(prefix)){
 				if(prefix[bit]=='0'){
-					
+					strcat(current_prefix, "0");
 					if((auxiliar->zero)==NULL){
 						if(next_hop!=-1){
-							(auxiliar->zero)=Initialize_node();
+							(auxiliar->zero)=Initialize_node(current_prefix);
 						}else{
 							printf("Prefix does not exist\n");
 							return;
@@ -45,9 +47,10 @@ void AddPrefix(node**root, char*prefix, int next_hop){
 					}
 					auxiliar=auxiliar->zero;
 				}else{
+					strcat(current_prefix, "1");
 					if((auxiliar->one)==NULL){
 						if(next_hop!=-1){
-							(auxiliar->one)=Initialize_node();
+							(auxiliar->one)=Initialize_node(current_prefix);
 						}else{
 							printf("Prefix does not exist\n");
 							return;
@@ -83,7 +86,7 @@ int DeletePrefix(node**base_node, char*prefix){
 	
 	/*AddPrefix(root, prefix, -1); versao apagar sem frees*/
 	
-	if(strcmp("*", prefix)==0) return;
+	if(strcmp("*", prefix)==0) return -1;
 	
 	if(strlen(prefix)>0){
 	

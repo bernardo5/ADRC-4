@@ -1,5 +1,6 @@
 #include "two_tree.h"
 
+/*returns 1 if the node is a leaf*/
 int leaf_check(node*base_node){
 	if((base_node->zero==NULL)&& (base_node->one==NULL)){
 		return 1;
@@ -8,6 +9,7 @@ int leaf_check(node*base_node){
 	}
 }
 
+/*returns 0 or 1 if there is need of adding a node struct in the tree conversion*/
 int child_check(node*base_node){
 	/*cant be both otherwise leaf_check=1*/
 	if((base_node->zero)==NULL){
@@ -21,12 +23,13 @@ int child_check(node*base_node){
 
 }
 
+/*returns the next hop value that the specified prefix will have*/
 int update_next_hop(node*base_node, int next_hop){
 	if((base_node->next_hop)!=-1){
 		/*change the value*/
 		return (base_node->next_hop);
 	}
-	return next_hop;	
+	return next_hop;
 }
 
 
@@ -38,12 +41,12 @@ void convert_tree(node**base_node, int next_hop){
 	}else{ /*middle node case*/
 		int check=child_check(*base_node);
 		char*new_prefix=malloc(sizeof(char)*(strlen((*base_node)->prefix)+strlen("1")+1));
-		if(check==0){
+		if(check==0){/*need to create a new node*/
 			strcpy(new_prefix, (*base_node)->prefix);
 			strcat(new_prefix, "0");
 			(*base_node)->zero=Initialize_node(new_prefix);
 		}else{
-			if(check==1){
+			if(check==1){/*need to create new node*/
 				strcpy(new_prefix, (*base_node)->prefix);
 				strcat(new_prefix, "1");
 				(*base_node)->one=Initialize_node(new_prefix);
@@ -56,9 +59,10 @@ void convert_tree(node**base_node, int next_hop){
 	return;
 }
 
+/*verifies if the address specified is a valid prefix*/
 int verify_address(char*address){
 	int i;
-	
+
 	for(i=0;i<strlen(address);i++){
 		if((address[i]!='0')&&(address[i]!='1'))return -1;
 	}
@@ -67,21 +71,23 @@ int verify_address(char*address){
 
 int AddressLookUp(node*root, char*address){
 	if(verify_address(address)==-1) return -1;
+	/*only continues if the address is valid*/
 	int bit=0;
 	node*auxiliar=root;
+	/*while its possible goes has far as possible in the tree*/
 	while(bit<strlen(address)){
 				if(address[bit]=='0'){
-					if((auxiliar->zero)==NULL){
+					if((auxiliar->zero)==NULL){/*reached as far as possible*/
 						return auxiliar->next_hop;
 					}
 					auxiliar=auxiliar->zero;
 				}else{
 					if((auxiliar->one)==NULL){
 						return auxiliar->next_hop;
-					}	
+					}
 					auxiliar=auxiliar->one;
 				}
 				bit++;
 	}
-	return -1;	
+	return -1;/*compilation issue only*/
 }

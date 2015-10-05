@@ -5,12 +5,20 @@ node*Init_tree(){
 	return aux;
 }
 
+char* concatenate_prefix(char*prefix, char*number){
+	char*new_prefix=malloc(sizeof(char)*(strlen(prefix)+strlen(number)+1));
+	strcpy(new_prefix, prefix);
+	strcat(new_prefix, number);
+	return new_prefix;
+}
 
-node* Initialize_node(){
+node* Initialize_node(char*prefix){
 	node*n=malloc(sizeof(node));
 	n->next_hop=-1; /*no hop specified*/
 	n->zero=NULL;
 	n->one=NULL;
+	n->prefix=malloc(sizeof(char)*(strlen(prefix)+1));
+	strcpy(n->prefix, prefix);
 	return n;
 }
 
@@ -135,7 +143,7 @@ void ReadTable(node**root, char*table_txt){
 
 	/*Tree initialization with the root pointer*/
 	
-	(*root) = Initialize_node();	
+	(*root) = Initialize_node("*");	
 	
 	while(get_table_line(&prefix, &next_hop, fp)==0){
 		AddPrefix(root, prefix, next_hop);

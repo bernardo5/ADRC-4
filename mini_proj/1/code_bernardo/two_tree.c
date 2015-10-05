@@ -55,3 +55,23 @@ void convert_tree(node**base_node, int next_hop){
 	}
 	return;
 }
+
+int AddressLookUp(node*root, char*address){
+	int bit=0;
+	node*auxiliar=root;
+	while(bit<strlen(address)){
+				if(address[bit]=='0'){
+					if((auxiliar->zero)==NULL){
+						return auxiliar->next_hop;
+					}
+					auxiliar=auxiliar->zero;
+				}else{
+					if((auxiliar->one)==NULL){
+						return auxiliar->next_hop;
+					}	
+					auxiliar=auxiliar->one;
+				}
+				bit++;
+	}
+	return -1;	
+}

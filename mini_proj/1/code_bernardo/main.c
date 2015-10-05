@@ -33,6 +33,9 @@ int main(int argc, char *argv[]){
 	convert_tree(&root, root->next_hop);
 	printf("\n\n");
 	PrintTable(root);
+	printf("\n\n");
+	
+	printf("next_hop:\t%d\n",AddressLookUp(root, "1110101010101"));
 	
 	exit(0);
 }

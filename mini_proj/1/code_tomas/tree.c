@@ -6,7 +6,7 @@ node*Init_tree(){
 }
 
 
-node* Initialize_node(){
+node*Initialize_node(){
 	node*n=malloc(sizeof(node));
 	n->next_hop=-1; /*no hop specified*/
 	n->zero=NULL;

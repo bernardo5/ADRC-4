@@ -22,7 +22,7 @@ int main(int argc, char *argv[]){
 	*/
 	//DeletePrefix(&root, "010");	
 	
-	/*DeletePrefix(&root, "*");*/
+	DeletePrefix(&root, "*");
 	
 	//DeletePrefix(&root, "10");
 	
@@ -30,9 +30,9 @@ int main(int argc, char *argv[]){
 	
 	PrintTable(root);
 	
-	convert_tree(&root, root->next_hop);
+	//convert_tree(&root, root->next_hop);
 	
-	PrintTable(root);
+	//PrintTable(root);
 	
 	exit(0);
 }

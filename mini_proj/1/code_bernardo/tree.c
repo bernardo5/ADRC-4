@@ -83,6 +83,8 @@ int DeletePrefix(node**base_node, char*prefix){
 	
 	/*AddPrefix(root, prefix, -1); versao apagar sem frees*/
 	
+	if(strcmp("*", prefix)==0) return;
+	
 	if(strlen(prefix)>0){
 	
 		if(prefix[0]=='0'){

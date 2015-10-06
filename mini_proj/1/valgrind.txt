@@ -1,0 +1,5 @@
+valgrind --track-origins=yes ./main teste_enunciado.txt
+
+
+valgrind --leak-check=yes ./main teste_enunciado.txt
+

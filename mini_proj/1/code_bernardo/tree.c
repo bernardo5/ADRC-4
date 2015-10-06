@@ -62,8 +62,8 @@ void AddPrefix(node**root, char*prefix, int next_hop){
 			}
 			/*copying the prefix values into the node*/
 			auxiliar->next_hop=next_hop;
-			auxiliar->prefix=malloc(sizeof(char)*strlen(prefix)+1);
-			strcpy(auxiliar->prefix, prefix);
+			//auxiliar->prefix=malloc(sizeof(char)*strlen(prefix)+1);
+			//strcpy(auxiliar->prefix, prefix);
 		}
 	free(current_prefix);/*free of the auxiliar string used*/
 	return;
@@ -156,6 +156,7 @@ void ReadTable(node**root, char*table_txt){
 	while(get_table_line(&prefix, &next_hop, fp)==0){
 		AddPrefix(root, prefix, next_hop);
 	}
+	free(prefix);
 	fclose(fp);
 	return;
 }
@@ -173,4 +174,12 @@ void PrintTable(node*base_node){
 	return;
 }
 
+
+void PosFixed_delete_tree(node** base_node){
+  if((*base_node)==NULL) return;
+  PosFixed_delete_tree(&(*base_node)->zero);
+  PosFixed_delete_tree(&(*base_node)->one);
+  Free_Node(*base_node);
+  return;
+}
 

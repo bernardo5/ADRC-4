@@ -37,7 +37,7 @@ void AddPrefix(node**root, char*prefix, int next_hop){
         *for ex:prefix(has none), no need of covering a tree path, etc*/
 		if(strcmp(prefix, "*")==0){
 			(*root)->next_hop=next_hop;
-			(*root)->prefix=malloc(sizeof(char)*strlen(prefix)+1);
+			//(*root)->prefix=malloc(sizeof(char)*strlen(prefix)+1);
 			strcpy((*root)->prefix, prefix);
 		}else{
 		    /*in this point, we have the necessity of covering a tree path which will

@@ -3,6 +3,20 @@
 /*This function has the purpose of initializing the pointer that will be
 *the root of the tree*/
 
+/*verifies if the address specified is a valid prefix*/
+int verify_address(char*address){
+	int i;
+
+	for(i=0;i<strlen(address);i++){
+		if((address[i]!='0')&&(address[i]!='1')){
+			printf("Prefix is invalid\n");
+			return -1;
+		}
+	}
+	return 1;
+}
+
+
 node*Init_tree(){
 	node*aux=NULL;
 	return aux;
@@ -27,6 +41,9 @@ node* Initialize_node(char*prefix){
 /*Function that adds a new prefix into a binary prefix tree*/
 
 void AddPrefix(node**root, char*prefix, int next_hop){
+	
+	if(verify_address(prefix)==-1) return;
+	
 	/*the prefix read can be * for empty prefixes
 		 * or a bit sequence*/
 

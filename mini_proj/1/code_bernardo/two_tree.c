@@ -59,16 +59,6 @@ void convert_tree(node**base_node, int next_hop){
 	return;
 }
 
-/*verifies if the address specified is a valid prefix*/
-int verify_address(char*address){
-	int i;
-
-	for(i=0;i<strlen(address);i++){
-		if((address[i]!='0')&&(address[i]!='1'))return -1;
-	}
-	return 1;
-}
-
 int AddressLookUp(node*root, char*address){
 	if(verify_address(address)==-1) return -1;
 	/*only continues if the address is valid*/

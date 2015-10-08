@@ -7,6 +7,9 @@ typedef struct _node{
 	struct _node*one;
 }node;
 
+
+int verify_address(char*address);
+
 node*Init_tree();
 
 node* Initialize_node(char*prefix);

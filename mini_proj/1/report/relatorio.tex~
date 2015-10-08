@@ -34,15 +34,17 @@ Como tal, a função irá ler do ficheiro um prefixo de cada vez, adicionando-o 
 
 O pseudo-código da função será o seguinte:
 
-\begin{algorithm}
-  OpenFile 
-  root=Inicialize_node
-  \While{there are lines in the document}{
-      get_table_line 
-      AddPrefix 
-  }
-  \caption{ReadTable}
+\begin{algorithm}[H]
+\KwData{file name and root pointer}
+ \KwResult{binary tree}
+ initialization\;
+ \While{there are lines in the document}{
+  get_table_line\;
+  AddPrefix\;
+ }
+ \caption{ReadTable}
 \end{algorithm}
+
 
 \section{Considerações finais}
 

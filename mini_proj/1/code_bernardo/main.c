@@ -12,6 +12,10 @@ int main(int argc, char *argv[]){
 	node*root=Init_tree();
 	
 	if(root==NULL)printf("Table successfully initialized\n");
+
+	
+
+
 	
 	ReadTable(&root, table_txt);
 	

@@ -33,11 +33,24 @@ char*NewPrefix(char*prefix){
 	return prefix;
 }
 
+int verify_address(char*address){
+	int i;
+	
+	for(i=0;i<strlen(address);i++){
+		if((address[i]!='0')&&(address[i]!='1')){
+			printf("Prefix isn't valid\n");
+			return -1;
+		}
+	}
+	return 1;
+}
 
 void AddPrefix(node**root, char*prefix, int next_hop){
 	/*the prefix read can be * for empty prefixes
 		 * or a bit sequence*/
 	char*current_prefix=malloc(sizeof(char)*(strlen(prefix)+1));
+	
+	if(verify_address(prefix)==-1) return;
 	 
 	if(strcmp(prefix, "*")==0){
 		(*root)->next_hop=next_hop;

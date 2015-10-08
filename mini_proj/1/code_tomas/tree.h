@@ -13,6 +13,8 @@ node*Initialize_node(char*prefix);
 
 char*NewPrefix(char*prefix);
 
+int verify_address(char*address);
+
 void Free_Node(node*base_node);
 
 void AddPrefix(node**root, char*prefix, int next_hop);

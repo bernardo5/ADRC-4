@@ -35,12 +35,11 @@ Como tal, a função irá ler do ficheiro um prefixo de cada vez, adicionando-o 
 O pseudo-código da função será o seguinte:
 
 \begin{algorithm}[H]
-\KwData{file name and root pointer}
- \KwResult{binary tree}
- initialization\;
+ root node creation()\;
  \While{there are lines in the document}{
-  get_table_line\;
-  AddPrefix\;
+  get table line()\;
+  
+  AddPrefix()\;
  }
  \caption{ReadTable}
 \end{algorithm}

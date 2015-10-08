@@ -49,6 +49,7 @@ void AddPrefix(node**root, char*prefix, int next_hop){
 		 /*this variable will be used to store the path already covered
 		 *it will be copied into a node structure, to make the table printing easier*/
 		char* current_prefix=malloc(sizeof(char)*(strlen(prefix)+1));
+		current_prefix[0] = '\0';
         /*if the prefix specified is the root some storage information has no use
         *for ex:prefix(has none), no need of covering a tree path, etc*/
 		if(strcmp(prefix, "*")==0){
@@ -73,6 +74,7 @@ void AddPrefix(node**root, char*prefix, int next_hop){
                     }
 					auxiliar=auxiliar->one;
 				}
+				printf("Current prefix: %s\n", current_prefix);
 				bit++;
 			}
 			/*copying the prefix values into the node*/

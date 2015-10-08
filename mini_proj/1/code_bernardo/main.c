@@ -18,8 +18,9 @@ int main(int argc, char *argv[]){
 
 	
 	ReadTable(&root, table_txt);
-	
-	//AddPrefix(&root, "001f", 10);
+	PrintTable(root);
+	printf("\n\n");
+	AddPrefix(&root, "101", 10);
 	/*printf("001 next hop is: %d\n", root->zero->zero->one->next_hop);
 	printf("00 next hop is: %d\n", root->zero->zero->next_hop);
 	printf("0 next hop is: %d\n", root->zero->next_hop);

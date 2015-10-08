@@ -1,5 +1,6 @@
 \documentclass[a4paper]{article}
 
+\usepackage[]{algorithm2e}
 \usepackage[portuguese]{babel}
 \usepackage{comment}
 \usepackage[T1]{fontenc}
@@ -22,9 +23,27 @@
 Neste mini-projecto, pretende-se a implementação de diversas funções relacionadas com a transmissão de dados em pacotes consoante
 o seu destino.
 
-Nesta fase, apenas se desenvolveu funções de conversão de \textit{forwarding tables} para \textit{}
+Nesta fase, apenas se desenvolveu funções de conversão de \textit{forwarding table} para \textit{binary tree}, desta última para
+\textit{binary2-tree}, adição de novos prefixos, remoção de prefixos e impressão de uma árvore binária no formato de
+\textit{forwarding table}.
 
-\section{fsmv}
+\section{Função \textit{ReadTable}}
+Nesta função o programa deverá ler de um ficheiro os prefixos de uma tabela e os correspondentes \textit{next hops} e criar a 
+árvore binária correspondente.
+Como tal, a função irá ler do ficheiro um prefixo de cada vez, adicionando-o à árvore com o \textit{next hop} correspondente.
+
+O pseudo-código da função será o seguinte:
+
+\begin{algorithm}
+\label{ReadTable}
+  OpenFile 
+  root=Inicialize_node
+  \While{there are lines in the document}{
+      get_table_line 
+      AddPrefix 
+  }
+  \caption{ReadTable}
+\end{algorithm}
 
 \section{Considerações finais}
 

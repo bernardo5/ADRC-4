@@ -8,10 +8,7 @@ int verify_address(char*address){
 	int i;
 
 	for(i=0;i<strlen(address);i++){
-		if((address[i]!='0')&&(address[i]!='1')){
-			printf("Prefix is invalid\n");
-			return -1;
-		}
+		if((address[i]!='0')&&(address[i]!='1')) return -1;
 	}
 	return 1;
 }
@@ -42,8 +39,10 @@ node* Initialize_node(char*prefix){
 
 void AddPrefix(node**root, char*prefix, int next_hop){
 	
-	if(verify_address(prefix)==-1) return;
-	
+	if((verify_address(prefix)==-1)&&strcmp("*", prefix)!=0){
+		printf("Invalid prefix\n");
+		 return;
+	}
 	/*the prefix read can be * for empty prefixes
 		 * or a bit sequence*/
 

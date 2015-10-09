@@ -131,6 +131,32 @@ Com esta função, pretende-se a conversão da árvore obtida anteriormente pela
  \Return\;
  \caption{TwoTree}
 \end{algorithm}
+
+\section{Função \textit{AdressLookUp}}
+Com esta rotina, pretende-se retornar o \textit{next\_hop} de um prefixo em causa. Considerando a ordem do enunciado, assume-se que a árvore a utilizar para obter a informação é do tipo \textit{binary}2-\textit{tree}. Como tal, toda a informação relativa aos \textit{next\_hops} estão contidas nas folhas da árvore. Assim, recebendo como argumentos de \textit{input} o ponteiro para o topo da árvore e o prefixo desejado, o algoritmo em causa percorre os nós consoante os \textit{bits} do prefixo especificado até que o ponteiro de um nó para o seu "filho" seja NULL. Quando tal acontecer significa que o nó para o qual o ponteiro auxiliar aponta é uma folha da árvore, cujo nó contém o \textit{next\_hop} mais específico para o prefixo dado no \textit{input}.
+
+\begin{algorithm}[H]
+ \If{prefix is invalid}{
+ 	\Return -1\;
+ }
+ auxiliar:=root\;
+ 
+ \While{havent reached the end of prefix bits}{
+ 	\eIf{bit=0}{
+ 		\If{has no zero child}{
+ 			\Return auxiliar->next\_hop\;
+ 		}
+ 		auxiliar:=auxiliar->zero\;
+ 	}{
+ 		\If{has no one child}{
+ 			\Return auxiliar->next\_hop\;
+ 		}
+ 		auxiliar:=auxiliar->one\;
+ 	}
+ }
+ \Return -1\;
+ \caption{AdressLookUp}
+\end{algorithm}
 \section{Considerações finais}
 
 \end{document}

@@ -43,7 +43,7 @@ O pseudo-código da função será o seguinte:
  }
  \caption{ReadTable}
 \end{algorithm}
-Desta forma, no pior caso, para a inserção de um prefixo novo, será necessário percorrer a altura da árvore \textit{n} vezes. A complexidade do algoritmo será assim O(n)O(get\_table\_line).
+Desta forma, sendo o objectivo a inserção de todos os prefixos, será necessário fazer \textit{n} vezes a chamada à função \textit{AddPrefix}. A complexidade do algoritmo será assim O(n)O(get\_table\_line).
 %conferir complexidade do algoritmo
 
 \section{Função \textit{AddPrefix}}
@@ -51,7 +51,8 @@ Tal como descrito no enunciado, a função tem por objectivo a adição de um no
 
 Nesta função, testa-se se o prefixo a colocar na árvore é válido. No caso de ser, verifica se o prefixo é do \textit{root} ou se é um endereço binário. Se for do \textit{root}, copia as informações directamente para a estrutura apontada pelo ponteiro. Se não for, irá percorrer os nós da árvore correspondentes (criando os não existentes no caminho), copiando os valores pretendidos na estrutura correspondente ao prefixo indicado.
 
-O pseudo-código da função será o seguinte:
+%PERGUNTAR AO PROF!!!!!!!!!
+No pior caso, o algoritmo implementado terá de percorrer a altura da árvore. A complexidade irá ser O(Comprimento do prefixo).
 
 \begin{algorithm}[H]
  \If{adress is invalid}{
@@ -62,16 +63,28 @@ O pseudo-código da função será o seguinte:
  	
  	root->prefix:=prefix\;
  }{
- 	%falta comentar
+    auxiliar\_node:=root\_node\;
+ 	\While{all prefix nodes havent been visited yet}{
+ 		\eIf{bit is 0}{
+ 			\If{there is no node}{
+ 				node creation()\;
+ 			}
+ 			auxiliar:=auxiliar->zero\;
+ 		}{
+ 			/*bit is one*/
+ 			
+ 			\If{there is no node}{
+ 				node creation()\;
+ 			}
+ 			auxiliar:=auxiliar->one\;
+ 		}
+		auxiliar->next\_hop:=next\_hop\; 	
+ 	}
  }
- 
- \While{there are lines in the document}{
-  get\_table\_line()\;
-  
-  AddPrefix()\;
- }
- \caption{ReadTable}
+ \caption{AddPrefix}
 \end{algorithm}
+
+\section{Função \textit{DeletePrefix}}
 
 \section{Considerações finais}
 

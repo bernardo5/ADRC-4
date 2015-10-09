@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.4)  9 OCT 2015 12:31
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.4)  9 OCT 2015 13:11
 entering extended mode
 **relatorio.tex
 
@@ -558,7 +558,7 @@ t)
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
  (C:\BG-files\IST\4ano\1semestre\ADRC\git\ADRC-4\mini_proj\1\report\rosto.tex
-<./title.png, id=19, 674.2791pt x 156.8259pt>
+<./title.png, id=23, 674.2791pt x 156.8259pt>
 File: ./title.png Graphic file (type png)
  <use ./title.png>
 Package pdftex.def Info: ./title.png used on input line 5.
@@ -577,28 +577,28 @@ estre/ADRC/git/ADRC-4/mini_proj/1/report/title.png (PNG copy)>])pdfTeX warning
 ed, duplicate ignored
 <to be read again> 
                    \relax 
-l.76 \section
-             {Considerações finais} [1]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 78.
+l.87 \section
+             {Função \textit{DeletePrefix}} [1]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 91.
  [2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 78.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 91.
 
 (C:\BG-files\IST\4ano\1semestre\ADRC\git\ADRC-4\mini_proj\1\report\relatorio.au
 x)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 78.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 78.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 91.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 91.
 Package rerunfilecheck Info: File `relatorio.out' has not changed.
-(rerunfilecheck)             Checksum: 1FF482F751D4646F7CAE7FEB58FA4734;241.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 78.
+(rerunfilecheck)             Checksum: 364FADB6062C918AF7030954CB14927A;302.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 91.
  ) 
 Here is how much of TeX's memory you used:
- 8154 strings out of 493921
- 120650 string characters out of 3146873
- 230158 words of memory out of 3000000
- 11365 multiletter control sequences out of 15000+200000
+ 8156 strings out of 493921
+ 120670 string characters out of 3146873
+ 231158 words of memory out of 3000000
+ 11366 multiletter control sequences out of 15000+200000
  12496 words of font info for 28 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 36i,9n,38p,478b,404s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,18n,38p,478b,426s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Bernardo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi6
 00\ecbx1000.pk> <C:\Users\Bernardo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jkn
 appen\ec\dpi600\ecbi1440.pk> <C:\Users\Bernardo\AppData\Local\MiKTeX\2.9\fonts\
@@ -611,9 +611,9 @@ ernardo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk
 ppen\ec\dpi600\eccc1000.pk> <C:\Users\Bernardo\AppData\Local\MiKTeX\2.9\fonts\p
 k\ljfour\jknappen\ec\dpi600\eccc1440.pk> <C:\Users\Bernardo\AppData\Local\MiKTe
 X\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc1728.pk>
-Output written on relatorio.pdf (3 pages, 97955 bytes).
+Output written on relatorio.pdf (3 pages, 101980 bytes).
 PDF statistics:
- 296 PDF objects out of 1000 (max. 8388607)
- 11 named destinations out of 1000 (max. 500000)
- 38 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 309 PDF objects out of 1000 (max. 8388607)
+ 12 named destinations out of 1000 (max. 500000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

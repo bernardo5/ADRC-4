@@ -1,23 +1,5 @@
-#
-# Makefile ADRC
-#
-
-CC= gcc
-TARGET= main
-CFLAGS= -g -Wall -ansi
-
-SRCFILES= main.c file.c
-INCFILES= file.h
-OBJFILES= main.o file.o
-
-default: $(TARGET)
-
-$(TARGET): $(OBJFILES)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJFILES)
+main: 
+	gcc main.c file.c tree.c -o main
 
 clean:
-	rm -f $(TARGET) $(OBJFILES) core.* #*
-
-main.o: main.c
-
-funcoes.o: funcoes.c funcoes.h
+	rm -f *.o *.~ main *.gch

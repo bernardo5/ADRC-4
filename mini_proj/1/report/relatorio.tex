@@ -106,6 +106,31 @@ Neste caso, pretende-se a conversão de uma árvore binária numa \textit{forwar
  \caption{PrintTable}
 \end{algorithm}
 A árvore será assim percorrida em profundidade, da esquerda para a direita.
+
+\section{Função \textit{TwoTree}}
+Com esta função, pretende-se a conversão da árvore obtida anteriormente pela função \textit{ReadTable} para uma \textit{binary}2-\textit{tree}. Por definição, neste tipo de árvore, todos os nós que não são folhas têm exactamente dois "filhos". Desta forma, o algoritmo percorre recursivamente os nós da árvore. Se ao chegar a uma folha e a mesma não tiver um valor de \textit{next hop} atribuído, actualiza-o. Caso o nó não seja uma folha, verifica qual a ramificação em falta, cria-a e chama a rotina para cada ramo. A função tem como parâmetros de entrada um ponteiro para o topo da árvore/sub-árvore, bem como o valor de \textit{next hop} que irá ser atribuído às folhas da ramificação em  causa. A função \textit{update\_next\_hop} tem como função verificar se o \textit{next\_hop} a utilizar na chamada recursiva é o mesmo no nó anterior ou um valor actualizado, no caso de o valor do nó visitado ser diferente.
+
+\begin{algorithm}[H]
+ \eIf{node is a leaf}{
+ 	\If{has no next hop}{
+ 		base\_node->next\_hop:=next\_hop\;
+ 	}
+ }{
+ 	\eIf{has no zero child}{
+ 		prefix:=new\_node\_prefix()\;
+ 		create\_zero\_child(prefix)\;
+ 	}{
+		\If{has no one child}{	
+			prefix:=new\_node\_prefix()\;
+			create\_one\_child(prefix)\;
+		}
+ 	}
+ 	TwoTree(base\_node->zero, update\_next\_hop())\;
+ 	TwoTree(base\_node->one, update\_next\_hop())\;
+ }
+ \Return\;
+ \caption{TwoTree}
+\end{algorithm}
 \section{Considerações finais}
 
 \end{document}

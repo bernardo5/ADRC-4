@@ -85,7 +85,9 @@ No pior caso, o algoritmo implementado terá de percorrer a altura da árvore. A
 \end{algorithm}
 
 \section{Função \textit{DeletePrefix}}
+Nesta função, assumimos os seguintes factos: o comando de \textit{delete} do \textit{root} deve ser considerado como inválido e no caso de se apagar um prefixo que seja "filho único" o "pai" também deve ser removido.
 
+Assim, no início da função, esta faz chamadas recursivas a ela própria até atingir o prefixo pretendido, retornando com uma mensagem de erro no caso de este não existir. Após apagar o nó correspondente, a função, ao retornar 1, "avisa" o nó de cima de que o ponteiro para este será agora NULL. Este factor será bastante importante na medida em que a condição de \textit{free} baseia-se no facto de os dois ponteiros para estruturas "filho" serem NULL. 
 \section{Considerações finais}
 
 \end{document}

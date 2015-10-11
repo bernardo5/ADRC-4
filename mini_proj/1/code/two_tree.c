@@ -33,7 +33,7 @@ int update_next_hop(node*base_node, int next_hop){
 }
 
 
-void convert_tree(node**base_node, int next_hop){
+void TwoTree(node**base_node, int next_hop){
 	if(leaf_check(*base_node)==1){ /*leaf case*/
 		if(((*base_node)->next_hop)==-1){ /*need to update node value*/
 			((*base_node)->next_hop)=next_hop;
@@ -52,21 +52,11 @@ void convert_tree(node**base_node, int next_hop){
 				(*base_node)->one=Initialize_node(new_prefix);
 			}
 		}
-		convert_tree(&((*base_node)->zero), update_next_hop(*base_node, next_hop));
-		convert_tree(&((*base_node)->one), update_next_hop(*base_node, next_hop));
+		TwoTree(&((*base_node)->zero), update_next_hop(*base_node, next_hop));
+		TwoTree(&((*base_node)->one), update_next_hop(*base_node, next_hop));
 		free(new_prefix);
 	}
 	return;
-}
-
-/*verifies if the address specified is a valid prefix*/
-int verify_address(char*address){
-	int i;
-
-	for(i=0;i<strlen(address);i++){
-		if((address[i]!='0')&&(address[i]!='1'))return -1;
-	}
-	return 1;
 }
 
 int AddressLookUp(node*root, char*address){

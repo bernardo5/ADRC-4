@@ -7,6 +7,9 @@ typedef struct _node{
 	struct _node*one;
 }node;
 
+
+int verify_address(char*address);
+
 node*Init_tree();
 
 node* Initialize_node(char*prefix);
@@ -22,4 +25,6 @@ int DeletePrefix(node**root, char*prefix);
 void ReadTable(node**root, char*table_txt);
 
 void PrintTable(node*base_node);
+
+void PosFixed_delete_tree(node** base_node);
 

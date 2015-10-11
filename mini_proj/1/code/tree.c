@@ -3,6 +3,17 @@
 /*This function has the purpose of initializing the pointer that will be
 *the root of the tree*/
 
+/*verifies if the address specified is a valid prefix*/
+int verify_address(char*address){
+	int i;
+
+	for(i=0;i<strlen(address);i++){
+		if((address[i]!='0')&&(address[i]!='1')) return -1;
+	}
+	return 1;
+}
+
+
 node*Init_tree(){
 	node*aux=NULL;
 	return aux;
@@ -27,17 +38,22 @@ node* Initialize_node(char*prefix){
 /*Function that adds a new prefix into a binary prefix tree*/
 
 void AddPrefix(node**root, char*prefix, int next_hop){
+	
+	if((verify_address(prefix)==-1)&&strcmp("*", prefix)!=0){
+		printf("Invalid prefix\n");
+		 return;
+	}
 	/*the prefix read can be * for empty prefixes
 		 * or a bit sequence*/
 
 		 /*this variable will be used to store the path already covered
 		 *it will be copied into a node structure, to make the table printing easier*/
 		char* current_prefix=malloc(sizeof(char)*(strlen(prefix)+1));
+		current_prefix[0] = '\0';
         /*if the prefix specified is the root some storage information has no use
         *for ex:prefix(has none), no need of covering a tree path, etc*/
 		if(strcmp(prefix, "*")==0){
 			(*root)->next_hop=next_hop;
-			(*root)->prefix=malloc(sizeof(char)*strlen(prefix)+1);
 			strcpy((*root)->prefix, prefix);
 		}else{
 		    /*in this point, we have the necessity of covering a tree path which will
@@ -58,12 +74,11 @@ void AddPrefix(node**root, char*prefix, int next_hop){
                     }
 					auxiliar=auxiliar->one;
 				}
+				printf("Current prefix: %s\n", current_prefix);
 				bit++;
 			}
 			/*copying the prefix values into the node*/
 			auxiliar->next_hop=next_hop;
-			auxiliar->prefix=malloc(sizeof(char)*strlen(prefix)+1);
-			strcpy(auxiliar->prefix, prefix);
 		}
 	free(current_prefix);/*free of the auxiliar string used*/
 	return;
@@ -156,6 +171,7 @@ void ReadTable(node**root, char*table_txt){
 	while(get_table_line(&prefix, &next_hop, fp)==0){
 		AddPrefix(root, prefix, next_hop);
 	}
+	free(prefix);
 	fclose(fp);
 	return;
 }
@@ -173,4 +189,12 @@ void PrintTable(node*base_node){
 	return;
 }
 
+
+void PosFixed_delete_tree(node** base_node){
+  if((*base_node)==NULL) return;
+  PosFixed_delete_tree(&(*base_node)->zero);
+  PosFixed_delete_tree(&(*base_node)->one);
+  Free_Node(*base_node);
+  return;
+}
 

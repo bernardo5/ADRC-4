@@ -1,6 +1,7 @@
-\documentclass[a4paper]{article}
+\documentclass[twocolumn]{article}
 
-\usepackage[]{algorithm2e}
+\usepackage{algorithm,algpseudocode,caption}
+
 \usepackage[portuguese]{babel}
 \usepackage{comment}
 \usepackage[T1]{fontenc}
@@ -34,15 +35,17 @@ Como tal, a função irá ler do ficheiro um prefixo de cada vez, adicionando-o 
 
 O pseudo-código da função será o seguinte:
 
-\begin{algorithm}[H]
- root node creation()\;
- \While{there are lines in the document}{
-  get\_table\_line()\;
+\begin{algorithmic}
+ \State $root node creation()\;$
+ \While{$there\_are\_lines\_in\_the\_document$}
+   \State $get\_table\_line()\;$
   
-  AddPrefix()\;
- }
+   \State $ AddPrefix()\;$
+ \EndWhile
+ 
+\Return\;
  \caption{ReadTable}
-\end{algorithm}
+\end{algorithmic}
 Desta forma, sendo o objectivo a inserção de todos os prefixos, será necessário fazer \textit{n} vezes a chamada à função \textit{AddPrefix}. A complexidade do algoritmo será assim O(n)O(get\_table\_line).
 %conferir complexidade do algoritmo
 
@@ -54,35 +57,33 @@ Nesta função, testa-se se o prefixo a colocar na árvore é válido. No caso d
 %PERGUNTAR AO PROF!!!!!!!!!
 No pior caso, o algoritmo implementado terá de percorrer a altura da árvore. A complexidade irá ser O(Comprimento do prefixo).
 
-\begin{algorithm}[H]
- \If{adress is invalid}{
+\begin{algorithmic}
+ \If{$adress\_is\_invalid$}{
  	\Return\;
- }
- \eIf{adress is "*" (root)}{
- 	root->next\_hop:=next\_hop\;
+ \EndIf
+ \If{$adress\_is\_"*"$}{\Comment{root prefix}
+ 	\State $root->next\_hop:=next\_hop\;$
  	
- 	root->prefix:=prefix\;
- }{
-    auxiliar\_node:=root\_node\;
- 	\While{all prefix nodes havent been visited yet}{
- 		\eIf{bit is 0}{
- 			\If{there is no node}{
- 				node creation()\;
- 			}
- 			auxiliar:=auxiliar->zero\;
- 		}{
- 			/*bit is one*/
- 			
- 			\If{there is no node}{
- 				node creation()\;
- 			}
- 			auxiliar:=auxiliar->one\;
- 		}
-		auxiliar->next\_hop:=next\_hop\; 	
- 	}
- }
+ 	\State $root->prefix:=prefix\;$
+ \Else
+    \State $auxiliar\_node:=root\_node\;$
+ 	\While{$all\_prefix\_nodes\_havent\_been\_visited\_yet$}{
+ 		\If{$bit\_is\_0$}{
+ 			\If{$there\_is\_no\_node$}
+ 				\State $node\_creation()\;$
+ 			\EndIf
+ 			\State $auxiliar:=auxiliar->zero\;$
+ 		\Else \Comment{bit is one} 			
+ 			\If{$there\_is\_no\_node$}
+ 				\State $node\_creation()\;$
+ 			\EndIf
+ 			\State $auxiliar:=auxiliar->one\;$
+ 		\EndIf
+		\State $auxiliar->next\_hop:=next\_hop\;$ 	
+ 	\EndWhile
+ \EndIf
  \caption{AddPrefix}
-\end{algorithm}
+\end{algorithmic}
 
 \section{Função \textit{DeletePrefix}}
 Nesta função, assumimos os seguintes factos: o comando de \textit{delete} do \textit{root} deve ser considerado como inválido, e no caso de se apagar um prefixo que seja "filho único" o "pai" também deve ser removido.
@@ -93,115 +94,119 @@ Assim, no início da função, esta faz chamadas recursivas a ela própria até 
 
 A complexidade do algoritmo será O(comprimento do prefixo). %PERGUNTAR
 
-\begin{algorithm}[H]
- \If{prefix corresponds to root}{
+\begin{algorithmic}
+ \If{$prefix\_corresponds\_to\_root$}
  	\Return -1\;
- }
- \eIf{havent reached the end of the prefix bits}{
- 	\eIf{bit=0}{
- 		prefix:=new\_prefix()\;
+ \EndIf
+ \If{$havent\_reached\_the\_end\_of\_the\_prefix\_bits$}
+ 	\If{$bit=0$}
+ 		\State $prefix:=new\_prefix()\;$
  		
- 		\eIf{node exists}{
- 			\If{Delete\_prefix(base\_node->zero, prefix)=1}{
- 				base\_node->zero:=NULL\;
- 			}
- 		}{
- 			prints message saying the prefix does not exist\;
+ 		\If{$node\_exists$}
+ 			\If{$Delete\_prefix(base\_node->zero, prefix)=1$}
+ 				\State $base\_node->zero:=NULL\;$
+ 			\EndIf
+ 		\Else
+ 			\State $prefix\_does\_not\_exist\;$
  			\Return -1\;
- 		}
- 	}{
- 		\If{bit=1}{
- 			prefix:=new\_prefix()\;
+ 		\EndIf
+ 	\Else
+ 		\If{$bit=1$}
+ 			\State $prefix:=new\_prefix()\;$
  		
- 			\eIf{node exists}{
- 				\If{Delete\_prefix(base\_node->one, prefix)=1}{
- 					base\_node->one:=NULL\;
- 				}
- 			}{
- 				prints message saying the prefix does not exist\;
+ 			\If{$node\_exists$}
+ 				\If{$Delete\_prefix(base\_node->one, prefix)=1$}
+ 					\State $base\_node->one:=NULL\;$
+ 				\EndIf
+ 			\Else
+ 				\State $prefix\_does\_not\_exist\;$
  				\Return -1\;
- 			}
- 		}
- 	}
- }{
- 	\eIf{node has no children}{
- 		Free\_node(base\_node)\;
+ 			\EndIf
+ 		\EndIf
+ 	\EndIf
+ \Else
+ 	\If{$node\_has\_no\_children$}
+ 		\State $Free\_node(base\_node)\;$
  		\Return 1\;
- 	}{
-		base\_node->next\_hop:=-1\; 	
- 	}
- }
+ 	\Else
+		\State $base\_node->next\_hop:=-1\;$\Comment{cant free the node but erases next hop}	
+ 	\EndIf
+ \EndIf
  \Return 0\;
  \caption{DeletePrefix}
-\end{algorithm}
+\end{algorithmic}
 \section{Função \textit{PrintTable}}
 Neste caso, pretende-se a conversão de uma árvore binária numa \textit{forwarding table}. Para tal, será necessário visitar todos os nós da árvore, verificando se têm \textit{next hop} atribuído. Assim:
 
-\begin{algorithm}[H]
- \If{has next hop}{
-	print node prefix and next hop value\;
- }
- \If{has "0" child}{
-	PrintTable(zero child)\;
- }
- \If{has "1" child}{
-	PrintTable(zero child)\;
- }
+\begin{algorithmic}
+ \If{$has\_next\_hop$}{
+	\State $print\_node\_prefix\_and\_next\_hop\;$
+ \EndIf
+ \If{$has\_"0"\_child$}
+	\State $PrintTable(zero\_child)\;$
+ \EndIf
+ \If{$has\_"1"\_child$}
+	\State $PrintTable(one\_child)\;$
+ \EndIf
+ 
  \Return\;
  \caption{PrintTable}
-\end{algorithm}
+\end{algorithmic}
 A árvore será assim percorrida em profundidade, da esquerda para a direita.
 
 \section{Função \textit{TwoTree}}
 Com esta função, pretende-se a conversão da árvore obtida anteriormente pela função \textit{ReadTable} para uma \textit{binary}2-\textit{tree}. Por definição, neste tipo de árvore, todos os nós que não são folhas têm exactamente dois "filhos". Desta forma, o algoritmo percorre recursivamente os nós da árvore. Se ao chegar a uma folha e a mesma não tiver um valor de \textit{next hop} atribuído actualiza-o. Caso o nó não seja uma folha, verifica qual a ramificação em falta, cria-a e chama a rotina para cada ramo. A função tem como parâmetros de entrada um ponteiro para o topo da árvore/sub-árvore, bem como o valor de \textit{next hop} que irá ser atribuído às folhas da ramificação em  causa. A função \textit{update\_next\_hop} tem como função verificar se o \textit{next\_hop} a utilizar na chamada recursiva é o mesmo no nó anterior ou um valor actualizado, no caso de o valor do nó visitado ser diferente.
 
-\begin{algorithm}[H]
- \eIf{node is a leaf}{
- 	\If{has no next hop}{
- 		base\_node->next\_hop:=next\_hop\;
- 	}
- }{
- 	\eIf{has no zero child}{
- 		prefix:=new\_node\_prefix()\;
- 		create\_zero\_child(prefix)\;
- 	}{
-		\If{has no one child}{	
-			prefix:=new\_node\_prefix()\;
-			create\_one\_child(prefix)\;
-		}
- 	}
- 	TwoTree(base\_node->zero, update\_next\_hop())\;
- 	TwoTree(base\_node->one, update\_next\_hop())\;
- }
+\begin{algorithmic}
+ \If{$node\_is\_a\_leaf$}
+ 	\If{$has\_no\_next\_hop$}
+ 		\State $base\_node->next\_hop:=next\_hop\;$
+ 	\EndIf
+ \Else
+ 	\If{$has\_no\_"0"\_child$}
+ 		\State $prefix:=new\_node\_prefix()\;$
+ 		\State $create\_zero\_child(prefix)\;$
+ 	\Else
+		\If{$has\_no\_"1"\_child$}	
+			\State $prefix:=new\_node\_prefix()\;$
+			\State $create\_one\_child(prefix)\;$
+		\EndIf
+ 	\EndIf
+ 	\State $TwoTree(base\_node->zero, update\_next\_hop())\;$
+ 	\State $TwoTree(base\_node->one, update\_next\_hop())\;$
+ \EndIf
+ 
  \Return\;
  \caption{TwoTree}
-\end{algorithm}
+\end{algorithmic}
 
 \section{Função \textit{AdressLookUp}}
 Com esta rotina, pretende-se retornar o \textit{next\_hop} do prefixo em causa. Considerando a ordem do enunciado, assume-se que a árvore a utilizar para obter a informação é do tipo \textit{binary}2-\textit{tree}. Como tal, toda a informação relativa aos \textit{next\_hops} estão contidas nas folhas da árvore. Assim, recebendo como argumentos de \textit{input} o ponteiro para o topo da árvore e o prefixo desejado, o algoritmo em causa percorre os nós consoante os \textit{bits} do prefixo especificado até que o ponteiro de um nó para o seu "filho" seja NULL. Quando tal acontecer significa que o nó para o qual o ponteiro auxiliar aponta é uma folha da árvore, cujo nó contém o \textit{next\_hop} mais específico para o prefixo dado no \textit{input}.
 
-\begin{algorithm}[H]
- \If{prefix is invalid}{
- 	\Return -1\;
- }
- auxiliar:=root\;
+\begin{algorithmic}
+ \If{$prefix\_is\_invalid$}
+ 	\Return $-1\;$
+ \EndIf
  
- \While{havent reached the end of prefix bits}{
- 	\eIf{bit=0}{
- 		\If{has no zero child}{
- 			\Return auxiliar->next\_hop\;
- 		}
- 		auxiliar:=auxiliar->zero\;
- 	}{
- 		\If{has no one child}{
- 			\Return auxiliar->next\_hop\;
- 		}
- 		auxiliar:=auxiliar->one\;
- 	}
- }
+ \State $auxiliar:=root\;$
+ 
+ \While{$havent\_reached\_the\_end\_of\_prefix\_bits$}
+ 	\If{$bit=0$}
+ 		\If{$has\_no\_"0"\_child$}{
+ 			\Return $auxiliar->next\_hop\;$
+ 		\EndIf
+ 		\State $auxiliar:=auxiliar->zero\;$
+ 	\Else
+ 		\If{$has\_no\_"1"\_child$}
+ 			\Return $auxiliar->next\_hop\;$
+ 		\EndIf
+ 		\State $auxiliar:=auxiliar->one\;$
+ 	\EndIf
+ \EndWhile
+ 
  \Return -1\;
  \caption{AdressLookUp}
-\end{algorithm}
+\end{algorithmic}
 \section{Considerações finais}
 
 \end{document}

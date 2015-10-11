@@ -23,7 +23,7 @@
 Neste mini-projecto, pretende-se a implementação de diversas funções relacionadas com a transmissão de dados em pacotes consoante
 o seu destino.
 
-Nesta fase, apenas se desenvolveu funções de conversão de \textit{forwarding table} para \textit{binary tree}, desta última para
+Nesta fase, apenas se desenvolveram funções de conversão de \textit{forwarding table} para \textit{binary tree}, desta última para
 \textit{binary2-tree}, adição de novos prefixos, remoção de prefixos e impressão de uma árvore binária no formato de
 \textit{forwarding table}.
 
@@ -49,7 +49,7 @@ Desta forma, sendo o objectivo a inserção de todos os prefixos, será necessá
 \section{Função \textit{AddPrefix}}
 Tal como descrito no enunciado, a função tem por objectivo a adição de um novo prefixo à árvore binária. Assumimos que esta função apenas é chamada quando a árvore binária do programa já foi previamente inicializada, ou seja, apenas é chamada dentro da função \textit{ReadTable}, onde o \textit{root node} é inicializado internamente, ou depois desta ser realizada.
 
-Nesta função, testa-se se o prefixo a colocar na árvore é válido. No caso de ser, verifica se o prefixo é do \textit{root} ou se é um endereço binário. Se for do \textit{root}, copia as informações directamente para a estrutura apontada pelo ponteiro. Se não for, irá percorrer os nós da árvore correspondentes (criando os não existentes no caminho), copiando os valores pretendidos na estrutura correspondente ao prefixo indicado.
+Nesta função, testa-se se o prefixo a colocar na árvore é válido. No caso de ser, verifica se o prefixo é do \textit{root} ou se é um endereço binário. Se for do \textit{root}, copiam-se as informações directamente para a estrutura apontada pelo ponteiro. Se não for, irão-se percorrer os nós da árvore correspondentes (criando os não existentes no caminho), copiando os valores pretendidos na estrutura correspondente ao prefixo indicado.
 
 %PERGUNTAR AO PROF!!!!!!!!!
 No pior caso, o algoritmo implementado terá de percorrer a altura da árvore. A complexidade irá ser O(Comprimento do prefixo).
@@ -87,13 +87,15 @@ No pior caso, o algoritmo implementado terá de percorrer a altura da árvore. A
 \section{Função \textit{DeletePrefix}}
 Nesta função, assumimos os seguintes factos: o comando de \textit{delete} do \textit{root} deve ser considerado como inválido, e no caso de se apagar um prefixo que seja "filho único" o "pai" também deve ser removido.
 
-Assim, no início da função, esta faz chamadas recursivas a ela própria até atingir o prefixo pretendido, retornando com uma mensagem de erro no caso de este não existir. Após apagar o nó correspondente, a função, ao retornar 1, "avisa" o nó de cima ("pai") de que o ponteiro para este será agora NULL. Este factor será bastante importante na medida em que a condição de \textit{free} baseia-se no facto de os dois ponteiros para estruturas "filho" serem NULL.
+Assim, no início da função, esta faz chamadas recursivas a ela própria até atingir o prefixo pretendido, retornando com uma mensagem de erro no caso de este não existir.
+ A função \textit{new\_prefix} corresponde a retirar ao prefixo a apagar um bit, de forma a que o caminho a percorrer se inicie no bit onde a função se encontra de momento.%ACRESCIMO
+  Após apagar o nó correspondente, a função, ao retornar 1, "avisa" o nó de cima ("pai") de que o ponteiro para este será agora NULL. Este factor será bastante importante na medida em que a condição de \textit{free} baseia-se no facto de os dois ponteiros para estruturas "filho" serem NULL.
 
 A complexidade do algoritmo será O(comprimento do prefixo). %PERGUNTAR
 
 \begin{algorithm}[H]
  \If{prefix corresponds to root}{
- 	\Return -1;
+ 	\Return -1\;
  }
  \eIf{havent reached the end of the prefix bits}{
  	\eIf{bit=0}{
@@ -151,7 +153,7 @@ Neste caso, pretende-se a conversão de uma árvore binária numa \textit{forwar
 A árvore será assim percorrida em profundidade, da esquerda para a direita.
 
 \section{Função \textit{TwoTree}}
-Com esta função, pretende-se a conversão da árvore obtida anteriormente pela função \textit{ReadTable} para uma \textit{binary}2-\textit{tree}. Por definição, neste tipo de árvore, todos os nós que não são folhas têm exactamente dois "filhos". Desta forma, o algoritmo percorre recursivamente os nós da árvore. Se ao chegar a uma folha e a mesma não tiver um valor de \textit{next hop} atribuído, actualiza-o. Caso o nó não seja uma folha, verifica qual a ramificação em falta, cria-a e chama a rotina para cada ramo. A função tem como parâmetros de entrada um ponteiro para o topo da árvore/sub-árvore, bem como o valor de \textit{next hop} que irá ser atribuído às folhas da ramificação em  causa. A função \textit{update\_next\_hop} tem como função verificar se o \textit{next\_hop} a utilizar na chamada recursiva é o mesmo no nó anterior ou um valor actualizado, no caso de o valor do nó visitado ser diferente.
+Com esta função, pretende-se a conversão da árvore obtida anteriormente pela função \textit{ReadTable} para uma \textit{binary}2-\textit{tree}. Por definição, neste tipo de árvore, todos os nós que não são folhas têm exactamente dois "filhos". Desta forma, o algoritmo percorre recursivamente os nós da árvore. Se ao chegar a uma folha e a mesma não tiver um valor de \textit{next hop} atribuído actualiza-o. Caso o nó não seja uma folha, verifica qual a ramificação em falta, cria-a e chama a rotina para cada ramo. A função tem como parâmetros de entrada um ponteiro para o topo da árvore/sub-árvore, bem como o valor de \textit{next hop} que irá ser atribuído às folhas da ramificação em  causa. A função \textit{update\_next\_hop} tem como função verificar se o \textit{next\_hop} a utilizar na chamada recursiva é o mesmo no nó anterior ou um valor actualizado, no caso de o valor do nó visitado ser diferente.
 
 \begin{algorithm}[H]
  \eIf{node is a leaf}{
@@ -176,7 +178,7 @@ Com esta função, pretende-se a conversão da árvore obtida anteriormente pela
 \end{algorithm}
 
 \section{Função \textit{AdressLookUp}}
-Com esta rotina, pretende-se retornar o \textit{next\_hop} de um prefixo em causa. Considerando a ordem do enunciado, assume-se que a árvore a utilizar para obter a informação é do tipo \textit{binary}2-\textit{tree}. Como tal, toda a informação relativa aos \textit{next\_hops} estão contidas nas folhas da árvore. Assim, recebendo como argumentos de \textit{input} o ponteiro para o topo da árvore e o prefixo desejado, o algoritmo em causa percorre os nós consoante os \textit{bits} do prefixo especificado até que o ponteiro de um nó para o seu "filho" seja NULL. Quando tal acontecer significa que o nó para o qual o ponteiro auxiliar aponta é uma folha da árvore, cujo nó contém o \textit{next\_hop} mais específico para o prefixo dado no \textit{input}.
+Com esta rotina, pretende-se retornar o \textit{next\_hop} do prefixo em causa. Considerando a ordem do enunciado, assume-se que a árvore a utilizar para obter a informação é do tipo \textit{binary}2-\textit{tree}. Como tal, toda a informação relativa aos \textit{next\_hops} estão contidas nas folhas da árvore. Assim, recebendo como argumentos de \textit{input} o ponteiro para o topo da árvore e o prefixo desejado, o algoritmo em causa percorre os nós consoante os \textit{bits} do prefixo especificado até que o ponteiro de um nó para o seu "filho" seja NULL. Quando tal acontecer significa que o nó para o qual o ponteiro auxiliar aponta é uma folha da árvore, cujo nó contém o \textit{next\_hop} mais específico para o prefixo dado no \textit{input}.
 
 \begin{algorithm}[H]
  \If{prefix is invalid}{

@@ -49,7 +49,7 @@ Desta forma, sendo o objectivo a inserção de todos os prefixos, será necessá
 \section{Função \textit{AddPrefix}}
 Tal como descrito no enunciado, a função tem por objectivo a adição de um novo prefixo à árvore binária. Assumimos que esta função apenas é chamada quando a árvore binária do programa já foi previamente inicializada, ou seja, apenas é chamada dentro da função \textit{ReadTable}, onde o \textit{root node} é inicializado internamente, ou depois desta ser realizada.
 
-Nesta função, testa-se se o prefixo a colocar na árvore é válido. No caso de ser, verifica se o prefixo é do \textit{root} ou se é um endereço binário. Se for do \textit{root}, copiam-se as informações directamente para a estrutura apontada pelo ponteiro. Se não for, irão-se percorrer os nós da árvore correspondentes (criando os não existentes no caminho), copiando os valores pretendidos na estrutura correspondente ao prefixo indicado.
+Nesta função, testa-se se o prefixo a colocar na árvore é válido. No caso de ser, verifica se o prefixo é do \textit{root} ou se é um endereço binário. Se for do \textit{root}, copiam-se as informações directamente para a estrutura apontada pelo ponteiro. Se não for, ir-se-á percorrer os nós da árvore correspondentes (criando os não existentes no caminho), copiando os valores pretendidos na estrutura correspondente ao prefixo indicado.
 
 %PERGUNTAR AO PROF!!!!!!!!!
 No pior caso, o algoritmo implementado terá de percorrer a altura da árvore. A complexidade irá ser O(Comprimento do prefixo).

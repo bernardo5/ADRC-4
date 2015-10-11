@@ -56,7 +56,7 @@ Nesta função, testa-se se o prefixo a colocar na árvore é válido. No caso d
 
 %PERGUNTAR AO PROF!!!!!!!!!
 No pior caso, o algoritmo implementado terá de percorrer a altura da árvore. A complexidade irá ser O(Comprimento do prefixo).
-
+O pseudo-código da função será o seguinte:
 \begin{algorithmic}
  \If{$adress\_is\_invalid$}{
  	\Return\;
@@ -89,11 +89,11 @@ No pior caso, o algoritmo implementado terá de percorrer a altura da árvore. A
 Nesta função, assumimos os seguintes factos: o comando de \textit{delete} do \textit{root} deve ser considerado como inválido, e no caso de se apagar um prefixo que seja "filho único" o "pai" também deve ser removido.
 
 Assim, no início da função, esta faz chamadas recursivas a ela própria até atingir o prefixo pretendido, retornando com uma mensagem de erro no caso de este não existir.
- A função \textit{new\_prefix} corresponde a retirar ao prefixo a apagar um bit, de forma a que o caminho a percorrer se inicie no bit onde a função se encontra de momento.%ACRESCIMO
-  Após apagar o nó correspondente, a função, ao retornar 1, "avisa" o nó de cima ("pai") de que o ponteiro para este será agora NULL. Este factor será bastante importante na medida em que a condição de \textit{free} baseia-se no facto de os dois ponteiros para estruturas "filho" serem NULL.
+ A função \textit{new\_prefix} corresponde a retirar ao prefixo a apagar um bit, de forma a que o caminho a percorrer se inicie no bit onde a função se encontra de momento. %ACRESCIMO
+Após apagar o nó correspondente, a função, ao retornar 1, "avisa" o nó de cima ("pai") de que o ponteiro para este será agora NULL. Este factor será bastante importante na medida em que a condição de \textit{free} baseia-se no facto de os dois ponteiros para estruturas "filho" serem NULL.
 
 A complexidade do algoritmo será O(comprimento do prefixo). %PERGUNTAR
-
+O pseudo-código da função será o seguinte:
 \begin{algorithmic}
  \If{$prefix\_corresponds\_to\_root$}
  	\Return -1\;
@@ -156,7 +156,7 @@ A árvore será assim percorrida em profundidade, da esquerda para a direita.
 
 \section{Função \textit{TwoTree}}
 Com esta função, pretende-se a conversão da árvore obtida anteriormente pela função \textit{ReadTable} para uma \textit{binary}2-\textit{tree}. Por definição, neste tipo de árvore, todos os nós que não são folhas têm exactamente dois "filhos". Desta forma, o algoritmo percorre recursivamente os nós da árvore. Se ao chegar a uma folha e a mesma não tiver um valor de \textit{next hop} atribuído actualiza-o. Caso o nó não seja uma folha, verifica qual a ramificação em falta, cria-a e chama a rotina para cada ramo. A função tem como parâmetros de entrada um ponteiro para o topo da árvore/sub-árvore, bem como o valor de \textit{next hop} que irá ser atribuído às folhas da ramificação em  causa. A função \textit{update\_next\_hop} tem como função verificar se o \textit{next\_hop} a utilizar na chamada recursiva é o mesmo no nó anterior ou um valor actualizado, no caso de o valor do nó visitado ser diferente.
-
+O pseudo-código da função será o seguinte:
 \begin{algorithmic}
  \If{$node\_is\_a\_leaf$}
  	\If{$has\_no\_next\_hop$}
@@ -182,7 +182,7 @@ Com esta função, pretende-se a conversão da árvore obtida anteriormente pela
 
 \section{Função \textit{AdressLookUp}}
 Com esta rotina, pretende-se retornar o \textit{next\_hop} do prefixo em causa. Considerando a ordem do enunciado, assume-se que a árvore a utilizar para obter a informação é do tipo \textit{binary}2-\textit{tree}. Como tal, toda a informação relativa aos \textit{next\_hops} estão contidas nas folhas da árvore. Assim, recebendo como argumentos de \textit{input} o ponteiro para o topo da árvore e o prefixo desejado, o algoritmo em causa percorre os nós consoante os \textit{bits} do prefixo especificado até que o ponteiro de um nó para o seu "filho" seja NULL. Quando tal acontecer significa que o nó para o qual o ponteiro auxiliar aponta é uma folha da árvore, cujo nó contém o \textit{next\_hop} mais específico para o prefixo dado no \textit{input}.
-
+O pseudo-código da função será o seguinte:
 \begin{algorithmic}
  \If{$prefix\_is\_invalid$}
  	\Return $-1\;$

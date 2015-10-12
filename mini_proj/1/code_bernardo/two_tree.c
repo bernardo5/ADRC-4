@@ -49,6 +49,7 @@ void TwoTree(node**base_node, int next_hop){
 		}
 		TwoTree(&((*base_node)->zero), update_next_hop(*base_node, next_hop));
 		TwoTree(&((*base_node)->one), update_next_hop(*base_node, next_hop));
+		((*base_node)->next_hop)=-1;
 	}
 	return;
 }

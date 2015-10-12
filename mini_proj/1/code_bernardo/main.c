@@ -19,12 +19,15 @@ int main(int argc, char *argv[]){
 	int hop;
 	char prefix[128];
 	char *aux_prefix=malloc(2*sizeof(char));
-	int control=0;
+	int look_up_control=0;
 	char number[2];
 	while(1){
 		aux_prefix[0] = '\0';
-		printf("Choose from the following options:\n1: Add Prefix\n2: Delete Prefix\n3: Print Table\n4: Convert Tree to Two Tree\n5: Address Look Up\n6: Exit\n\n");
-
+		printf("Choose from the following options:\n");
+		printf("1: Add Prefix\n2: Delete Prefix\n3: Print Table\n");
+		printf("4: Convert Tree to Two Tree\n5: Address Look Up\n");
+		printf("6: Exit\n\n");
+		
 		bzero(prefix, 128);
 		fgets(number, 2, stdin);
 		
@@ -32,7 +35,7 @@ int main(int argc, char *argv[]){
 			if(option==1){
 				printf("\nPlease specify the prefix and next hop to add.\n");
 				scanf("%s %d", prefix, &hop);
-				control=0;
+				look_up_control=0;
 				AddPrefix(&root, prefix, hop);
 			}
 			else if(option==2){
@@ -40,7 +43,7 @@ int main(int argc, char *argv[]){
 				fscanf(stdin,"%s", prefix);
 				if(DeletePrefix(&root, prefix)!=-1){
 					printf("\nPrefix successfully deleted.\n\n");			
-					control=0;
+					look_up_control=0;
 				}
 			}
 			else if(option==3){
@@ -48,12 +51,12 @@ int main(int argc, char *argv[]){
 				printf("\nTable successfully printed\n");
 			}
 			else if(option==4){
-				control=1;
+				look_up_control=1;
 				TwoTree(&root, root->next_hop);
 				printf("\nTable successfully converted\n");
 			}
 			else if(option==5){
-				if(control==0){
+				if(look_up_control==0){
 					printf("\nPlease convert the tree to a two tree first.\n\n");
 				}else{
 					printf("\nPlease specify the prefix to scan.\n");

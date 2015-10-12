@@ -12,7 +12,7 @@ int verify_address(char*address);
 
 node*Init_tree();
 
-node* Initialize_node(char*prefix);
+node* Initialize_node();
 
 void AddPrefix(node**root, char*prefix, int next_hop);
 

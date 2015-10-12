@@ -25,13 +25,11 @@ node*Init_tree(){
 *table into a binary prefix tree representation or in a convertion from binary prefix
 *prefix tree into a binary prefix 2-tree*/
 
-node* Initialize_node(char*prefix){
+node* Initialize_node(){
 	node*n=malloc(sizeof(node));
 	n->next_hop=-1; /*no hop specified*/
 	n->zero=NULL;
 	n->one=NULL;
-	n->prefix=malloc(sizeof(char)*(strlen(prefix)+1));
-	strcpy(n->prefix, prefix);
 	return n;
 }
 
@@ -45,16 +43,11 @@ void AddPrefix(node**root, char*prefix, int next_hop){
 	}
 	/*the prefix read can be * for empty prefixes
 		 * or a bit sequence*/
-
-		 /*this variable will be used to store the path already covered
-		 *it will be copied into a node structure, to make the table printing easier*/
-		char* current_prefix=malloc(sizeof(char)*(strlen(prefix)+1));
-		current_prefix[0] = '\0';
+		 
         /*if the prefix specified is the root some storage information has no use
         *for ex:prefix(has none), no need of covering a tree path, etc*/
 		if(strcmp(prefix, "*")==0){
 			(*root)->next_hop=next_hop;
-			strcpy((*root)->prefix, prefix);
 		}else{
 		    /*in this point, we have the necessity of covering a tree path which will
 		    *depend on the prefix given*/
@@ -62,15 +55,13 @@ void AddPrefix(node**root, char*prefix, int next_hop){
 			node*auxiliar=(*root); /*auxiliar pointer that will go through the tree*/
 			while(bit<strlen(prefix)){ /*while we havent reached th end of the path specified by the prefix*/
 				if(prefix[bit]=='0'){
-					strcat(current_prefix, "0");
 					if((auxiliar->zero)==NULL){/*if the node doesnt exist its necessary to create it*/
-						(auxiliar->zero)=Initialize_node(current_prefix);/*node creation with the prefix specification*/
+						(auxiliar->zero)=Initialize_node();/*node creation with the prefix specification*/
                     }
 					auxiliar=auxiliar->zero;
 				}else{
-					strcat(current_prefix, "1");
 					if((auxiliar->one)==NULL){
-                        (auxiliar->one)=Initialize_node(current_prefix);
+                        (auxiliar->one)=Initialize_node();
                     }
 					auxiliar=auxiliar->one;
 				}
@@ -79,17 +70,13 @@ void AddPrefix(node**root, char*prefix, int next_hop){
 			/*copying the prefix values into the node*/
 			auxiliar->next_hop=next_hop;
 		}
-	free(current_prefix);/*free of the auxiliar string used*/
 	return;
 }
 
 /*function that frees a certain node*/
 
 void Free_Node(node*base_node){
-
-	free(base_node->prefix);
 	free(base_node);
-
 	return;
 }
 

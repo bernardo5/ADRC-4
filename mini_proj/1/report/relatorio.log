@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.4)  11 OCT 2015 19:27
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.4)  12 OCT 2015 23:29
 entering extended mode
 **relatorio.tex
 
@@ -683,7 +683,7 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 
-Overfull \hbox (46.28444pt too wide) in paragraph at lines 70--71
+Overfull \hbox (46.28444pt too wide) in paragraph at lines 68--69
 [] \T1/cmr/bx/n/10 while $\OML/cmm/m/it/10 all[]prefix[]nodes[]havent[]been[]vi
 sited[]yet$
  []
@@ -695,7 +695,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.85  \caption
+l.83  \caption
               {AddPrefix}
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -706,7 +706,7 @@ If that doesn't work, type  X <return>  to quit.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.86 \end{algorithmic}
+l.84 \end{algorithmic}
                       
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -717,7 +717,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.86 \end{algorithmic}
+l.84 \end{algorithmic}
                       
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -728,7 +728,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.86 \end{algorithmic}
+l.84 \end{algorithmic}
                       
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -740,14 +740,14 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.94 
+l.92 
       [1
 
 ]
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.99  	\Return -1\;
+l.97  	\Return -1\;
                    
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -759,8 +759,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.100  \EndIf
-             
+l.98  \EndIf
+            
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
@@ -771,8 +771,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.100  \EndIf
-             
+l.98  \EndIf
+            
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
@@ -783,8 +783,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.100  \EndIf
-             
+l.98  \EndIf
+            
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
@@ -795,24 +795,24 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.101  \If
-          {$havent\_reached\_the\_end\_of\_the\_prefix\_bits$}
+l.99  \If
+         {$havent\_reached\_the\_end\_of\_the\_prefix\_bits$}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.101  \If
-          {$havent\_reached\_the\_end\_of\_the\_prefix\_bits$}
+l.99  \If
+         {$havent\_reached\_the\_end\_of\_the\_prefix\_bits$}
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.101  \If
-          {$havent\_reached\_the\_end\_of\_the\_prefix\_bits$}
+l.99  \If
+         {$havent\_reached\_the\_end\_of\_the\_prefix\_bits$}
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -822,8 +822,8 @@ my insertion and my current dilemma will both disappear.
 ! Extra }, or forgotten \endgroup.
 \par ...m \@noitemerr {\@@par }\fi \else {\@@par }
                                                   \fi 
-l.101  \If
-          {$havent\_reached\_the\_end\_of\_the\_prefix\_bits$}
+l.99  \If
+         {$havent\_reached\_the\_end\_of\_the\_prefix\_bits$}
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -831,21 +831,21 @@ the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
 
-Overfull \hbox (15.53671pt too wide) in paragraph at lines 101--102
+Overfull \hbox (15.53671pt too wide) in paragraph at lines 99--100
 [] \T1/cmr/bx/n/10 if $\OML/cmm/m/it/10 havent[]reached[]the[]end[]of[]the[]pre
 fix[]bits$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 106--107
+Underfull \hbox (badness 10000) in paragraph at lines 104--105
 [] \T1/cmr/bx/n/10 if $\OML/cmm/m/it/10 Delete[]prefix\OT1/cmr/m/n/10 (\OML/cmm
-/m/it/10 base[]node\OMS/cmsy/m/n/10   \OML/cmm/m/it/10 >$
+/m/it/10 base[]node \OMS/cmsy/m/n/10 !$
  []
 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.111  			\Return -1\;
+l.109  			\Return -1\;
                       
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -857,7 +857,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.112  		\EndIf
+l.110  		\EndIf
                
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -869,7 +869,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.112  		\EndIf
+l.110  		\EndIf
                
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -881,7 +881,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.112  		\EndIf
+l.110  		\EndIf
                
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -893,7 +893,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.113  	\Else
+l.111  	\Else
              
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -901,7 +901,7 @@ If that doesn't work, type  X <return>  to quit.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.113  	\Else
+l.111  	\Else
              
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -909,7 +909,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.113  	\Else
+l.111  	\Else
              
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -918,7 +918,7 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 
-Underfull \hbox (badness 1742) in paragraph at lines 110--113
+Underfull \hbox (badness 1742) in paragraph at lines 108--111
 [] $\OML/cmm/m/it/10 prefix[]does[]not[]exist $ \T1/cmr/bx/n/10 re-turn \T1/cmr
 /m/n/10 -
  []
@@ -926,7 +926,7 @@ Underfull \hbox (badness 1742) in paragraph at lines 110--113
 ! Extra }, or forgotten \endgroup.
 \par ...m \@noitemerr {\@@par }\fi \else {\@@par }
                                                   \fi 
-l.113  	\Else
+l.111  	\Else
              
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -935,14 +935,20 @@ the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 118--119
+Underfull \hbox (badness 10000) in paragraph at lines 116--117
 [] \T1/cmr/bx/n/10 if
+ []
+
+
+Underfull \hbox (badness 1024) in paragraph at lines 116--117
+$\OML/cmm/m/it/10 Delete[]prefix\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 base[]node \O
+MS/cmsy/m/n/10 ! \OML/cmm/m/it/10 one; prefix\OT1/cmr/m/n/10 ) = 1$
  []
 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.123  				\Return -1\;
+l.121  				\Return -1\;
                        
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -954,7 +960,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.124  			\EndIf
+l.122  			\EndIf
                 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -966,7 +972,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.124  			\EndIf
+l.122  			\EndIf
                 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -978,7 +984,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.124  			\EndIf
+l.122  			\EndIf
                 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -990,7 +996,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.125  		\EndIf
+l.123  		\EndIf
                
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -998,7 +1004,7 @@ If that doesn't work, type  X <return>  to quit.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.125  		\EndIf
+l.123  		\EndIf
                
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1006,7 +1012,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.125  		\EndIf
+l.123  		\EndIf
                
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1015,14 +1021,14 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 122--125
+Underfull \hbox (badness 10000) in paragraph at lines 120--123
 [] $\OML/cmm/m/it/10 prefix[]does[]not[]exist $
  []
 
 ! Extra }, or forgotten \endgroup.
 \par ...m \@noitemerr {\@@par }\fi \else {\@@par }
                                                   \fi 
-l.125  		\EndIf
+l.123  		\EndIf
                
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -1033,21 +1039,21 @@ deleted material, e.g., by typing `I$}'.
 ! Missing number, treated as zero.
 <to be read again> 
                    \ALG@b@2@Else@0 
-l.127  \Else
+l.125  \Else
             
 A number should have been here; I inserted `0'.
 (If you can't figure out why I needed to see a number,
 look up `weird error' in the index to The TeXbook.)
 
 
-Underfull \hbox (badness 3407) in paragraph at lines 128--129
+Underfull \hbox (badness 3407) in paragraph at lines 126--127
 [] \T1/cmr/bx/n/10 if $\OML/cmm/m/it/10 node[]has[]no[]children$
  []
 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.130  		\Return 1\;
+l.128  		\Return 1\;
                     
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1059,7 +1065,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.131  	\Else
+l.129  	\Else
              
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1071,7 +1077,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.131  	\Else
+l.129  	\Else
              
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1083,7 +1089,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.131  	\Else
+l.129  	\Else
              
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1095,8 +1101,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.132 		\State
-               $base\_node->next\_hop:=-1\;$\Comment{cant free the node but ...
+l.130 		\State
+               $base\_node \rightarrow next\_hop:=-1\;$\Comment{cant free th...
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1104,16 +1110,16 @@ If that doesn't work, type  X <return>  to quit.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.132 		\State
-               $base\_node->next\_hop:=-1\;$\Comment{cant free the node but ...
+l.130 		\State
+               $base\_node \rightarrow next\_hop:=-1\;$\Comment{cant free th...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.132 		\State
-               $base\_node->next\_hop:=-1\;$\Comment{cant free the node but ...
+l.130 		\State
+               $base\_node \rightarrow next\_hop:=-1\;$\Comment{cant free th...
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -1123,8 +1129,8 @@ my insertion and my current dilemma will both disappear.
 ! Extra }, or forgotten \endgroup.
 \par ...m \@noitemerr {\@@par }\fi \else {\@@par }
                                                   \fi 
-l.132 		\State
-               $base\_node->next\_hop:=-1\;$\Comment{cant free the node but ...
+l.130 		\State
+               $base\_node \rightarrow next\_hop:=-1\;$\Comment{cant free th...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -1132,18 +1138,14 @@ the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 132--133
-[] $\OML/cmm/m/it/10 base[]node\OMS/cmsy/m/n/10   \OML/cmm/m/it/10 >$
+Underfull \hbox (badness 10000) in paragraph at lines 130--131
+[] $\OML/cmm/m/it/10 base[]node \OMS/cmsy/m/n/10 !$
  []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 
 ! Missing number, treated as zero.
 <to be read again> 
                    \ALG@b@2@EndIf@0 
-l.134  \EndIf
+l.132  \EndIf
              
 A number should have been here; I inserted `0'.
 (If you can't figure out why I needed to see a number,
@@ -1152,7 +1154,7 @@ look up `weird error' in the index to The TeXbook.)
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.135  \Return 0\;
+l.133  \Return 0\;
                   
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1164,7 +1166,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.136  \caption
+l.134  \caption
                {DeletePrefix}
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -1179,7 +1181,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.137 \end{algorithmic}
+l.135 \end{algorithmic}
                        
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1187,29 +1189,33 @@ If that doesn't work, type  X <return>  to quit.
 ! Incompatible glue units.
 \endtrivlist ...@noparlist \else \ifdim \lastskip 
                                                   >\z@ \@tempskipa \lastskip...
-l.137 \end{algorithmic}
+l.135 \end{algorithmic}
                        
 I'm going to assume that 1mu=1pt when they're mixed.
 
 ! Incompatible glue units.
 <recently read> \lastskip 
                           
-l.137 \end{algorithmic}
+l.135 \end{algorithmic}
                        
 I'm going to assume that 1mu=1pt when they're mixed.
 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.137 \end{algorithmic}
+l.135 \end{algorithmic}
                        
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.152  \Return\;
+l.154  \Return\;
                 
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1221,7 +1227,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.153  \caption
+l.155  \caption
                {PrintTable}
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -1236,7 +1242,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.154 \end{algorithmic}
+l.156 \end{algorithmic}
                        
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1244,21 +1250,21 @@ If that doesn't work, type  X <return>  to quit.
 ! Incompatible glue units.
 \endtrivlist ...@noparlist \else \ifdim \lastskip 
                                                   >\z@ \@tempskipa \lastskip...
-l.154 \end{algorithmic}
+l.156 \end{algorithmic}
                        
 I'm going to assume that 1mu=1pt when they're mixed.
 
 ! Incompatible glue units.
 <recently read> \lastskip 
                           
-l.154 \end{algorithmic}
+l.156 \end{algorithmic}
                        
 I'm going to assume that 1mu=1pt when they're mixed.
 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.154 \end{algorithmic}
+l.156 \end{algorithmic}
                        
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1266,7 +1272,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.154 \end{algorithmic}
+l.156 \end{algorithmic}
                        
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1275,21 +1281,21 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 175--176
-[] $\OML/cmm/m/it/10 TwoTree\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 base[]node\OMS/cm
-sy/m/n/10   \OML/cmm/m/it/10 >$
+Underfull \hbox (badness 10000) in paragraph at lines 177--178
+[] $\OML/cmm/m/it/10 TwoTree\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 base[]node \OMS/c
+msy/m/n/10 !$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 176--177
-[] $\OML/cmm/m/it/10 TwoTree\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 base[]node\OMS/cm
-sy/m/n/10   \OML/cmm/m/it/10 >$
+Underfull \hbox (badness 10000) in paragraph at lines 178--179
+[] $\OML/cmm/m/it/10 TwoTree\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 base[]node \OMS/c
+msy/m/n/10 !$
  []
 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.179  \Return\;
+l.182  \Return\;
                 
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1301,7 +1307,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.180  \caption
+l.183  \caption
                {TwoTree}
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -1316,7 +1322,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.181 \end{algorithmic}
+l.184 \end{algorithmic}
                        
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1324,39 +1330,39 @@ If that doesn't work, type  X <return>  to quit.
 ! Incompatible glue units.
 \endtrivlist ...@noparlist \else \ifdim \lastskip 
                                                   >\z@ \@tempskipa \lastskip...
-l.181 \end{algorithmic}
+l.184 \end{algorithmic}
                        
 I'm going to assume that 1mu=1pt when they're mixed.
 
 ! Incompatible glue units.
 <recently read> \lastskip 
                           
-l.181 \end{algorithmic}
+l.184 \end{algorithmic}
                        
 I'm going to assume that 1mu=1pt when they're mixed.
 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.181 \end{algorithmic}
+l.184 \end{algorithmic}
                        
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-Overfull \hbox (7.28412pt too wide) in paragraph at lines 193--194
+Overfull \hbox (7.28412pt too wide) in paragraph at lines 196--197
 []\T1/cmr/bx/n/10 while $\OML/cmm/m/it/10 havent[]reached[]the[]end[]of[]prefix
 []bits$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 195--197
+Underfull \hbox (badness 10000) in paragraph at lines 198--200
 [] \T1/cmr/bx/n/10 if $\OML/cmm/m/it/10 has[]no[]\OT1/cmr/m/n/10 "0"[]\OML/cmm/
 m/it/10 child$ \T1/cmr/bx/n/10 then re-turn
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 200--202
+Underfull \hbox (badness 10000) in paragraph at lines 203--205
 [] \T1/cmr/bx/n/10 if $\OML/cmm/m/it/10 has[]no[]\OT1/cmr/m/n/10 "1"[]\OML/cmm/
 m/it/10 child$ \T1/cmr/bx/n/10 then re-turn
  []
@@ -1364,7 +1370,7 @@ m/it/10 child$ \T1/cmr/bx/n/10 then re-turn
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.207  \Return -1\;
+l.210  \Return -1\;
                    
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1376,7 +1382,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.208  \caption
+l.211  \caption
                {AdressLookUp}
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -1391,7 +1397,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.209 \end{algorithmic}
+l.212 \end{algorithmic}
                        
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1399,21 +1405,21 @@ If that doesn't work, type  X <return>  to quit.
 ! Incompatible glue units.
 \endtrivlist ...@noparlist \else \ifdim \lastskip 
                                                   >\z@ \@tempskipa \lastskip...
-l.209 \end{algorithmic}
+l.212 \end{algorithmic}
                        
 I'm going to assume that 1mu=1pt when they're mixed.
 
 ! Incompatible glue units.
 <recently read> \lastskip 
                           
-l.209 \end{algorithmic}
+l.212 \end{algorithmic}
                        
 I'm going to assume that 1mu=1pt when they're mixed.
 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.209 \end{algorithmic}
+l.212 \end{algorithmic}
                        
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1421,7 +1427,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.209 \end{algorithmic}
+l.212 \end{algorithmic}
                        
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1429,26 +1435,26 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 212.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 215.
 [3]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 212.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 215.
 
 (C:\BG-files\IST\4ano\1semestre\ADRC\git\ADRC-4\mini_proj\1\report\relatorio.au
 x)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 212.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 212.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 215.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 215.
 Package rerunfilecheck Info: File `relatorio.out' has not changed.
 (rerunfilecheck)             Checksum: 10C7C3A4431F693CE1BA06C54D30A892;478.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 212.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 215.
  ) 
 Here is how much of TeX's memory you used:
  7360 strings out of 493921
  109639 string characters out of 3146873
- 195805 words of memory out of 3000000
+ 196805 words of memory out of 3000000
  10569 multiletter control sequences out of 15000+200000
  12496 words of font info for 28 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 36i,4n,38p,990b,454s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,4n,38p,990b,448s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Bernardo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi6
 00\ecbx1000.pk> <C:\Users\Bernardo\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jkn
 appen\ec\dpi600\ecbi1440.pk> <C:\Users\Bernardo\AppData\Local\MiKTeX\2.9\fonts\
@@ -1464,7 +1470,7 @@ X\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc1728.pk><C:/Program Files/MiKTeX 2
 .9_/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9_/fon
 ts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9_/fonts/type1
 /public/amsfonts/cm/cmsy10.pfb>
-Output written on relatorio.pdf (4 pages, 143504 bytes).
+Output written on relatorio.pdf (4 pages, 143620 bytes).
 PDF statistics:
  336 PDF objects out of 1000 (max. 8388607)
  12 named destinations out of 1000 (max. 500000)

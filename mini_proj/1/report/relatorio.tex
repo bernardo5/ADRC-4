@@ -62,9 +62,7 @@ O pseudo-código da função será o seguinte:
  	\Return\;
  \EndIf
  \If{$adress\_is\_"*"$}{\Comment{root prefix}
- 	\State $root->next\_hop:=next\_hop\;$
- 	
- 	\State $root->prefix:=prefix\;$
+ 	\State $root \rightarrow next\_hop:=next\_hop\;$
  \Else
     \State $auxiliar\_node:=root\_node\;$
  	\While{$all\_prefix\_nodes\_havent\_been\_visited\_yet$}{
@@ -72,14 +70,14 @@ O pseudo-código da função será o seguinte:
  			\If{$there\_is\_no\_node$}
  				\State $node\_creation()\;$
  			\EndIf
- 			\State $auxiliar:=auxiliar->zero\;$
+ 			\State $auxiliar:=auxiliar \rightarrow zero\;$
  		\Else \Comment{bit is one} 			
  			\If{$there\_is\_no\_node$}
  				\State $node\_creation()\;$
  			\EndIf
- 			\State $auxiliar:=auxiliar->one\;$
+ 			\State $auxiliar:=auxiliar \rightarrow one\;$
  		\EndIf
-		\State $auxiliar->next\_hop:=next\_hop\;$ 	
+		\State $auxiliar \rightarrow next\_hop:=next\_hop\;$ 	
  	\EndWhile
  \EndIf
  \caption{AddPrefix}
@@ -103,8 +101,8 @@ O pseudo-código da função será o seguinte:
  		\State $prefix:=new\_prefix()\;$
  		
  		\If{$node\_exists$}
- 			\If{$Delete\_prefix(base\_node->zero, prefix)=1$}
- 				\State $base\_node->zero:=NULL\;$
+ 			\If{$Delete\_prefix(base\_node \rightarrow zero, prefix)=1$}
+ 				\State $base\_node \rightarrow zero:=NULL\;$
  			\EndIf
  		\Else
  			\State $prefix\_does\_not\_exist\;$
@@ -115,8 +113,8 @@ O pseudo-código da função será o seguinte:
  			\State $prefix:=new\_prefix()\;$
  		
  			\If{$node\_exists$}
- 				\If{$Delete\_prefix(base\_node->one, prefix)=1$}
- 					\State $base\_node->one:=NULL\;$
+ 				\If{$Delete\_prefix(base\_node \rightarrow one, prefix)=1$}
+ 					\State $base\_node \rightarrow one:=NULL\;$
  				\EndIf
  			\Else
  				\State $prefix\_does\_not\_exist\;$
@@ -129,7 +127,7 @@ O pseudo-código da função será o seguinte:
  		\State $Free\_node(base\_node)\;$
  		\Return 1\;
  	\Else
-		\State $base\_node->next\_hop:=-1\;$\Comment{cant free the node but erases next hop}	
+		\State $base\_node \rightarrow next\_hop:=-1\;$\Comment{cant free the node but erases next hop}	
  	\EndIf
  \EndIf
  \Return 0\;
@@ -139,14 +137,18 @@ O pseudo-código da função será o seguinte:
 Neste caso, pretende-se a conversão de uma árvore binária numa \textit{forwarding table}. Para tal, será necessário visitar todos os nós da árvore, verificando se têm \textit{next hop} atribuído. Assim:
 
 \begin{algorithmic}
- \If{$has\_next\_hop$}{
-	\State $print\_node\_prefix\_and\_next\_hop\;$
+ \If{$node\_has\_next\_hop$}{
+	\State $print\_prefix\_and\_next\_hop\;$
  \EndIf
  \If{$has\_"0"\_child$}
-	\State $PrintTable(zero\_child)\;$
+ 	\State $update\_prefix$
+ 	
+	\State $PrintTable(zero\_child,prefix)\;$
  \EndIf
  \If{$has\_"1"\_child$}
-	\State $PrintTable(one\_child)\;$
+ 	\State $update\_prefix$
+ 	
+	\State $PrintTable(one\_child,prefix)\;$
  \EndIf
  
  \Return\;
@@ -160,20 +162,21 @@ O pseudo-código da função será o seguinte:
 \begin{algorithmic}
  \If{$node\_is\_a\_leaf$}
  	\If{$has\_no\_next\_hop$}
- 		\State $base\_node->next\_hop:=next\_hop\;$
+ 		\State $base\_node \rightarrow next\_hop:=next\_hop\;$
  	\EndIf
  \Else
  	\If{$has\_no\_"0"\_child$}
  		\State $prefix:=new\_node\_prefix()\;$
- 		\State $create\_zero\_child(prefix)\;$
+ 		\State $create\_"0"\_child()\;$
  	\Else
 		\If{$has\_no\_"1"\_child$}	
 			\State $prefix:=new\_node\_prefix()\;$
-			\State $create\_one\_child(prefix)\;$
+			\State $create\_"1"\_child()\;$
 		\EndIf
  	\EndIf
- 	\State $TwoTree(base\_node->zero, update\_next\_hop())\;$
- 	\State $TwoTree(base\_node->one, update\_next\_hop())\;$
+ 	\State $TwoTree(base\_node \rightarrow zero, update\_next\_hop())\;$
+ 	\State $TwoTree(base\_node \rightarrow one, update\_next\_hop())\;$
+ 	\State $base\_node \rightarrow next\_hop:=-1\;$
  \EndIf
  
  \Return\;
@@ -193,14 +196,14 @@ O pseudo-código da função será o seguinte:
  \While{$havent\_reached\_the\_end\_of\_prefix\_bits$}
  	\If{$bit=0$}
  		\If{$has\_no\_"0"\_child$}{
- 			\Return $auxiliar->next\_hop\;$
+ 			\Return $auxiliar \rightarrow next\_hop\;$
  		\EndIf
- 		\State $auxiliar:=auxiliar->zero\;$
+ 		\State $auxiliar:=auxiliar \rightarrow zero\;$
  	\Else
  		\If{$has\_no\_"1"\_child$}
- 			\Return $auxiliar->next\_hop\;$
+ 			\Return $auxiliar \rightarrow next\_hop\;$
  		\EndIf
- 		\State $auxiliar:=auxiliar->one\;$
+ 		\State $auxiliar:=auxiliar \rightarrow one\;$
  	\EndIf
  \EndWhile
  

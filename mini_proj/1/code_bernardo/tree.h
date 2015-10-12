@@ -24,7 +24,7 @@ int DeletePrefix(node**root, char*prefix);
 
 void ReadTable(node**root, char*table_txt);
 
-void PrintTable(node*base_node);
+void PrintTable(node*base_node, char*prefix);
 
 void PosFixed_delete_tree(node** base_node);
 

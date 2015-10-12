@@ -18,10 +18,11 @@ int main(int argc, char *argv[]){
 	int option;
 	int hop;
 	char prefix[128];
+	char *aux_prefix=malloc(2*sizeof(char));
 	int control=0;
 	char number[2];
 	while(1){
-
+		aux_prefix[0] = '\0';
 		printf("Choose from the following options:\n1: Add Prefix\n2: Delete Prefix\n3: Print Table\n4: Convert Tree to Two Tree\n5: Address Look Up\n6: Exit\n\n");
 
 		bzero(prefix, 128);
@@ -43,7 +44,7 @@ int main(int argc, char *argv[]){
 				}
 			}
 			else if(option==3){
-				PrintTable(root);
+				PrintTable(root, aux_prefix);
 				printf("\nTable successfully printed\n");
 			}
 			else if(option==4){
@@ -62,6 +63,8 @@ int main(int argc, char *argv[]){
 			}
 			else if(option==6){
 				printf("The program will now exit.\n");
+				free(aux_prefix);
+				PosFixed_delete_tree(&root);
 				exit(1);
 			}
 		}

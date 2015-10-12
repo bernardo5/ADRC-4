@@ -2,7 +2,7 @@
 
 int main(int argc, char *argv[]){
 
-	if(argc!=2){
+	if(argc<2){
 		printf("Specify the file name\n");
 		exit(-1);
 	}
@@ -13,36 +13,58 @@ int main(int argc, char *argv[]){
 
 	if(root==NULL)printf("Table successfully initialized\n");
 
-
-
-
-
 	ReadTable(&root, table_txt);
-	PrintTable(root);
-	printf("\n\n");
-	AddPrefix(&root, "101", 10);
-	/*printf("001 next hop is: %d\n", root->zero->zero->one->next_hop);
-	printf("00 next hop is: %d\n", root->zero->zero->next_hop);
-	printf("0 next hop is: %d\n", root->zero->next_hop);
-	*/
-	//DeletePrefix(&root, "010");
 
-	//DeletePrefix(&root, "*");
+	int option;
+	int hop;
+	char prefix[128];
+	int control=0;
+	char number[2];
+	while(1){
 
-	//DeletePrefix(&root, "10");
+		printf("Choose from the following options:\n1: Add Prefix\n2: Delete Prefix\n3: Print Table\n4: Convert Tree to Two Tree\n5: Address Look Up\n6: Exit\n\n");
 
-
-
-	PrintTable(root);
-
-	/*TwoTree(&root, root->next_hop);
-	printf("\n\n");
-	PrintTable(root);
-	printf("\n\n");
-
-	printf("next_hop:\t%d\n",AddressLookUp(root, "1110101010101"));
-
-	printf("next_hop:\t%d\n",AddressLookUp(root, "1110101010101f"));*/
-	PosFixed_delete_tree(&root);
+		bzero(prefix, 128);
+		fgets(number, 2, stdin);
+		
+		if(sscanf(number, "%d", &option)==1){
+			if(option==1){
+				printf("\nPlease specify the prefix and next hop to add.\n");
+				scanf("%s %d", prefix, &hop);
+				control=0;
+				AddPrefix(&root, prefix, hop);
+			}
+			else if(option==2){
+				printf("\nPlease specify the prefix to delete.\n");
+				fscanf(stdin,"%s", prefix);
+				if(DeletePrefix(&root, prefix)!=-1){
+					printf("\nPrefix successfully deleted.\n\n");			
+					control=0;
+				}
+			}
+			else if(option==3){
+				PrintTable(root);
+				printf("\nTable successfully printed\n");
+			}
+			else if(option==4){
+				control=1;
+				TwoTree(&root, root->next_hop);
+				printf("\nTable successfully converted\n");
+			}
+			else if(option==5){
+				if(control==0){
+					printf("\nPlease convert the tree to a two tree first.\n\n");
+				}else{
+					printf("\nPlease specify the prefix to scan.\n");
+					fscanf(stdin,"%s", prefix);
+					printf("\nNext hop is: %d\n", AddressLookUp(root, prefix));
+				}
+			}
+			else if(option==6){
+				printf("The program will now exit.\n");
+				exit(1);
+			}
+		}
+	}
 	exit(0);
 }

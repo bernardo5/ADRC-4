@@ -74,7 +74,6 @@ void AddPrefix(node**root, char*prefix, int next_hop){
                     }
 					auxiliar=auxiliar->one;
 				}
-				printf("Current prefix: %s\n", current_prefix);
 				bit++;
 			}
 			/*copying the prefix values into the node*/
@@ -105,7 +104,10 @@ char*NewPrefix(char*prefix){
 
 int DeletePrefix(node**base_node, char*prefix){
     /*its not supposed to delete the root*/
-	if(strcmp("*", prefix)==0) return -1;
+		if((verify_address(prefix)==-1)&&strcmp("*", prefix)!=0){
+		printf("Invalid prefix\n");
+		 return -1;
+	}
     /*if we havent reached the end of the string we havent reached the node we wanted to delete*/
 	if(strlen(prefix)>0){
 		if(prefix[0]=='0'){

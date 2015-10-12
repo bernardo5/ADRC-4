@@ -79,5 +79,6 @@ int AddressLookUp(node*root, char*address){
 				}
 				bit++;
 	}
-	return -1;/*compilation issue only*/
+	
+	return auxiliar->next_hop;
 }

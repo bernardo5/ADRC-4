@@ -211,5 +211,13 @@ O pseudo-código da função será o seguinte:
  \caption{AdressLookUp}
 \end{algorithmic}
 \section{Considerações finais}
+Relativamente ao processo de construção do mini-projeto, foi-nos possível não só compreender melhor os conceitos estruturais por detrás do reencaminhamento de tráfego da internet, bem como as vantagens e desvantagens de cada estrutura.
 
+Algumas destas limitações são as seguintes:
+\begin{itemize}
+  \item assume-se que na procura de \textit{next\_hop} na árvore, o endereço IP terá de ter um comprimento igual ou superior ao caminho correspondente a percorrer na representação em árvore binária
+  
+  \item sendo a procura numa \textit{Binary2-tree} bastante mais simplificada pelo facto de os \textit{next\_hops} estarem sempre nas \textit{leafs}, o algoritmo por nós implementado pressupõe que previamente à procura, a conversão da árvore já foi realizada
+\end{itemize}
+Estas limitações foram contornadas por \textit{flags} no ficheiro principal \textit{main.c}, no caso da conversão da árvore, e por uma verificação de retorno -1 no caso do comprimento do prefixo.
 \end{document}

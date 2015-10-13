@@ -50,13 +50,13 @@ void AddPrefix(node**root, char*prefix, int next_hop){
 		 * or a bit sequence*/
 	char*current_prefix=malloc(sizeof(char)*(strlen(prefix)+1));
 	
-	if(verify_address(prefix)==-1) return;
-	 
 	if(strcmp(prefix, "*")==0){
 		(*root)->next_hop=next_hop;
 		(*root)->prefix=malloc(sizeof(char)*strlen(prefix)+1);
 		strcpy((*root)->prefix, prefix);
 	}else{
+		
+		if(verify_address(prefix)==-1) return;
 		int bit=0;
 		node*auxiliar=(*root);
 		while(bit<strlen(prefix)){

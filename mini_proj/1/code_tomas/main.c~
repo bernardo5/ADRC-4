@@ -24,7 +24,7 @@ int main(int argc, char *argv[]){
 		printf("Choose from the following options:\n1: Add Prefix\n2: Delete Prefix\n3: Print Table\n4: Convert Tree to Two Tree\n5: Address Look Up\n6: Exit\n\n");
 		
 		bzero(prefix, 128);
-		if(scanf("%d",&option)==1)printf("deu\n");
+		scanf("%d",&option);
 
 		if(option==1){
 			printf("\nPlease specify the prefix and next hop to add.\n");

@@ -22,6 +22,10 @@ int main(int argc, char *argv[]){
 	char *aux_prefix=malloc(2*sizeof(char)); /*used in function print table to know the nodes prefixes*/
 	int look_up_control=0; /*used to know if Adress Look Up can be called with no chance for errors*/
 	char number[2]; /*string used to get the variable option stated before*/
+	
+	
+	
+	
 	while(1){
 		aux_prefix[0] = '\0';/*inicialization of empty string*/
 		
@@ -32,8 +36,8 @@ int main(int argc, char *argv[]){
 		printf("6: Exit\n\n");
 		
 		bzero(prefix, 128);
-		fgets(number, 2, stdin); /*getting option chosen by user*/
-		
+		fscanf(stdin,"%s", number); /*getting prefix to delete*/
+		//fgets(number, 2, stdin); /*getting option chosen by user*/		
 		if(sscanf(number, "%d", &option)==1){/*verifying if user typed a number*/
 			if(option==1){/*AddPrefix*/
 				printf("\nPlease specify the prefix and next hop to add.\n");
@@ -78,7 +82,7 @@ int main(int argc, char *argv[]){
 				/*free of everything*/
 				free(aux_prefix);
 				PosFixed_delete_tree(&root);
-				exit(1);
+				exit(0);
 			}
 		}
 	}

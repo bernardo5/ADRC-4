@@ -50,7 +50,7 @@ int main(int argc, char *argv[]){
 				}
 			}
 			else if(option==3){ /*Print table*/
-				PrintTable(root, aux_prefix);
+				PrintTable(root, aux_prefix, look_up_control);
 				printf("\nTable successfully printed\n");
 			}
 			else if(option==4){ /*tree conversion*/

@@ -49,7 +49,7 @@ void TwoTree(node**base_node, int next_hop){
 		}
 		TwoTree(&((*base_node)->zero), update_next_hop(*base_node, next_hop));
 		TwoTree(&((*base_node)->one), update_next_hop(*base_node, next_hop));
-		((*base_node)->next_hop)=-1;
+		//((*base_node)->next_hop)=-1;
 	}
 	return;
 }
@@ -76,4 +76,29 @@ int AddressLookUp(node*root, char*address){
 	}
 	
 	return auxiliar->next_hop;
+}
+
+void PrintTable(node*base_node, char*prefix, int look_up_control){
+	char*current_prefix=malloc(sizeof(char)*(strlen(prefix)+1));
+	if((base_node->next_hop)!=-1){/*the prefix of the node visited has a next hop info*/
+		if((look_up_control==1)&&(leaf_check(base_node)!=1)){
+			/*do nothing*/
+		}else{
+			if((prefix[0] == '\0')&&(look_up_control==0)) printf("*");
+			printf("%s\t%d\n", prefix, base_node->next_hop);
+		}
+	
+	}
+	if(base_node->zero!=NULL){/*if it has a child this way, analyses its sub-tree*/
+		strcpy(current_prefix, prefix);
+		strcat((current_prefix), "0");
+		PrintTable(base_node->zero, current_prefix,look_up_control);
+	}
+	if(base_node->one!=NULL){/*if it has a child this way, analyses its sub-tree*/
+		strcpy(current_prefix, prefix);
+		strcat((current_prefix), "1");
+		PrintTable(base_node->one, current_prefix, look_up_control);
+	}
+	free(current_prefix);
+	return;
 }

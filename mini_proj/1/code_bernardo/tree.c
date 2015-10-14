@@ -165,27 +165,6 @@ void ReadTable(node**root, char*table_txt){
 	return;
 }
 
-void PrintTable(node*base_node, char*prefix){
-	char*current_prefix=malloc(sizeof(char)*(strlen(prefix)+1));
-	if((base_node->next_hop)!=-1){/*the prefix of the node visited has a next hop info*/
-		if(prefix[0] == '\0') printf("*");
-		printf("%s\t%d\n", prefix, base_node->next_hop);
-	}
-	if(base_node->zero!=NULL){/*if it has a child this way, analyses its sub-tree*/
-		strcpy(current_prefix, prefix);
-		strcat((current_prefix), "0");
-		PrintTable(base_node->zero, current_prefix);
-	}
-	if(base_node->one!=NULL){/*if it has a child this way, analyses its sub-tree*/
-		strcpy(current_prefix, prefix);
-		strcat((current_prefix), "1");
-		PrintTable(base_node->one, current_prefix);
-	}
-	free(current_prefix);
-	return;
-}
-
-
 void PosFixed_delete_tree(node** base_node){
   if((*base_node)==NULL) return;
   PosFixed_delete_tree(&(*base_node)->zero);

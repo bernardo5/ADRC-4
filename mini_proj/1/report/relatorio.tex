@@ -134,27 +134,9 @@ O pseudo-código da função será o seguinte:
  \caption{DeletePrefix}
 \end{algorithmic}
 \section{Função \textit{PrintTable}}
-Neste caso, pretende-se a conversão de uma árvore binária numa \textit{forwarding table}. Para tal, será necessário visitar todos os nós da árvore, verificando se têm \textit{next hop} atribuído. Assim:
+Neste caso, pretende-se a conversão de uma árvore binária numa \textit{forwarding table}. Para tal, será necessário visitar todos os nós da árvore, verificando se têm \textit{next hop} atribuído. No caso de a árvore ser \textit{binary2-tree}, apenas são impressos os prefixos e correspondentes \textit{next hops} se o nó visitado for uma \textit{leaf}. Desta forma, é-nos possível manter as informações relativas à árvore anterior, para que uma futura conversão seja viável.
 
-\begin{algorithmic}
- \If{$node\_has\_next\_hop$}{
-	\State $print\_prefix\_and\_next\_hop\;$
- \EndIf
- \If{$has\_"0"\_child$}
- 	\State $update\_prefix$
- 	
-	\State $PrintTable(zero\_child,prefix)\;$
- \EndIf
- \If{$has\_"1"\_child$}
- 	\State $update\_prefix$
- 	
-	\State $PrintTable(one\_child,prefix)\;$
- \EndIf
- 
- \Return\;
- \caption{PrintTable}
-\end{algorithmic}
-A árvore será assim percorrida em profundidade, da esquerda para a direita.
+A árvore será assim percorrida em profundidade, da esquerda para a direita, imprimindo em primeiro lugar o nó visitado.
 
 \section{Função \textit{TwoTree}}
 Com esta função, pretende-se a conversão da árvore obtida anteriormente pela função \textit{ReadTable} para uma \textit{binary}2-\textit{tree}. Por definição, neste tipo de árvore, todos os nós que não são folhas têm exactamente dois "filhos". Desta forma, o algoritmo percorre recursivamente os nós da árvore. Se ao chegar a uma folha e a mesma não tiver um valor de \textit{next hop} atribuído actualiza-o. Caso o nó não seja uma folha, verifica qual a ramificação em falta, cria-a e chama a rotina para cada ramo. A função tem como parâmetros de entrada um ponteiro para o topo da árvore/sub-árvore, bem como o valor de \textit{next hop} que irá ser atribuído às folhas da ramificação em  causa. A função \textit{update\_next\_hop} tem como função verificar se o \textit{next\_hop} a utilizar na chamada recursiva é o mesmo no nó anterior ou um valor actualizado, no caso de o valor do nó visitado ser diferente.
@@ -218,7 +200,7 @@ Algumas destas limitações são as seguintes:
   \item assume-se que na procura de \textit{next\_hop} na árvore, o endereço IP terá de ter um comprimento igual ou superior ao caminho correspondente a percorrer na representação em árvore binária
   
   \item sendo a procura numa \textit{Binary2-tree} bastante mais simplificada pelo facto de os \textit{next\_hops} estarem sempre nas \textit{leafs}, o algoritmo por nós implementado pressupõe que previamente à procura, a conversão da árvore já foi realizada
-  \item na conversão entre modelos das árvores, optámos por manter os \textit{next hops} dos nós intermédios nas respectivas estruturas, apesar de numa \textit{binary2-tree} os \textit{next hops} se encontrarem nas folhas.
+  \item na conversão entre modelos das árvores, optámos por manter os \textit{next hops} dos nós intermédios nas respectivas estruturas, apesar de numa \textit{binary2-tree} os \textit{next hops} se encontrarem nas folhas. Optámos por esta estrutura para salvaguardar os casos em que o utilizador apaga um prefixo duma árvore \textit{binary2-tree}. Desta forma não perdemos informação caso seja necessário uma nova passagem para uma \textit{2-tree}.
   \end{itemize}
 Estas limitações foram contornadas por \textit{flags} no ficheiro principal \textit{main.c}, no caso da conversão da árvore, e por uma verificação de retorno -1 no caso do comprimento do prefixo.
 \end{document}

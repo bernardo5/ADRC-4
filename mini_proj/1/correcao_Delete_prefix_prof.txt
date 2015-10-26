@@ -1,0 +1,10 @@
+Del Prefix (root, prefix){
+	if prefix is empty{
+		root->hop=-1;
+	}
+	if first(prefix)=0{
+		delPrefix(root->leftchild, -prefix)  ,-prefix=prefixo sem 1º bit
+		if root->leftchild->leftchild=NULL and root->leftchild->rightchild=NULL and root->leftchild->hop=-1
+			remove root->leftchild
+	}
+}

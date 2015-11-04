@@ -1,4 +1,3 @@
-#include "lista_adjacencias.h"
 #include "dijkstra.h"
 
 void Initialize_distance_matrix(int*** distance, node *list, int destiny){

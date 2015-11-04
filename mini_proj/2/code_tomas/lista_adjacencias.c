@@ -42,9 +42,8 @@ void list_adj(node**list, int initial_node, int final_node,
 			if(aux->identifier==initial_node){
 				 create_link_entry(&aux, final_node, preference);
 				 
-			 }
+			}
 		}
-		
 	}
 	
 	return;

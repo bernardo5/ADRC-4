@@ -1,8 +1,6 @@
-#include "lista_adjacencias.h"
-
+#include "dijkstra.h"
 
 int main(int argc, char**argv){
-	FILE*fp;
 	char * ficheiroIn;
 	node*list=NULL;
 	
@@ -19,6 +17,6 @@ int main(int argc, char**argv){
 	for(aux=list;aux!=NULL;aux=aux->next){
 		for(aux_adj=aux->link;aux_adj!=NULL; aux_adj=aux_adj->next) printf("%d %d %d\n\n", aux->identifier, aux_adj->identifier, aux_adj->preference);
 	}
-	
+	Dijkstra(list, 12122);
 	exit(0);
 }

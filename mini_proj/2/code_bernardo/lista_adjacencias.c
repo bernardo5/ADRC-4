@@ -20,7 +20,6 @@ void create_link_entry(node**n, int final_node, int preference){
 		temp->identifier=final_node;
 		temp->preference=preference;
 		if((*n)->link==NULL){/*first element*/
-			printf("primeiro\n");
 			(*n)->link=temp; 
 		}else{/*the list has elements*/
 			if((temp->preference) < ((*n)->link->preference)){

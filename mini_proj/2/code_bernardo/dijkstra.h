@@ -1,6 +1,6 @@
 #include "lista_adjacencias.h"
 
-void Initialize_distance_matrix(int*** distance, node *list, int destiny);
+void Initialize_distance_matrix(int**node_identifiers, int**node_distance, int**node_visited, node *list, int destiny);
 
 int max(int i, int n);
 

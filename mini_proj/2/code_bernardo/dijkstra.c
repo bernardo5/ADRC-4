@@ -4,9 +4,14 @@ void Initialize_distance_matrix(int*** distance, node *list, int destiny){
 	int i;
 	node*aux;
 	for(i=0, aux=list; aux!=NULL; aux=aux->next, i=i+1 ){
-		*distance[0][i]=aux->identifier; 
+		printf("inicializacao do no %d\n", i);
+		*distance[0][i]=aux->identifier;
+		printf("identificador: %d\n", *distance[0][i]); 
+		printf("sdnv\n");
 		*distance[1][i]=-1; /*infinity distance*/
+		printf("nsdnvj\n");
 		*distance[2][i]=0; /*node not seen*/
+		printf("nsdnvcadcadvavj\n");
 		if(aux->identifier==destiny){
 			*distance[1][i]=0;
 			*distance[2][i]=1;
@@ -34,21 +39,22 @@ void Dijkstra(node*list, int destiny){
 	int count_nodes=0;
 	node*aux;
 	adj_node*links;
-	for(aux=list; aux!=NULL; aux=aux->next) printf("identifier: %d\n", aux->identifier);
+	int dijkstra_u=0;
+	int dijkstra_distance;
 	for(aux=list; aux!=NULL; aux=aux->next)count_nodes=count_nodes+1;
-	printf("number of nodes: %d\n", count_nodes);
 	int **distance = (int **)malloc(3 * sizeof(int *)); 
     int row;
 
-	int dijkstra_u=0;
-	int dijkstra_distance;
+	
     // for each row allocate Cols ints
-    for (row = 0; row < count_nodes; row++) {
+    for (row = 0; row < 3; row++) {
         distance[row] = (int *)malloc(count_nodes * sizeof(int));
     }
-	
+	printf("Alocou a matriz\n");
 	Initialize_distance_matrix(&distance, list, destiny);
+	printf("Analizou a matriz das distancias\n");
 	int count_nodes_cycle=count_nodes;
+	printf("numero de nos: %d\n", count_nodes);
 	while(count_nodes_cycle!=0){
 		dijkstra_distance=-5;
 		

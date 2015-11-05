@@ -65,7 +65,7 @@ void list_adj(node**list, int initial_node, int final_node,
 		}
 		
 	}
-	
+	/* */
 	return;
 }
 

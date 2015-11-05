@@ -121,7 +121,7 @@ void Dijkstra(node*list, int destiny){
 		
 		for(dijkstra_u=0; dijkstra_u<count_nodes; dijkstra_u++)printf("%d\t", node_distance[dijkstra_u]);
 		printf("\n\n");
-		
+		/*merge*/
 		while(empty_queue(visited_nodes)){
 			dijkstra_u=identifier_smaller_distance(node_identifiers, node_distance, count_nodes, visited_nodes);
 			dijkstra_identifier=node_identifiers[dijkstra_u];

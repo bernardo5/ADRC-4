@@ -25,28 +25,6 @@ struct _heap {
   int *heapdata;               /* An array of ints. */
 };
 
-void FixUp(Heap * h, int k, dados*d)
-{
-  int t;
-  while ((k > 0) && ((h->less) (d->caminho[(h->heapdata)[(k - 1) / 2]], d->caminho[(h->heapdata)[k]]))) {
-#ifdef DEMO
-    
-#endif
-    /*---------------------------------------------------------*/
-    t = (h->heapdata)[k];
-    (h->heapdata)[k] = (h->heapdata)[(k - 1) / 2];
-    (h->heapdata)[(k - 1) / 2] = t;
-
-#ifdef DEMO
-  
-#endif
- 
-    k = (k - 1) / 2;
-  }
-
-  return;
-}
-
 void FixDown(Heap * h, int k, int ** node_distance)
 {
   int j;

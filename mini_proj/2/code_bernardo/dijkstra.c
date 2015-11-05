@@ -32,7 +32,6 @@ void Dijkstra(node*list, int destiny){
 	node*aux;
 	adj_node*links;
 	int dijkstra_u=0;
-	int dijkstra_distance;
 	for(aux=list; aux!=NULL; aux=aux->next)count_nodes=count_nodes+1;
 	printf("numero de nos:%d\n\n", count_nodes);
 	int colum;
@@ -47,15 +46,21 @@ void Dijkstra(node*list, int destiny){
 		//int count_nodes_cycle=count_nodes;
 		//printf("numero de nos: %d\n", count_nodes);
 		
+		for(dijkstra_u=0; dijkstra_u<count_nodes; dijkstra_u++)printf("%d\t", node_identifiers[dijkstra_u]);
+		printf("\n\n");
+		
+		for(dijkstra_u=0; dijkstra_u<count_nodes; dijkstra_u++)printf("%d\t", node_distance[dijkstra_u]);
+		printf("\n\n");
+		
 		while(!HeapEmpty(h)){
 			if(node_distance[dijkstra_u=RemoveMax(h, &node_distance)]!=-1){
 				for(aux=list;aux->identifier!=dijkstra_u;aux=aux->next);
 				
 					for(links=aux->link;links!=NULL; links=links->next){
 						for(colum=0; node_identifiers[colum]!=links->identifier; colum++);
-						if(node_distance[colum] < max(dijkstra_distance,links->preference)){
-							node_distance[colum] = max(dijkstra_distance,links->preference);
-							Heapify(h, d);
+						if(node_distance[colum] < max(node_distance[dijkstra_u],links->preference)){
+							node_distance[colum] = max(node_distance[dijkstra_u],links->preference);
+							Heapify(h, &node_distance);
 						}						
 					}
 			}

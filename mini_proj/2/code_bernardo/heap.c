@@ -25,19 +25,29 @@ struct _heap {
   int *heapdata;               /* An array of ints. */
 };
 
-void FixDown(Heap * h, int k, int ** node_distance)
+void FixDown(Heap * h, int k, int ** node_distance, int **node_identifiers)
 {
   int j;
   int t;
+  
+  int colum;
+  int colum_;
+  int i;
+  
+  
 
   while ((2 * k + 1) < h->n_elements) {
     j = 2 * k + 1;
-    if (((j + 1) < h->n_elements) &&
-         (maxNum((*node_distance)[h->heapdata[j]], (*node_distance)[h->heapdata[j + 1]]))) {
-      /* second offspring is greater */
-      j++;
+    if (((j + 1) < h->n_elements)){
+		for(i=0; (h->heapdata[j])!=(*node_identifiers)[i]; i++)colum=i;
+		for(i=0; (h->heapdata[j+1])!=(*node_identifiers)[i]; i++)colum_=i;
+		if((maxNum((*node_distance)[colum], (*node_distance)[colum_]))){
+			 j++;
+		}
     }
-    if (! maxNum((*node_distance)[h->heapdata[k]], (*node_distance)[h->heapdata[j]])) {
+    for(i=0; (h->heapdata[k])!=(*node_identifiers)[i]; i++)colum=i;
+	for(i=0; (h->heapdata[j])!=(*node_identifiers)[i]; i++)colum_=i;
+    if (! maxNum((*node_distance)[colum], (*node_distance)[colum_])) {
       /* Elements are in correct order. */
 
 #ifdef DEMO
@@ -110,7 +120,7 @@ void Direct_Insert(Heap * h, int element)
   return;
 }
 
-int RemoveMax(Heap * h, int ** node_distance)
+int RemoveMax(Heap * h, int ** node_distance, int **node_identifiers)
 {
   int t;
 
@@ -119,17 +129,17 @@ int RemoveMax(Heap * h, int ** node_distance)
     (h->heapdata)[0] = (h->heapdata)[h->n_elements - 1];
     (h->heapdata)[h->n_elements - 1] = t;
     h->n_elements--;
-    FixDown(h, 0, &(*node_distance));
+    FixDown(h, 0, &(*node_distance), &(*node_identifiers));
     return t;
   }
  return -1;
 }
 
-void Heapify(Heap * h, int **node_distance)
+void Heapify(Heap * h, int **node_distance, int **node_identifiers)
 {
 	int i;
 	for(i=h->n_elements-1; i>=0; i-=2){
-		FixDown(h, (i-1)/2, &(*node_distance));
+		FixDown(h, (i-1)/2, &(*node_distance), &(*node_identifiers));
 	}
 
     return;

@@ -1,7 +1,7 @@
 #include "dijkstra.h"
 #include "heap.h"
 
-void Initialize_distance_matrix(int**node_identifiers, int**node_distance,/* int**node_visited,*/ node *list, int destiny){
+void Initialize_distance_matrix(int**node_identifiers, int**node_distance,/* int**node_visited,*/ node *list, int destiny, Heap**h){
 	int i;
 	node*aux;
 	for(i=0, aux=list; aux!=NULL; aux=aux->next, i=i+1 ){
@@ -12,6 +12,7 @@ void Initialize_distance_matrix(int**node_identifiers, int**node_distance,/* int
 			(*node_distance)[i]=0;
 			//(*node_visited)[i]=1;
 		}
+		Direct_Insert((*h), aux->identifier);
 	}
 	return;
 }
@@ -41,7 +42,7 @@ void Dijkstra(node*list, int destiny){
 		int*node_identifiers=malloc(count_nodes*sizeof(int));
 		int*node_distance=malloc(count_nodes*sizeof(int));
 		printf("Alocou a matriz\n");
-		Initialize_distance_matrix(&node_identifiers, &node_distance, /*&node_visited,*/ list, destiny);
+		Initialize_distance_matrix(&node_identifiers, &node_distance, /*&node_visited,*/ list, destiny, &h);
 		printf("Analizou a matriz das distancias\n");
 		//int count_nodes_cycle=count_nodes;
 		//printf("numero de nos: %d\n", count_nodes);
@@ -51,20 +52,23 @@ void Dijkstra(node*list, int destiny){
 		
 		for(dijkstra_u=0; dijkstra_u<count_nodes; dijkstra_u++)printf("%d\t", node_distance[dijkstra_u]);
 		printf("\n\n");
-		
+		Heapify(h, &node_distance, &node_identifiers);
 		while(!HeapEmpty(h)){
-			if(node_distance[dijkstra_u=RemoveMax(h, &node_distance)]!=-1){
+			if(node_distance[dijkstra_u=RemoveMax(h, &node_distance, &node_identifiers)]!=-1){
+				printf("no retirado:%d\n", dijkstra_u);
 				for(aux=list;aux->identifier!=dijkstra_u;aux=aux->next);
 				
 					for(links=aux->link;links!=NULL; links=links->next){
 						for(colum=0; node_identifiers[colum]!=links->identifier; colum++);
 						if(node_distance[colum] < max(node_distance[dijkstra_u],links->preference)){
 							node_distance[colum] = max(node_distance[dijkstra_u],links->preference);
-							Heapify(h, &node_distance);
+							Heapify(h, &node_distance, &node_identifiers);
 						}						
 					}
 			}
-		}		
+			//printf("no retirado que deu merda:%d\n", dijkstra_u);
+		}
+				
 		for(colum=0; colum<count_nodes; colum++){
 			printf("%d\t%d\n", node_identifiers[colum], node_distance[colum]/*, node_visited[colum]*/);
 		}

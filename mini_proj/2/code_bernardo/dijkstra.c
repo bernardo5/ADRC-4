@@ -1,7 +1,7 @@
 #include "dijkstra.h"
 
-int max(int i, int n){
-	if(i>n){
+int min(int i, int n){
+	if(i<n){
 		return i;
 	}else{
 		return n;
@@ -27,7 +27,7 @@ void Initialize_distance_matrix(int**node_identifiers, int**node_distance, node 
 		(*node_identifiers)[i]=aux->identifier;
 		(*node_distance)[i]=-1; /*infinity distance*/
 		if((aux->identifier)==destiny){
-			(*node_distance)[i]=0;
+			(*node_distance)[i]=4;
 		}
 		insert(aux->identifier, &(*visited_nodes));
 	}	
@@ -126,9 +126,11 @@ void Dijkstra(node*list, int destiny){
 			dijkstra_u=identifier_smaller_distance(node_identifiers, node_distance, count_nodes, visited_nodes);
 			dijkstra_identifier=node_identifiers[dijkstra_u];
 			remove_element_from_queue(&visited_nodes, dijkstra_identifier);
+			//**********************************************************
 			node*bg;
 			for(bg=visited_nodes; bg!=NULL; bg=bg->next)printf("%d\t", bg->identifier);
 			printf("retirou-se o no %d da posicao %d do vetor\n", dijkstra_identifier, dijkstra_u);
+			//*********************************************************
 			if(node_distance[dijkstra_u]!=-1){
 				/*access node identifier adjency list*/				
 				for(aux=list;aux->identifier!=dijkstra_identifier;aux=aux->next);
@@ -136,8 +138,8 @@ void Dijkstra(node*list, int destiny){
 					for(links=aux->link;links!=NULL; links=links->next){
 						if(verify_node_unseen(links->identifier, visited_nodes)){
 							for(colum=0; node_identifiers[colum]!=links->identifier; colum++);
-							if(node_distance[colum] < max(node_distance[dijkstra_u],links->preference)){
-								node_distance[colum] = max(node_distance[dijkstra_u],links->preference);
+							if(node_distance[colum] < min(node_distance[dijkstra_u],links->preference)){
+								node_distance[colum] = min(node_distance[dijkstra_u],links->preference);
 							}		
 						}			
 					}

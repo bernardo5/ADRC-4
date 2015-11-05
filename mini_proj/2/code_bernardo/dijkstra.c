@@ -96,6 +96,18 @@ int verify_node_unseen(int node_identifier, node*visited_nodes){
 	return 0;
 }
 
+void invert_weights(int**node_distance, int count_nodes){
+	int i;
+	for(i=0; i<count_nodes;i++){
+		if((*node_distance)[i]==1){
+			 (*node_distance)[i]=3;
+		}else{
+			if((*node_distance)[i]==3) (*node_distance)[i]=1;
+		}
+	}
+	
+}
+
 void Dijkstra(node*list, int destiny){
 	int e;
 	int count_nodes=0;
@@ -104,33 +116,16 @@ void Dijkstra(node*list, int destiny){
 	int dijkstra_u=0;
 	int dijkstra_identifier;
 	for(aux=list; aux!=NULL; aux=aux->next)count_nodes=count_nodes+1;
-	printf("numero de nos:%d\n\n", count_nodes);
 	int colum;
 	if(count_nodes>0){
 		node*visited_nodes=NULL;
 		int*node_identifiers=malloc(count_nodes*sizeof(int));
 		int*node_distance=malloc(count_nodes*sizeof(int));
-		printf("Alocou a matriz\n");
 		Initialize_distance_matrix(&node_identifiers, &node_distance, list, destiny, &visited_nodes);
-		printf("Analizou a matriz das distancias\n");
-		
-		
-	
-		for(dijkstra_u=0; dijkstra_u<count_nodes; dijkstra_u++)printf("%d\t", node_identifiers[dijkstra_u]);
-		printf("\n\n");
-		
-		for(dijkstra_u=0; dijkstra_u<count_nodes; dijkstra_u++)printf("%d\t", node_distance[dijkstra_u]);
-		printf("\n\n");
-		/*merge*/
 		while(empty_queue(visited_nodes)){
 			dijkstra_u=identifier_smaller_distance(node_identifiers, node_distance, count_nodes, visited_nodes);
 			dijkstra_identifier=node_identifiers[dijkstra_u];
 			remove_element_from_queue(&visited_nodes, dijkstra_identifier);
-			//**********************************************************
-			node*bg;
-			for(bg=visited_nodes; bg!=NULL; bg=bg->next)printf("%d\t", bg->identifier);
-			printf("retirou-se o no %d da posicao %d do vetor\n", dijkstra_identifier, dijkstra_u);
-			//*********************************************************
 			if(node_distance[dijkstra_u]!=-1){
 				/*access node identifier adjency list*/				
 				for(aux=list;aux->identifier!=dijkstra_identifier;aux=aux->next);
@@ -145,14 +140,8 @@ void Dijkstra(node*list, int destiny){
 						}			
 					}
 			}
-			//***************************************************
-				printf("\n");
-				for(e=0; e<count_nodes; e++){
-					printf("%d\t%d\n", node_identifiers[e], node_distance[e]);
-				}
-				printf("\n");
-				//***************************************************
 		}
+		invert_weights(&node_distance, count_nodes);
 		printf("\n\nfinal\n\n");	
 		for(colum=0; colum<count_nodes; colum++){
 			printf("%d\t%d\n", node_identifiers[colum], node_distance[colum]);

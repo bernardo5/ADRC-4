@@ -67,6 +67,35 @@ int identifier_smaller_distance(int*node_identifiers, int*node_distance, int cou
 	return position;
 }
 
+void remove_element_from_queue(node**visited_nodes, int dijkstra_identifier){
+	node*aux=(*visited_nodes);
+	node*aux_ant;
+	/*remove first element case*/
+	if((aux->identifier)==dijkstra_identifier){
+		(*visited_nodes)=aux->next;
+		//free(aux);
+	}else{/*remove element from end or middle*/
+		aux_ant=aux;
+		aux=aux->next;
+		while(aux->identifier!=dijkstra_identifier){
+			aux=aux->next;
+			aux_ant=aux_ant->next;
+		}
+		aux_ant->next=aux->next;
+	}
+	free(aux);
+	
+	return;
+}
+
+int verify_node_unseen(int node_identifier, node*visited_nodes){
+	node*aux;
+	for(aux=visited_nodes; aux!=NULL; aux=aux->next){
+		if((aux->identifier)==node_identifier)return 1;
+	}
+	return 0;
+}
+
 void Dijkstra(node*list, int destiny){
 	int e;
 	int count_nodes=0;
@@ -82,7 +111,7 @@ void Dijkstra(node*list, int destiny){
 		int*node_identifiers=malloc(count_nodes*sizeof(int));
 		int*node_distance=malloc(count_nodes*sizeof(int));
 		printf("Alocou a matriz\n");
-		Initialize_distance_matrix(&node_identifiers, &node_distance, /*&node_visited,*/ list, destiny, &visited_nodes);
+		Initialize_distance_matrix(&node_identifiers, &node_distance, list, destiny, &visited_nodes);
 		printf("Analizou a matriz das distancias\n");
 		
 		
@@ -93,21 +122,24 @@ void Dijkstra(node*list, int destiny){
 		for(dijkstra_u=0; dijkstra_u<count_nodes; dijkstra_u++)printf("%d\t", node_distance[dijkstra_u]);
 		printf("\n\n");
 		
-		int hj=1;
-		while(/*empty_queue(visited_nodes)*/ hj){
-			hj=0;
+		while(empty_queue(visited_nodes)){
 			dijkstra_u=identifier_smaller_distance(node_identifiers, node_distance, count_nodes, visited_nodes);
 			dijkstra_identifier=node_identifiers[dijkstra_u];
+			remove_element_from_queue(&visited_nodes, dijkstra_identifier);
+			node*bg;
+			for(bg=visited_nodes; bg!=NULL; bg=bg->next)printf("%d\t", bg->identifier);
 			printf("retirou-se o no %d da posicao %d do vetor\n", dijkstra_identifier, dijkstra_u);
 			if(node_distance[dijkstra_u]!=-1){
 				/*access node identifier adjency list*/				
 				for(aux=list;aux->identifier!=dijkstra_identifier;aux=aux->next);
 				/*for each uv*/
 					for(links=aux->link;links!=NULL; links=links->next){
-						for(colum=0; node_identifiers[colum]!=links->identifier; colum++);
-						if(node_distance[colum] < max(node_distance[dijkstra_u],links->preference)){
-							node_distance[colum] = max(node_distance[dijkstra_u],links->preference);
-						}						
+						if(verify_node_unseen(links->identifier, visited_nodes)){
+							for(colum=0; node_identifiers[colum]!=links->identifier; colum++);
+							if(node_distance[colum] < max(node_distance[dijkstra_u],links->preference)){
+								node_distance[colum] = max(node_distance[dijkstra_u],links->preference);
+							}		
+						}			
 					}
 			}
 			//***************************************************

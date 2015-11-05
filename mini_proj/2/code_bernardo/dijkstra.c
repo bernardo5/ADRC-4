@@ -29,10 +29,13 @@ int max(int i, int n){
 	return -1;
 }
 
-/*void unseen_nodes_list(){
-	
-	return;
-}*/
+int unseen_nodes_list(int * node_visited, int colums){
+	int i;
+	for(i=0; i<colums;i++){
+		if(node_visited[colums]==0) return 1;
+	}
+	return 0;
+}
 
 void Dijkstra(node*list, int destiny){
 	
@@ -52,8 +55,9 @@ void Dijkstra(node*list, int destiny){
 	printf("Analizou a matriz das distancias\n");
 	int count_nodes_cycle=count_nodes;
 	printf("numero de nos: %d\n", count_nodes);
-	while(count_nodes_cycle!=0){
+	while(/*unseen_nodes_list(node_visited, count_nodes)*/count_nodes_cycle!=0){
 		dijkstra_distance=-5;
+		printf("count nodes:%d\n", count_nodes_cycle);
 		
 		/*  ******************************************************** */
 		/* select a node u of Q for which d[u] is smallest */

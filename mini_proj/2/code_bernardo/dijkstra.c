@@ -74,23 +74,17 @@ void Dijkstra(node*list, int destiny){
 		
 		for(aux=list;aux->identifier!=dijkstra_u;aux=aux->next);		
 		
-		//new_node=aux->link->identifier;
-		
-		
-		
-		//for(row=0; distance[0][row]!=new_node; row++);
-		//distance[2][row]=1; /*node already visited*/ 
-		//dist=distance[1][row];
-		//for(aux=list;aux->identifier!=new_node;aux=aux->next);
 		for(links=aux->link;links!=NULL; links=links->next){
 			for(colum=0; node_identifiers[colum]!=links->identifier; colum++);
-			if(node_distance[colum] < max(dijkstra_u,links->preference)) 
-					node_distance[colum] = max(dijkstra_u,links->preference);
+			if(node_distance[colum] < max(dijkstra_distance,links->preference)) 
+					node_distance[colum] = max(dijkstra_distance,links->preference);
 		}
 		count_nodes_cycle--;
 	}
 	
-	
+	for(colum=0; colum<count_nodes; colum++){
+		printf("%d\t%d\t%d\n", node_identifiers[colum], node_distance[colum], node_visited[colum]);
+	}
 	
 	return;
 }

@@ -79,11 +79,8 @@ void Read_file(char * ficheiroIn, node**list){
 		fprintf ( stderr, "ERROR! Cannot open file: %s!\n", ficheiroIn);
 		exit ( 1 );
     }
-    node*aux;
     while(get_table_line(&initial_node, &final_node, &preference, fp)==0){
-		printf("\n\n\n\n");
 		list_adj(&(*list), initial_node, final_node, preference);
-		for(aux=(*list); aux!=NULL; aux=aux->next) printf("identifier: %d\n", aux->identifier);
 	}
 
 	return;

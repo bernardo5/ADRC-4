@@ -7,11 +7,8 @@ void Initialize_distance_matrix(int**node_identifiers, int**node_distance, int**
 		printf("inicializacao do no %d\n", i);
 		(*node_identifiers)[i]=aux->identifier;
 		printf("identificador: %d\n", (*node_identifiers)[i]); 
-		printf("sdnv\n");
 		(*node_distance)[i]=-1; /*infinity distance*/
-		printf("nsdnvj\n");
 		(*node_visited)[i]=0; /*node not seen*/
-		printf("nsdnvcadcadvavj\n");
 		if((aux->identifier)==destiny){
 			(*node_distance)[i]=0;
 			(*node_visited)[i]=1;
@@ -62,16 +59,19 @@ void Dijkstra(node*list, int destiny){
 		/*  ******************************************************** */
 		/* select a node u of Q for which d[u] is smallest */
 		for(colum=0; colum<count_nodes; colum++){
-			if((dijkstra_distance<node_distance[colum])&&
-				(node_visited[colum]==0)){
+			if(node_visited[colum]==0 && node_visited[colum+1]==0){
+				dijkstra_distance=max(node_distance[colum],node_distance[colum+1]);
+			}else if(node_visited[colum]==0){
 				dijkstra_distance=node_distance[colum];
-				dijkstra_u=node_identifiers[colum];
 			}
 		}
+		dijkstra_distance=node_distance[colum];
+		dijkstra_u=node_identifiers[colum];
 		/* ********************************************************* */
 		
 		/*node was visited now*/
-		for(colum=0; dijkstra_u!=node_identifiers[colum]; colum++) node_visited[colum]=1;
+		for(colum=0; dijkstra_u!=node_identifiers[colum]; colum++);
+		node_visited[colum]=1;
 		/* ********************************************************* */
 		
 		/* for each uv */

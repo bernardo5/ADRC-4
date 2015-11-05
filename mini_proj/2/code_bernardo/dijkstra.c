@@ -73,6 +73,7 @@ void Dijkstra(node*list, int destiny){
 	node*aux;
 	adj_node*links;
 	int dijkstra_u=0;
+	int dijkstra_identifier;
 	for(aux=list; aux!=NULL; aux=aux->next)count_nodes=count_nodes+1;
 	printf("numero de nos:%d\n\n", count_nodes);
 	int colum;
@@ -95,11 +96,12 @@ void Dijkstra(node*list, int destiny){
 		int hj=1;
 		while(/*empty_queue(visited_nodes)*/ hj){
 			hj=0;
-			dijkstra_identifier=identifier_smaller_distance(node_identifiers, node_distance, count_nodes, visited_nodes);
-			dijkstra_u=node_identifiers[dijkstra_identifier];
-			if(node_distance[dijkstra_identifier]=!=-1){
+			dijkstra_u=identifier_smaller_distance(node_identifiers, node_distance, count_nodes, visited_nodes);
+			dijkstra_identifier=node_identifiers[dijkstra_u];
+			printf("retirou-se o no %d da posicao %d do vetor\n", dijkstra_identifier, dijkstra_u);
+			if(node_distance[dijkstra_u]!=-1){
 				/*access node identifier adjency list*/				
-				for(aux=list;aux->identifier!=dijkstra_u;aux=aux->next);
+				for(aux=list;aux->identifier!=dijkstra_identifier;aux=aux->next);
 				/*for each uv*/
 					for(links=aux->link;links!=NULL; links=links->next){
 						for(colum=0; node_identifiers[colum]!=links->identifier; colum++);
@@ -115,11 +117,10 @@ void Dijkstra(node*list, int destiny){
 				}
 				printf("\n");
 				//***************************************************
-			//printf("no retirado que deu merda:%d\n", dijkstra_u);
 		}
 		printf("\n\nfinal\n\n");	
 		for(colum=0; colum<count_nodes; colum++){
-			printf("%d\t%d\n", node_identifiers[colum], node_distance[colum]/*, node_visited[colum]*/);
+			printf("%d\t%d\n", node_identifiers[colum], node_distance[colum]);
 		}
 	}
 	return;

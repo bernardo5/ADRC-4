@@ -19,6 +19,7 @@ int main(int argc, char**argv){
 			 printf("%d %d %d\n", aux->identifier, aux_adj->identifier, aux_adj->preference);
 		 }
 	}
+	/*d*/
 	Dijkstra(list, 7);
 	exit(0);
 }

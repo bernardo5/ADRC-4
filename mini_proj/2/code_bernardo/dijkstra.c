@@ -138,7 +138,8 @@ void Dijkstra(node*list, int destiny){
 					for(links=aux->link;links!=NULL; links=links->next){
 						if(verify_node_unseen(links->identifier, visited_nodes)){
 							for(colum=0; node_identifiers[colum]!=links->identifier; colum++);
-							if(node_distance[colum] < min(node_distance[dijkstra_u],links->preference)){
+							if((node_distance[colum] < min(node_distance[dijkstra_u],links->preference))&&
+								((links->preference)<=node_distance[dijkstra_u])){
 								node_distance[colum] = min(node_distance[dijkstra_u],links->preference);
 							}		
 						}			

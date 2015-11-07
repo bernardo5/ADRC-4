@@ -16,7 +16,6 @@ void insert(int identifier, node**list){
 	n->next=(*list);
 	n->link=NULL;
 	(*list)=n;
-	//free(n);
 	return;
 }
 

@@ -19,25 +19,11 @@ void create_link_entry(node**n, int final_node, int preference){
 		adj_node * temp=(adj_node*)malloc(sizeof(adj_node));
 		temp->identifier=final_node;
 		temp->preference=preference;
-		if((*n)->link==NULL){/*first element*/
-			(*n)->link=temp; 
-		}else{/*the list has elements*/
-			if((temp->preference) < ((*n)->link->preference)){
-				adj_node*insert_aux;
-				for(insert_aux=(*n)->link;(insert_aux->next!=NULL)
-						&&(temp->preference < insert_aux->next->preference);
-											insert_aux=insert_aux->next);
-				temp->next=insert_aux->next;
-				insert_aux->next=temp;
-			}else{
-				temp->next=(*n)->link;
-				(*n)->link=temp;
-			}
-		}
 		
-		
-		/*temp->next=(*n)->link;
-		(*n)->link=temp;*/
+		/*insertion in the beginning*/
+		temp->next=(*n)->link;
+		(*n)->link=temp; 
+
 		return;
 }
 
@@ -65,7 +51,6 @@ void list_adj(node**list, int initial_node, int final_node,
 		}
 		
 	}
-	/* */
 	return;
 }
 

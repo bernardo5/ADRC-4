@@ -19,14 +19,16 @@ void insert(int identifier, node**list){
 	return;
 }
 
-void Initialize_distance_matrix(int**node_identifiers, int**node_distance, node *list, int destiny, node**visited_nodes){
+void Initialize_distance_matrix(int**node_identifiers, int**node_distance, int**node_hops, node *list, int destiny, node**visited_nodes){
 	int i;
 	node*aux;
 	for(i=0, aux=list; aux!=NULL; aux=aux->next, i=i+1 ){
 		(*node_identifiers)[i]=aux->identifier;
 		(*node_distance)[i]=-1; /*infinity distance*/
+		(*node_hops)[i]=-1;
 		if((aux->identifier)==destiny){
 			(*node_distance)[i]=4;
+			(*node_hops)[i]=0;
 		}
 		insert(aux->identifier, &(*visited_nodes));
 	}	
@@ -48,7 +50,7 @@ int empty_queue(node*visited_nodes){
 	return 1;
 }
 
-int identifier_smaller_distance(int*node_identifiers, int*node_distance, int count_nodes, node*visited_nodes){
+int identifier_smaller_distance(int*node_identifiers, int*node_distance, int*node_hops, int count_nodes, node*visited_nodes){
 	int i, position=-1;
 	int dist=-4;
 	node*aux;
@@ -108,7 +110,6 @@ void invert_weights(int**node_distance, int count_nodes){
 }
 
 void Dijkstra(node*list, int destiny){
-	int e;
 	int count_nodes=0;
 	node*aux;
 	adj_node*links;
@@ -120,9 +121,10 @@ void Dijkstra(node*list, int destiny){
 		node*visited_nodes=NULL;
 		int*node_identifiers=malloc(count_nodes*sizeof(int));
 		int*node_distance=malloc(count_nodes*sizeof(int));
-		Initialize_distance_matrix(&node_identifiers, &node_distance, list, destiny, &visited_nodes);
+		int*node_hops=malloc(count_nodes*sizeof(int));
+		Initialize_distance_matrix(&node_identifiers, &node_distance, &node_hops, list, destiny, &visited_nodes);
 		while(empty_queue(visited_nodes)){
-			dijkstra_u=identifier_smaller_distance(node_identifiers, node_distance, count_nodes, visited_nodes);
+			dijkstra_u=identifier_smaller_distance(node_identifiers, node_distance, node_hops, count_nodes, visited_nodes);
 			dijkstra_identifier=node_identifiers[dijkstra_u];
 			remove_element_from_queue(&visited_nodes, dijkstra_identifier);
 			if(node_distance[dijkstra_u]!=-1){
@@ -140,10 +142,9 @@ void Dijkstra(node*list, int destiny){
 					}
 			}
 		}
-		invert_weights(&node_distance, count_nodes);
-		printf("\n\nfinal\n\n");	
+		invert_weights(&node_distance, count_nodes);	
 		for(colum=0; colum<count_nodes; colum++){
-			printf("%d\t%d\n", node_identifiers[colum], node_distance[colum]);
+			printf("%d\t%d\t%d\n", node_identifiers[colum], node_distance[colum], node_hops[colum]);
 		}
 	}
 	return;

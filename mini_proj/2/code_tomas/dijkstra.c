@@ -25,7 +25,7 @@ void Initialize_distance_matrix(int**node_identifiers, int**node_distance, int**
 	for(i=0, aux=list; aux!=NULL; aux=aux->next, i=i+1 ){
 		(*node_identifiers)[i]=aux->identifier;
 		(*node_distance)[i]=-1; /*infinity distance*/
-		(*node_hops)[i]=-1;
+		(*node_hops)[i]=50000;
 		if((aux->identifier)==destiny){
 			(*node_distance)[i]=4;
 			(*node_hops)[i]=0;
@@ -53,14 +53,18 @@ int empty_queue(node*visited_nodes){
 int identifier_smaller_distance(int*node_identifiers, int*node_distance, int*node_hops, int count_nodes, node*visited_nodes){
 	int i, position=-1;
 	int dist=-4;
+	int hops=50000;
 	node*aux;
 	/*loop to see which one has a smaller distance to destiny*/
 	for(aux=visited_nodes; aux!=NULL; aux=aux->next){
 		/*loop to get the colum of the selected item in the queue*/
 		for(i=0; (node_identifiers[i]!=(aux->identifier))&&(i<count_nodes); i++);
-		if(node_distance[i]>dist){
-			dist=node_distance[i];
-			position=i;
+		if(node_distance[i]>=dist){
+			if(node_hops[i]<hops){
+				dist=node_distance[i];
+				hops=node_hops[i];
+				position=i;
+			}
 		}
 	}
 	/*after the loop we get the colum of the vector that has the
@@ -137,6 +141,7 @@ void Dijkstra(node*list, int destiny){
 							if((node_distance[colum] < min(node_distance[dijkstra_u],links->preference))&&
 								((links->preference)<=node_distance[dijkstra_u])){
 								node_distance[colum] = min(node_distance[dijkstra_u],links->preference);
+								node_hops[colum]=node_hops[dijkstra_u]+1;
 							}		
 						}			
 					}

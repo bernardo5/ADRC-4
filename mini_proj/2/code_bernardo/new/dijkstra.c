@@ -113,44 +113,36 @@ void invert_weights(int**node_distance, int count_nodes){
 	
 }
 
-void Dijkstra(node*list, int destiny){
-	int count_nodes=0;
+void Dijkstra(node*list, int destiny, int count_nodes, int**node_identifiers, int**node_distance, int**node_hops){
 	node*aux;
 	adj_node*links;
 	int dijkstra_u=0;
 	int dijkstra_identifier;
-	for(aux=list; aux!=NULL; aux=aux->next)count_nodes=count_nodes+1;
 	int colum;
 	if(count_nodes>0){
 		node*visited_nodes=NULL;
-		int*node_identifiers=malloc(count_nodes*sizeof(int));
-		int*node_distance=malloc(count_nodes*sizeof(int));
-		int*node_hops=malloc(count_nodes*sizeof(int));
-		Initialize_distance_matrix(&node_identifiers, &node_distance, &node_hops, list, destiny, &visited_nodes);
+		Initialize_distance_matrix(&(*node_identifiers), &(*node_distance), &(*node_hops), list, destiny, &visited_nodes);
 		while(empty_queue(visited_nodes)){
-			dijkstra_u=identifier_smaller_distance(node_identifiers, node_distance, node_hops, count_nodes, visited_nodes);
-			dijkstra_identifier=node_identifiers[dijkstra_u];
+			dijkstra_u=identifier_smaller_distance((*node_identifiers), (*node_distance), (*node_hops), count_nodes, visited_nodes);
+			dijkstra_identifier=(*node_identifiers)[dijkstra_u];
 			remove_element_from_queue(&visited_nodes, dijkstra_identifier);
-			if(node_distance[dijkstra_u]!=-1){
+			if((*node_distance)[dijkstra_u]!=-1){
 				/*access node identifier adjency list*/				
 				for(aux=list;aux->identifier!=dijkstra_identifier;aux=aux->next);
 				/*for each uv*/
 					for(links=aux->link;links!=NULL; links=links->next){
 						if(verify_node_unseen(links->identifier, visited_nodes)){
-							for(colum=0; node_identifiers[colum]!=links->identifier; colum++);
-							if((node_distance[colum] < min(node_distance[dijkstra_u],links->preference))&&
-								((links->preference)<=node_distance[dijkstra_u])){
-								node_distance[colum] = min(node_distance[dijkstra_u],links->preference);
-								node_hops[colum]=node_hops[dijkstra_u]+1;
+							for(colum=0; (*node_identifiers)[colum]!=links->identifier; colum++);
+							if(((*node_distance)[colum] < min((*node_distance)[dijkstra_u],links->preference))&&
+								((links->preference)<=(*node_distance)[dijkstra_u])){
+								(*node_distance)[colum] = min((*node_distance)[dijkstra_u],links->preference);
+								(*node_hops)[colum]=(*node_hops)[dijkstra_u]+1;
 							}		
 						}			
 					}
 			}
 		}
-		invert_weights(&node_distance, count_nodes);	
-		for(colum=0; colum<count_nodes; colum++){
-			printf("%d\t%d\t%d\n", node_identifiers[colum], node_distance[colum], node_hops[colum]);
-		}
+		invert_weights(&(*node_distance), count_nodes);	
 	}
 	return;
 }

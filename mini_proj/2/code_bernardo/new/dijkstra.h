@@ -4,4 +4,4 @@ void Initialize_distance_matrix(int**node_identifiers, int**node_distance, int**
 
 
 
-void Dijkstra(node*list, int destiny);
+void Dijkstra(node*list, int destiny, int count_nodes, int**node_identifiers, int**node_distance, int**node_hops);

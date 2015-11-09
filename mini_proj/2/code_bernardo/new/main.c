@@ -1,9 +1,11 @@
-#include "dijkstra.h"
+#include "statistics.h"
+
 
 int main(int argc, char**argv){
 	char * ficheiroIn;
 	node*list=NULL;
 	node*aux;
+	float stat_customer, stat_peer, stat_provider;
 	int count_nodes=0;
 	if(argc<2){
 		printf("too few arguments\n");
@@ -30,5 +32,10 @@ int main(int argc, char**argv){
 	for(colum=0; colum<count_nodes; colum++){
 		printf("%d\t%d\t%d\n", (node_identifiers)[colum], (node_distance)[colum], (node_hops)[colum]);
 	}
+	
+	paths_statistics(&stat_customer, &stat_peer, &stat_provider, count_nodes, node_distance);
+	
+	printf("customer: %f\nstat_peer:%f\nstat_provider:%f\n\n", stat_customer, stat_peer, stat_provider);
+	
 	exit(0);
 }

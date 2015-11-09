@@ -3,8 +3,9 @@
 
 int main(int argc, char**argv){
 	char * ficheiroIn;
-	node*list=NULL;
+	node*list;
 	node*aux;
+	int size;
 	float stat_customer, stat_peer, stat_provider, stat_hops;
 	int count_nodes=0;
 	if(argc<2){
@@ -12,27 +13,26 @@ int main(int argc, char**argv){
 		exit(-1);
 	}
 	ficheiroIn = argv[1];
-	
-	Read_file(ficheiroIn, &list);
+	printf("entrou no read file\n");
+	Read_file(ficheiroIn, &list, &size);
 	printf("Criou lista\n");
-	adj_node*aux_adj;
+	/*adj_node*aux_adj;
 	int vec;
 	for(vec=0;vec<positions(ficheiroIn);vec++){
 		for(aux_adj=list[vec].link;aux_adj!=NULL; aux_adj=aux_adj->next){
-			 printf("%d %d %d\n", list[vec].identifier, aux_adj->identifier, aux_adj->preference);
+			 printf("%d %d %d\n", vec+1, aux_adj->identifier, aux_adj->preference);
 		 }
-	}
-	/*for(aux=list; aux!=NULL; aux=aux->next)count_nodes=count_nodes+1;
-	int*node_identifiers=malloc(count_nodes*sizeof(int));
-	int*node_distance=malloc(count_nodes*sizeof(int));
-	int*node_hops=malloc(count_nodes*sizeof(int));
-	Dijkstra(list, 1, count_nodes, &node_identifiers, &node_distance, &node_hops);
+	}*/
+	int*node_identifiers=malloc(size*sizeof(int));
+	int*node_distance=malloc(size*sizeof(int));
+	int*node_hops=malloc(size*sizeof(int));
+	Dijkstra(list, 1, size, &node_identifiers, &node_distance, &node_hops);
 	int colum;
-	for(colum=0; colum<count_nodes; colum++){
+	for(colum=0; colum<size; colum++){
 		printf("%d\t%d\t%d\n", (node_identifiers)[colum], (node_distance)[colum], (node_hops)[colum]);
 	}
 	
-	paths_statistics(&stat_customer, &stat_peer, &stat_provider, count_nodes, node_distance);
+	/*paths_statistics(&stat_customer, &stat_peer, &stat_provider, count_nodes, node_distance);
 	
 	printf("customer: %f\nstat_peer:%f\nstat_provider:%f\n\n", stat_customer, stat_peer, stat_provider);
 	

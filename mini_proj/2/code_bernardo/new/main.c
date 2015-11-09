@@ -22,11 +22,17 @@ int main(int argc, char**argv){
 	int*node_distance=malloc(size*sizeof(int));
 	int*node_hops=malloc(size*sizeof(int));
 	float ones=0, twos=0, threes=0;
-	int colum;
+	int colum, be;
 	for(colum=0; colum<size; colum++){
 		if((list[colum].link)!=NULL){ /*node exists*/
 			Dijkstra(list, colum+1, size, &node_distance, &node_hops);
+			for(be=0; be<size; be++){
+				if((list[be].link)!=NULL){
+					printf("%d\t%d\t%d\n", be+1, (node_distance)[be], (node_hops)[be]);
+				}
+			}
 			paths_count(size, node_distance, &ones, &twos, &threes);
+			printf("\n\n\n");
 		}
 	}
 	

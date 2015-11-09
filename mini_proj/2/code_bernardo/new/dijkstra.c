@@ -116,7 +116,6 @@ void invert_weights(int**node_distance, int count_nodes){
 void Dijkstra(node*list, int destiny){
 	int count_nodes=0;
 	node*aux;
-	node*aux_remove_assistant;
 	adj_node*links;
 	int dijkstra_u=0;
 	int dijkstra_identifier;
@@ -127,26 +126,14 @@ void Dijkstra(node*list, int destiny){
 		int*node_identifiers=malloc(count_nodes*sizeof(int));
 		int*node_distance=malloc(count_nodes*sizeof(int));
 		int*node_hops=malloc(count_nodes*sizeof(int));
-		//printf("tem memoria p esta merda tda!!!! ahahahah\n");
 		Initialize_distance_matrix(&node_identifiers, &node_distance, &node_hops, list, destiny, &visited_nodes);
 		while(empty_queue(visited_nodes)){
 			dijkstra_u=identifier_smaller_distance(node_identifiers, node_distance, node_hops, count_nodes, visited_nodes);
 			dijkstra_identifier=node_identifiers[dijkstra_u];
 			remove_element_from_queue(&visited_nodes, dijkstra_identifier);
 			if(node_distance[dijkstra_u]!=-1){
-				/*access node identifier adjency list*/	
-				if((list->identifier)!=dijkstra_identifier){
-					aux_remove_assistant=list;
-					aux=list->next;
-					while(aux->identifier!=dijkstra_identifier){
-						aux=aux->next;
-						aux_remove_assistant=aux_remove_assistant->next;
-					}
-					aux_remove_assistant->next=aux->next;
-				}else{
-					aux=list;
-				}			
-				
+				/*access node identifier adjency list*/				
+				for(aux=list;aux->identifier!=dijkstra_identifier;aux=aux->next);
 				/*for each uv*/
 					for(links=aux->link;links!=NULL; links=links->next){
 						if(verify_node_unseen(links->identifier, visited_nodes)){

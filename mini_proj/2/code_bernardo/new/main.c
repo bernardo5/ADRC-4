@@ -11,7 +11,7 @@ int main(int argc, char**argv){
 	ficheiroIn = argv[1];
 	
 	Read_file(ficheiroIn, &list);
-	printf("criou lista de adjacencias\n");
+	
 	/*node*aux;
 	adj_node*aux_adj;
 	for(aux=list;aux!=NULL;aux=aux->next){
@@ -19,6 +19,6 @@ int main(int argc, char**argv){
 			 printf("%d %d %d\n", aux->identifier, aux_adj->identifier, aux_adj->preference);
 		 }
 	}*/
-	Dijkstra(list, 174);
+	Dijkstra(list, 4);
 	exit(0);
 }

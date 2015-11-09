@@ -4,18 +4,14 @@
 int main(int argc, char**argv){
 	char * ficheiroIn;
 	node*list;
-	node*aux;
 	int size;
 	float stat_customer, stat_peer, stat_provider, stat_hops;
-	int count_nodes=0;
 	if(argc<2){
 		printf("too few arguments\n");
 		exit(-1);
 	}
 	ficheiroIn = argv[1];
-	printf("entrou no read file\n");
 	Read_file(ficheiroIn, &list, &size);
-	printf("Criou lista\n");
 	/*adj_node*aux_adj;
 	int vec;
 	for(vec=0;vec<positions(ficheiroIn);vec++){
@@ -25,14 +21,26 @@ int main(int argc, char**argv){
 	}*/
 	int*node_distance=malloc(size*sizeof(int));
 	int*node_hops=malloc(size*sizeof(int));
-	Dijkstra(list, 1, size, &node_distance, &node_hops);
+	float ones=0, twos=0, threes=0;
 	int colum;
+	for(colum=0; colum<size; colum++){
+		if((list[colum].link)!=NULL){ /*node exists*/
+			Dijkstra(list, colum+1, size, &node_distance, &node_hops);
+			paths_count(size, node_distance, &ones, &twos, &threes);
+		}
+	}
+	
+	paths_statistics(&stat_customer, &stat_peer, &stat_provider, size, ones, twos, threes);
+	
+	printf("customer: %f\nstat_peer:%f\nstat_provider:%f\n\n", stat_customer, stat_peer, stat_provider);
+	
+	/*
 	for(colum=0; colum<size; colum++){
 		if((list[colum].link)!=NULL){
 			printf("%d\t%d\t%d\n", colum+1, (node_distance)[colum], (node_hops)[colum]);
 		}
 		
-	}
+	}*/
 	
 	/*paths_statistics(&stat_customer, &stat_peer, &stat_provider, count_nodes, node_distance);
 	

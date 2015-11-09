@@ -48,7 +48,6 @@ void Read_file(char * ficheiroIn, node**list, int*size){
 	FILE*fp;
 	int initial_node, final_node, preference;
 	(*size)=positions(ficheiroIn);
-	printf("calculou as posicoes:%d\n", (*size));
 	fp = fopen( ficheiroIn , "r");
 	if ( fp == NULL ) {
 		fprintf ( stderr, "ERROR! Cannot open file: %s!\n", ficheiroIn);
@@ -56,15 +55,11 @@ void Read_file(char * ficheiroIn, node**list, int*size){
     }
     (*list)=malloc((*size)*sizeof(node));
     if((*list)==NULL)printf("ERROR IN MALLOC\n");
-    printf("passou o malloc\n");
 	int i=0;
 	for(i=0; i<(*size); i++){
 		((*list)[i]).link=NULL;
-		printf("%d\n", i);
 	}
-	printf("inicializou vector de %d posicoes\n", i);
     while(get_table_line(&initial_node, &final_node, &preference, fp)==0){
-		printf("criacao lista adj\n");
 		list_adj(&(*list), initial_node, final_node, preference, (*size));
 	}
 	fclose(fp);

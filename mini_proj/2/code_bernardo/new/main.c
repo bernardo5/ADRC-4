@@ -23,13 +23,15 @@ int main(int argc, char**argv){
 			 printf("%d %d %d\n", vec+1, aux_adj->identifier, aux_adj->preference);
 		 }
 	}*/
-	int*node_identifiers=malloc(size*sizeof(int));
 	int*node_distance=malloc(size*sizeof(int));
 	int*node_hops=malloc(size*sizeof(int));
-	Dijkstra(list, 1, size, &node_identifiers, &node_distance, &node_hops);
+	Dijkstra(list, 1, size, &node_distance, &node_hops);
 	int colum;
 	for(colum=0; colum<size; colum++){
-		printf("%d\t%d\t%d\n", (node_identifiers)[colum], (node_distance)[colum], (node_hops)[colum]);
+		if((list[colum].link)!=NULL){
+			printf("%d\t%d\t%d\n", colum+1, (node_distance)[colum], (node_hops)[colum]);
+		}
+		
 	}
 	
 	/*paths_statistics(&stat_customer, &stat_peer, &stat_provider, count_nodes, node_distance);

@@ -1,4 +1,4 @@
-#include "dijkstra.h"
+#include "lista_adjacencias.h"
 
 void paths_count(int count_nodes, int*node_distance, float *ones, float* twos, float *threes);
 

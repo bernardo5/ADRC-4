@@ -1,5 +1,23 @@
 #include "lista_adjacencias.h"
 
+int positions(char * ficheiroIn){
+	int size=0;
+	int initial_node, final_node, preference;
+	FILE*fp;
+	fp = fopen( ficheiroIn , "r");
+	if ( fp == NULL ) {
+		fprintf ( stderr, "ERROR! Cannot open file: %s!\n", ficheiroIn);
+		exit ( 1 );
+    }
+    while(get_table_line(&initial_node, &final_node, &preference, fp)==0){
+		if(initial_node>size)size=initial_node;
+	}
+    
+	fclose(fp);
+	return size;
+}
+
+
 int get_table_line(int * initial_node, int *final_node , int*preference, FILE*fp){
 	if(fscanf(fp, "%d %d %d", initial_node, final_node, preference)!=3){
 		return -1;
@@ -7,67 +25,43 @@ int get_table_line(int * initial_node, int *final_node , int*preference, FILE*fp
 	return 0;
 }
 
-void create_node_entry(node**n, int initial_node){
-		(*n)=(node*)malloc(sizeof(node));
-		(*n)->identifier=initial_node;
-		(*n)->next=NULL;
-		(*n)->link=NULL;
-		return;
-}
-
-void create_link_entry(node**n, int final_node, int preference){
+void create_link_entry(node**n, int initial_node, int final_node, int preference){
 		adj_node * temp=(adj_node*)malloc(sizeof(adj_node));
 		temp->identifier=final_node;
 		temp->preference=preference;
 		
 		/*insertion in the beginning*/
-		temp->next=(*n)->link;
-		(*n)->link=temp; 
+		temp->next=((*n)[initial_node-1]).link;
+		((*n)[initial_node-1]).link=temp; 
 
 		return;
 }
 
 void list_adj(node**list, int initial_node, int final_node, 
-														int preference){
-	if(*list==NULL){
-		/*creates node and respective link*/
-		create_node_entry(&(*list), initial_node);	
-		create_link_entry(&(*list), final_node, preference);	
-	}else{
-		node*aux;
-		for(aux=(*list); (aux->identifier!=initial_node) && (aux->next!=NULL); 
-				aux=aux->next);
-				
-				
-		if(aux->identifier==initial_node){
-				 create_link_entry(&aux, final_node, preference);
-				 
-		}else{
-			if(aux->next==NULL){
-				/*there is no node in the list*/
-				create_node_entry(&(aux->next), initial_node);	
-				create_link_entry(&(aux->next), final_node, preference);
-			}
-		}
-		
-	}
+														int preference, int size){
+	create_link_entry(&(*list), initial_node, final_node, preference);	
 	return;
 }
 
 
-void Read_file(char * ficheiroIn, node**list){
+void Read_file(char * ficheiroIn, node**list, int*size){
 	FILE*fp;
 	int initial_node, final_node, preference;
-	
+	(*size)=positions(ficheiroIn);
 	fp = fopen( ficheiroIn , "r");
 	if ( fp == NULL ) {
 		fprintf ( stderr, "ERROR! Cannot open file: %s!\n", ficheiroIn);
 		exit ( 1 );
     }
-    node*aux;
-    while(get_table_line(&initial_node, &final_node, &preference, fp)==0){
-		list_adj(&(*list), initial_node, final_node, preference);
+    (*list)=malloc((*size)*sizeof(node));
+    if((*list)==NULL)printf("ERROR IN MALLOC\n");
+	int i=0;
+	for(i=0; i<(*size); i++){
+		((*list)[i]).link=NULL;
 	}
-
+    while(get_table_line(&initial_node, &final_node, &preference, fp)==0){
+		list_adj(&(*list), initial_node, final_node, preference, (*size));
+	}
+	fclose(fp);
 	return;
 }

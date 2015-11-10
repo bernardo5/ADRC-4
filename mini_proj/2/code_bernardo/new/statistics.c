@@ -22,6 +22,18 @@ void paths_count(int count_nodes, int*node_distance, float *ones, float* twos, f
 	return;
 }
 
+void hops_count(int**stat_hops, int*node_hops, int size){
+	int i;
+	
+	for(i=0; i<size; i++){
+		if((node_hops[i]>0)&&(node_hops[i]<50)){
+			(*stat_hops)[node_hops[i]]++;
+		}
+		
+	}
+	return;
+}
+
 int count_number_nodes(node*list, int size){
 	int count_nodes=0;
 	int i;
@@ -42,20 +54,18 @@ void paths_statistics(float *stat_customer, float *stat_peer, float *stat_provid
 	return;
 }
 
-/*void number_hops_statistics(int count_nodes, int*node_hops, float * stat_hops){
+void number_hops_statistics(int*stat_hops){
 	int i;
-	float sum=0;
-	for(i=0; i<count_nodes;i++){
-		sum=sum+(node_hops)[i];
-		if((node_hops)[i]==50000){
-			i=count_nodes;
-			sum=50000;
-		}
+	float total=0;
+	
+	/*count the total number of hops*/
+	for(i=0;i<50;i++){
+		if(stat_hops[i]!=0)total=total+stat_hops[i];
 	}
-	if(sum==50000){
-		(*stat_hops)=50000;
-	}else{
-		(*stat_hops)=sum/count_nodes;
+	
+	for(i=0;i<50;i++){
+		if(stat_hops[i]!=0)printf("%d hops statistics=%f\n", i, (stat_hops[i])/total);
 	}
+	
 	return;
-}*/
+}

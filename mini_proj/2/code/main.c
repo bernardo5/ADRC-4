@@ -1,4 +1,4 @@
-#include "statistics.h"
+#include "dijkstra.h"
 
 
 int main(int argc, char**argv){
@@ -32,11 +32,11 @@ int main(int argc, char**argv){
 	for(colum=0; colum<size; colum++){
 		if((list[colum].link)!=NULL){ /*node exists*/
 			Dijkstra(list, colum+1, size, &node_distance, &node_hops);
-			/*for(be=0; be<size; be++){
+			for(be=0; be<size; be++){
 				if((list[be].link)!=NULL){
 					printf("%d\t%d\t%d\n", be+1, (node_distance)[be], (node_hops)[be]);
 				}
-			}*/
+			}
 			paths_count(size, node_distance, &ones, &twos, &threes);
 			hops_count(&stat_hops, node_hops, size);
 			printf("finished one dijkstra\n");

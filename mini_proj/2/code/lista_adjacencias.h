@@ -12,6 +12,11 @@ typedef struct _node{
 	struct _adj_node * link;
 }node;
 
+typedef struct _dij_node{
+	struct _dij_node * next;
+	int identifier;
+}dij_node;
+
 int positions(char * ficheiroIn);
 
 int get_table_line(int * initial_node, int *final_node , int*preference, FILE*fp);

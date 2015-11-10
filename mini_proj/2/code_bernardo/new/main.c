@@ -36,7 +36,7 @@ int main(int argc, char**argv){
 		}
 	}
 	
-	paths_statistics(&stat_customer, &stat_peer, &stat_provider, size, ones, twos, threes);
+	paths_statistics(&stat_customer, &stat_peer, &stat_provider, count_number_nodes(list, size), ones, twos, threes);
 	
 	printf("customer: %f\nstat_peer:%f\nstat_provider:%f\n\n", stat_customer, stat_peer, stat_provider);
 	

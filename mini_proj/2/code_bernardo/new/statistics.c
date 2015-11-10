@@ -22,6 +22,19 @@ void paths_count(int count_nodes, int*node_distance, float *ones, float* twos, f
 	return;
 }
 
+int count_number_nodes(node*list, int size){
+	int count_nodes=0;
+	int i;
+	for(i=0; i<size;i++){
+		if((list[i].link)!=NULL){
+			count_nodes++;
+		}
+	}
+	
+	return count_nodes;
+}
+
+
 void paths_statistics(float *stat_customer, float *stat_peer, float *stat_provider, int count_nodes, float ones, float twos, float threes){
 	(*stat_customer)=ones/((count_nodes-1)*count_nodes);
 	(*stat_peer)=twos/((count_nodes-1)*count_nodes);

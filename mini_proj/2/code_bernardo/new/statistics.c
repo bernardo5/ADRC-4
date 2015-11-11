@@ -51,6 +51,7 @@ void paths_statistics(float *stat_customer, float *stat_peer, float *stat_provid
 	(*stat_customer)=ones/((count_nodes-1)*count_nodes);
 	(*stat_peer)=twos/((count_nodes-1)*count_nodes);
 	(*stat_provider)=threes/((count_nodes-1)*count_nodes);
+	printf("Unusable: %f\n", 1-(*stat_customer)-(*stat_peer)-(*stat_provider));
 	return;
 }
 

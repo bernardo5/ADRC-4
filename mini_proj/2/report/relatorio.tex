@@ -88,7 +88,9 @@ O pseudo-código da função apresentada é o seguinte:
   
   stat\_peer=twos/total\_routes;
   
-  stat\_peer=threes/total\_routes;
+  stat\_provider=threes/total\_routes;
+  
+  stat\_unusable=1-stat\_customer-stat\_peer-stat\_provider\;
  \caption{\textit{paths\_statistics}}
 \end{algorithm}
 \subsection{Função \textit{number\_hops\_statistics}}

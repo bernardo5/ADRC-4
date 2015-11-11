@@ -9,7 +9,7 @@ int min(int i, int n){
 	return -1;
 }
 
-void Initialize_distance_matrix(int count_nodes, int**node_distance, int**node_hops, node *list, int destiny, Heap*h){
+void Initialize_distance_matrix(int count_nodes, int**node_distance, int**node_hops, node *list, int destiny, Heap*h, int**heap_place){
 	int i;
 	for(i=0; i<count_nodes; i++ ){
 		(*node_distance)[i]=-1; /*infinity distance*/
@@ -19,7 +19,7 @@ void Initialize_distance_matrix(int count_nodes, int**node_distance, int**node_h
 			(*node_hops)[i]=0;
 		}
 		if((list[i].link)!=NULL) /*the node exists*/
-			Insert(h, i+1, (*node_distance));
+			Insert(h, i+1, (*node_distance), &(*heap_place));
 	}	
 	return;
 }
@@ -41,24 +41,25 @@ void Dijkstra(node*list, int destiny, int count_nodes, int**node_distance, int**
 	int dijkstra_u=0;
 	int dijkstra_identifier;
 	Heap*heap;
-	int unvisited_nodes[count_nodes], i;
-	for(i=0; i<count_nodes;i++)unvisited_nodes[i]=0;
+	int i, *heap_place;
+	heap_place=malloc(count_nodes*sizeof(int));
+	for(i=0; i<count_nodes;i++) heap_place[count_nodes]=-1;
 	if(count_nodes>0){
 		heap=NewHeap(count_number_nodes(list, count_nodes));
-		Initialize_distance_matrix(count_nodes, &(*node_distance), &(*node_hops), list, destiny, heap);
+		Initialize_distance_matrix(count_nodes, &(*node_distance), &(*node_hops), list, destiny, heap, &heap_place);
 		while(HeapEmpty(heap)){
-			dijkstra_identifier= RemoveMax(heap, (*node_distance));
+			dijkstra_identifier= RemoveMax(heap, (*node_distance), &heap_place);
 			dijkstra_u = dijkstra_identifier - 1;
-			unvisited_nodes[dijkstra_u]=1;
+			//unvisited_nodes[dijkstra_u]=1;
 			if((*node_distance)[dijkstra_u]!=-1){
 				/*for each uv*/
 					for(links=(list[dijkstra_u]).link;links!=NULL; links=links->next){
-						if(unvisited_nodes[(links->identifier)-1]==0){
+						if(heap_place[(links->identifier)-1]!=-1){
 							if(((*node_distance)[(links->identifier)-1] < min((*node_distance)[dijkstra_u],links->preference))&&
 								((links->preference)<=(*node_distance)[dijkstra_u])){
 								(*node_distance)[(links->identifier)-1] = min((*node_distance)[dijkstra_u],links->preference);
 								(*node_hops)[(links->identifier)-1]=(*node_hops)[dijkstra_u]+1;
-								Heapify(heap, (*node_distance));//fixup
+								FixUp(heap, heap_place[(links->identifier)-1], (*node_distance), &heap_place);
 							}		
 						}			
 					}
@@ -66,5 +67,6 @@ void Dijkstra(node*list, int destiny, int count_nodes, int**node_distance, int**
 		}
 		invert_weights(&(*node_distance), count_nodes);	
 	}
+	free(heap_place);
 	return;
 }

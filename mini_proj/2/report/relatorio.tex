@@ -36,8 +36,46 @@ Por questões de tempo de resolução do problema e tendo sido assegurado que o 
 Sendo as estatísticas calculadas depois de cada nó saber os caminhos a escolher tendo por base todos os destinos possíveis, após a leitura do ficheiro, o programa procede à realização da nossa função \textit{Dijkstra} para todos os destinos, no fim de cada iteração atualiza-se o número de rotas utilizadas de cada tipo e o número de saltos utilizados para chegar ao destino. No fim de todos os cálculos são então feitas as estatísticas, sendo posteriormente apresentadas ao utilizador.
 
 \section{Função \textit{Dijkstra}}
+O pseudo-código da função apresentada é o seguinte:
 
-\subsection{Função \textit{Insert}}
+\begin{algorithm}[H]
+\KwResult{Vector with flags of paths and number of hops}
+ Initialize variables\;
+ 
+ \eIf{there are nodes}{
+ 	Create heap\;
+ 	Initialize node distances, node hops and heap\;
+    \While{heap is not empty}{
+	    Remove heap root\;
+	    \If{root distance!=infinity}{
+			\For{each link}{
+				\If{link unseen}{
+					\If{route through new link is more favorable than the stored route and route is usable}{
+						Stored route = New route\;
+						
+						Hops of new link = Hops of heap root+1\;
+						
+						FixUp heap in position of changed node\;
+					}				
+				}			
+			}
+		}    
+    }
+    Invert flags of paths\;
+ }
+ 
+ \caption{\textit{Dijkstra}}
+\end{algorithm}
+
+Este algoritmo apesar de se basear no de \textit{Dijkstra} é uma adaptação.
+
+Neste programa temos um vector \textit{heap\_place} que que contém a posição instantânea de cada nó no \textit{heap}. O vector \textit{node\_distance} contém o tipo de caminho para o nó corresponde à sua posição mais um, isto deve-se ao vector começar em zero e termos considerado que não existe identificador zero. O vector \textit{node\_hops} contém o número de saltos necessários até um destino para o nó corresponde à sua posição mais um.
+
+Em cada iteração do algoritmo criado, para retirar o nó pretendido utilizaram-se \textit{heaps}, de forma a melhorar a \textit{performance} do programa para ficheiros de dimensões elevadas. Uma alternativa seria percorrer uma lista com os nós todos, em busca do que tivesse a rota mais favorável, no entanto a complexidade seria O(n), em vez de O(1).
+
+A condição de substituição no vector \textit{node\_distance} em vez de ser o tradicional relaxamento de arestas de menor caminho passa a ser um relaxamento de arestas, em busca da melhor rota, não sendo estas somadas, mas considerando o pior caso, que irá definir a rota. Sempre que um valor do vector que controla as rotas é mudado, é necessário alterar a ordem dos nós dentro do acervo, usando a função \textit{FixUp}. Tradicionalmente, utiliza-se a função \textit{Heapify}, no entanto, devido ao elevado número de nós e ao facto de estarmos a utilizar o algoritmo para cada um deles, o \textit{FixUp} reduz, substancialmente, o número de operações sobre o acervo. No entanto é necessário um compromisso de memória gasta \textit{versus} tempo, sendo o tempo o facto preponderante no cálculo das rotas de \textit{AS's} optámos pela utilização de um vector que guarda a posição de cada nó no acervo.
+
+As funções \textit{NewHeap}, \textit{FixUp}, \textit{Insert}, \textit{RemoveMax} e \textit{HeapEmpty} são adjacentes ao uso de \textit{heaps} e, por isso, não achámos necessária a sua explicação.
 
 \section{Estatísticas}
 Para o cálculo das estatísticas pedidas, utilizámos as variáveis \textit{ones}, \textit{twos}, \textit{threes} e o vector \textit{stat\_hops}, que estão constantemente a ser atualizados no fim de cada iteração, recalculando o número de rotas \textit{customer}, \textit{peer}, \textit{provider} e o número de vezes que se chega ao destino em \textit{i} saltos, sendo \textit{i} o índice do vector \textit{stat\_hops}.

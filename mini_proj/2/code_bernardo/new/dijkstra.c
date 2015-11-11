@@ -58,7 +58,7 @@ void Dijkstra(node*list, int destiny, int count_nodes, int**node_distance, int**
 								((links->preference)<=(*node_distance)[dijkstra_u])){
 								(*node_distance)[(links->identifier)-1] = min((*node_distance)[dijkstra_u],links->preference);
 								(*node_hops)[(links->identifier)-1]=(*node_hops)[dijkstra_u]+1;
-								Heapify(heap, (*node_distance));
+								Heapify(heap, (*node_distance));//fixup
 							}		
 						}			
 					}

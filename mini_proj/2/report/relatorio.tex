@@ -1,0 +1,49 @@
+\documentclass[a4paper]{article}
+
+\usepackage[portuguese]{babel}
+\usepackage{comment}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{indentfirst}
+\usepackage[hypcap]{caption} % makes \ref point to top of figures and tables
+
+\begin{document}
+
+\input{./rosto.tex}
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
+
+\pagenumbering{arabic}
+\section{Descrição do problema}
+Neste mini-projecto, pretende-se a implementação de diversas funções relacionadas com o tipo de rota comercial eleita de cada nó de uma dada rede para um destino eleito.
+
+Assim, a função \textit{Dijkstra} elege o tipo de rota e calcula o número de saltos necessários para chegar ao destino.
+
+O cálculo das estatísticas para as diferentes rotas e para os números de saltos até ao destino, é feito depois da função anterior ser corrida para todos os destinos possíveis no grafo. Este é feito pelas funções \textit{paths\_statistics} e \textit{number\_hops\_statistics}.
+
+\section{Abordagem ao problema}
+Decidimos utilizar um algoritmo baseado no algoritmo de \textit{Dijkstra} para a computação das rotas a utilizar dos diversos nós para um destino eleito. Como tal, foi necessário que o programa interpretasse os dados de entrada provenientes de um ficheiro de texto por forma a ficar com a topologia da rede. A topologia é armazenada numa lista de adjacências.
+
+Por questões de tempo de resolução do problema e tendo sido assegurado que o número de nós dos grafos não excederia o valor máximo de alocação de memória, a lista de adjacências criada tem por base um vector de ponteiros em que cada posição contém uma lista para as adjacências de cada nó.
+
+Sendo as estatísticas calculadas depois de cada nó saber os caminhos a escolher tendo por base todos os destinos possíveis, após a leitura do ficheiro, o programa procede à realização da nossa função \textit{Dijkstra} para todos os destinos, no fim de cada iteração atualiza-se o número de rotas utilizadas de cada tipo e o número de saltos utilizados para chegar ao destino. No fim de todos os cálculos são então feitas as estatísticas, sendo posteriormente apresentadas ao utilizador.
+
+\section{Função \textit{Dijkstra}}
+
+\subsection{Função \textit{Insert}}
+
+\section{Estatísticas}
+
+\subsection{Função \textit{paths\_statistics}}
+
+\subsection{Função \textit{number\_hops\_statistics}}
+
+\section{Considerações finais}
+
+
+\end{document}

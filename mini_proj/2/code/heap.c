@@ -51,7 +51,7 @@ int HeapEmpty(Heap*h){
  *
  *****************************************************************************/
 
-void FixUp(Heap * h, int k, int *node_distance)
+void FixUp(Heap * h, int k, int *node_distance, int**heap_place)
 {
   int t;
   while ((k > 0) && (node_distance[(((h)->heapdata)[(k - 1) / 2])-1]<node_distance[(((h)->heapdata)[k])-1])) {
@@ -66,6 +66,9 @@ void FixUp(Heap * h, int k, int *node_distance)
     t = ((h)->heapdata)[k];
     ((h)->heapdata)[k] = ((h)->heapdata)[(k - 1) / 2];
     ((h)->heapdata)[(k - 1) / 2] = t;
+    
+    (*heap_place)[(((h)->heapdata)[(k - 1) / 2])-1]=(k - 1) / 2;
+    (*heap_place)[(((h)->heapdata)[k])-1]=k;
 
 #ifdef DEMO
     /* --------------------------------------------------- */
@@ -92,7 +95,7 @@ void FixUp(Heap * h, int k, int *node_distance)
  *
  *****************************************************************************/
 
-void FixDown(Heap * h, int k, int*node_distance)
+void FixDown(Heap * h, int k, int*node_distance, int**heap_place)
 {
   int j;
   int t;
@@ -129,6 +132,10 @@ void FixDown(Heap * h, int k, int*node_distance)
     t = ((h)->heapdata)[k];
     ((h)->heapdata)[k] = ((h)->heapdata)[j];
     ((h)->heapdata)[j] = t;
+    
+    (*heap_place)[(((h)->heapdata)[j])-1]=j;
+    (*heap_place)[(((h)->heapdata)[k])-1]=k;
+    
     k = j;
 
 #ifdef DEMO
@@ -207,7 +214,7 @@ Heap *NewHeap(int size)
  *
  *****************************************************************************/
 
-void Insert(Heap * h, int element, int*node_distance)
+void Insert(Heap * h, int element, int*node_distance, int**heap_place)
 {
   if ((h)->n_elements == (h)->size) {
     printf("Heap full (size = %d) !\n", (h)->size);
@@ -216,7 +223,8 @@ void Insert(Heap * h, int element, int*node_distance)
   (h)->heapdata[(h)->n_elements] = element;
 
   (h)->n_elements++;
-  FixUp(h, (h)->n_elements - 1, node_distance);
+  (*heap_place)[element-1]=(h->n_elements)-1;
+  FixUp(h, (h)->n_elements - 1, node_distance, &(*heap_place));
 
   return;
 }
@@ -263,7 +271,7 @@ void Insert(Heap * h, int element, int*node_distance)
  *
  *****************************************************************************/
 
-int RemoveMax(Heap * h, int *node_distance)
+int RemoveMax(Heap * h, int *node_distance, int**heap_place)
 {
   int t;
 
@@ -272,7 +280,8 @@ int RemoveMax(Heap * h, int *node_distance)
     ((h)->heapdata)[0] = ((h)->heapdata)[(h)->n_elements - 1];
     ((h)->heapdata)[(h)->n_elements - 1] = t;
     (h)->n_elements--;
-    FixDown(h, 0, node_distance);
+    FixDown(h, 0, node_distance, &(*heap_place));
+    (*heap_place)[t-1]=-1;
     return t;
   }
 
@@ -338,7 +347,7 @@ int RemoveMax(Heap * h, int *node_distance)
  *
  *****************************************************************************/
 
-void Heapify(Heap * h, int*node_distance)
+/*void Heapify(Heap * h, int*node_distance)
 {
 	int i;
 	for(i=(h)->n_elements-1; i>=0; i-=2){
@@ -346,4 +355,4 @@ void Heapify(Heap * h, int*node_distance)
 	}
 
     return;
-}
+}*/

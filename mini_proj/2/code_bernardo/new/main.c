@@ -12,13 +12,6 @@ int main(int argc, char**argv){
 	}
 	ficheiroIn = argv[1];
 	Read_file(ficheiroIn, &list, &size);
-	/*adj_node*aux_adj;
-	int vec;
-	for(vec=0;vec<positions(ficheiroIn);vec++){
-		for(aux_adj=list[vec].link;aux_adj!=NULL; aux_adj=aux_adj->next){
-			 printf("%d %d %d\n", vec+1, aux_adj->identifier, aux_adj->preference);
-		 }
-	}*/
 	int*node_distance=malloc(size*sizeof(int));
 	int*node_hops=malloc(size*sizeof(int));
 	int*stat_hops=malloc(50*sizeof(int)); /*used to calc statistics*/

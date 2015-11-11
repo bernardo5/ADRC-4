@@ -1,0 +1,43 @@
+Unusable: 0.976530
+customer: 0.006117
+stat_peer:0.008676
+stat_provider:0.008676
+
+1 hops statistics=0.000105
+2 hops statistics=0.026802
+3 hops statistics=0.144332
+4 hops statistics=0.209746
+5 hops statistics=0.170273
+6 hops statistics=0.123166
+7 hops statistics=0.086490
+8 hops statistics=0.062860
+9 hops statistics=0.045272
+10 hops statistics=0.033544
+11 hops statistics=0.026611
+12 hops statistics=0.021858
+13 hops statistics=0.016258
+14 hops statistics=0.010443
+15 hops statistics=0.006695
+16 hops statistics=0.005065
+17 hops statistics=0.003266
+18 hops statistics=0.001979
+19 hops statistics=0.001294
+20 hops statistics=0.001058
+21 hops statistics=0.000844
+22 hops statistics=0.000633
+23 hops statistics=0.000374
+24 hops statistics=0.000329
+25 hops statistics=0.000267
+26 hops statistics=0.000161
+27 hops statistics=0.000125
+28 hops statistics=0.000060
+29 hops statistics=0.000046
+30 hops statistics=0.000023
+31 hops statistics=0.000011
+32 hops statistics=0.000006
+33 hops statistics=0.000002
+34 hops statistics=0.000001
+35 hops statistics=0.000001
+36 hops statistics=0.000000
+37 hops statistics=0.000000
+

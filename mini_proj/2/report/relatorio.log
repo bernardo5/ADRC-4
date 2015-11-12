@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.10.22)  12 NOV 2015 21:28
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.10.22)  12 NOV 2015 22:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -601,38 +601,38 @@ been already used, duplicate ignored
 l.46 
       [1]
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language append on input line 87.
+(babel)             in language append on input line 92.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language append on input line 89.
+(babel)             in language append on input line 94.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language append on input line 89.
+(babel)             in language append on input line 94.
  [2]
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language append on input line 89.
+(babel)             in language append on input line 94.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language append on input line 103.
+(babel)             in language append on input line 108.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language append on input line 117.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language append on input line 126.
+(babel)             in language append on input line 122.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language append on input line 131.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language append on input line 131.
+(babel)             in language append on input line 136.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language append on input line 136.
  [3]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 172.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 177.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language append on input line 172.
+(babel)             in language append on input line 177.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language append on input line 172.
+(babel)             in language append on input line 177.
  [4]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 172.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 177.
  (./relatorio.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 172.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 172.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 177.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 177.
 Package rerunfilecheck Info: File `relatorio.out' has not changed.
 (rerunfilecheck)             Checksum: 63525FE02FE6673017A555944A9ADC00;533.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 172.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 177.
  ) 
 Here is how much of TeX's memory you used:
  8365 strings out of 494963
@@ -641,7 +641,7 @@ Here is how much of TeX's memory you used:
  11491 multiletter control sequences out of 15000+600000
  13971 words of font info for 30 fonts, out of 8000000 for 9000
  38 hyphenation exceptions out of 8191
- 37i,30n,38p,962b,606s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,33n,42p,962b,653s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/bernardo/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1200.600pk> </hom
 e/bernardo/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/bernar
 do/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/bernardo/.texm
@@ -653,7 +653,7 @@ c/ecrm1200.600pk> </home/bernardo/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti14
 40.600pk> </home/bernardo/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1000.600pk
 > </home/bernardo/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1440.600pk> </home
 /bernardo/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1728.600pk>
-Output written on relatorio.pdf (5 pages, 115421 bytes).
+Output written on relatorio.pdf (5 pages, 115527 bytes).
 PDF statistics:
  427 PDF objects out of 1000 (max. 8388607)
  111 compressed objects within 2 object streams

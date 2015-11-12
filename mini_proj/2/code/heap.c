@@ -276,12 +276,17 @@ int RemoveMax(Heap * h, int *node_distance, int**heap_place)
   int t;
 
   if ((h)->n_elements > 0) {
+
     t = ((h)->heapdata)[0];
     ((h)->heapdata)[0] = ((h)->heapdata)[(h)->n_elements - 1];
-    ((h)->heapdata)[(h)->n_elements - 1] = t;
+    //((h)->heapdata)[(h)->n_elements - 1] = t;
+    (*heap_place)[((h)->heapdata)[(h)->n_elements - 1]-1]=0;
+    (*heap_place)[t-1]=-1;
     (h)->n_elements--;
     FixDown(h, 0, node_distance, &(*heap_place));
-    (*heap_place)[t-1]=-1;
+	 //(*heap_place)[t-1]=-1;
+  /*  for(i=0; i<(h)->n_elements; i++)printf("%d\t", ((h)->heapdata)[i]);
+    printf("\n\n");*/
     return t;
   }
 

@@ -25,6 +25,7 @@ int main(int argc, char**argv){
 	int colum=0;
 	for(colum=0; colum<size; colum++){
 		if((list[colum].link)!=NULL){ /*node exists*/
+			//printf("\nfinished dijkstra para %d\n", colum+1);
 			Dijkstra(list, colum+1, size, &node_distance, &node_hops);
 			/*for(be=0; be<size; be++){
 				if((list[be].link)!=NULL){

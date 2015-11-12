@@ -1,0 +1,23 @@
+Unusable: 0.000000
+customer: 0.260633
+stat_peer:0.369683
+stat_provider:0.369683
+
+1 hops statistics=0.000127
+2 hops statistics=0.037416
+3 hops statistics=0.263880
+4 hops statistics=0.420485
+5 hops statistics=0.206696
+6 hops statistics=0.055096
+7 hops statistics=0.012004
+8 hops statistics=0.003052
+9 hops statistics=0.000798
+10 hops statistics=0.000298
+11 hops statistics=0.000103
+12 hops statistics=0.000032
+13 hops statistics=0.000010
+14 hops statistics=0.000003
+15 hops statistics=0.000000
+16 hops statistics=0.000000
+17 hops statistics=0.000000
+

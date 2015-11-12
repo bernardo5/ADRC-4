@@ -62,12 +62,17 @@ O pseudo-código da função apresentada é o seguinte:
 	    \If{root distance!=infinity}{
 			\For{each link}{
 				\If{link unseen}{
-					\If{route through new link is more favorable than the stored route and route is usable}{
-						Stored route = New route\;
+					\If{route through new link is more or equally favorable than the stored route and route is usable}{
+						\If{no consecutive peer links}{
+							Stored route = New route\;
 						
-						Hops of new link = Hops of heap root+1\;
+							\If{reaches destiny node in less hops}{
+								Hops of new link = Hops of heap root+1\;
+							}
+													
+							FixUp heap in position of changed node\;
+						}
 						
-						FixUp heap in position of changed node\;
 					}				
 				}			
 			}
@@ -108,7 +113,14 @@ O pseudo-código da função apresentada é o seguinte:
  
  \caption{\textit{number\_hops\_statistics}}
 \end{algorithm}
-\section{Considerações finais}
 
+\section{Considerações finais}
+No início do programa, este lê duas vezes o ficheiro que contém as ligações do grafo. Uma para saber qual o maior identificador dos nós e outra para armazenar o grafo sob a forma de lista de adjacências, já depois de a memória ter sido alocada (O(2L)=O(L), sendo L o número de linhas do ficheiro).
+
+Posteriormente, são descobertas os tipos de rotas de todos os nós do grafo para todos destinos, ou seja, é corrido o algoritmo da nossa função \textit{Dijkstra} N vezes. Para cada iteração, é contado o número de vezes que se utiliza cada tipo de rota e o número de saltos que foram necessários para chegar ao destino (O(2N) = O(N)).
+
+Finalmente são feitas as estatísticas dos valores pretendidos (cálculo das probabilidades de cada tipo de rota e do número de saltos para chegar ao destino) cujas funções têm complexidade O(1).
+
+O nosso programa tem assim complexidade O(L + NM*log(N) + 1), ou seja O(NM*log(N)).
 
 \end{document}

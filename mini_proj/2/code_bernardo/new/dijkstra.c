@@ -48,23 +48,8 @@ void Dijkstra(node*list, int destiny, int count_nodes, int**node_distance, int**
 		heap=NewHeap(count_number_nodes(list, count_nodes));
 		Initialize_distance_matrix(count_nodes, &(*node_distance), &(*node_hops), list, destiny, heap, &heap_place);
 		while(HeapEmpty(heap)){
-							/*int i;
-							printf("heap\n");
-							for(i=0; i<(h)->n_elements; i++)printf("%d\t", ((h)->heapdata)[i]);
-							printf("\n\n");*/
 			dijkstra_identifier= RemoveMax(heap, (*node_distance), &heap_place);
-			//printf("node:%d position %d in heap\n", dijkstra_identifier, (heap_place)[dijkstra_identifier-1]);
-    /* printf("heap after remove\n");*/
-			/*int nm;*/
-			/*for(nm=0; nm<11;nm++){
-				printf("%d\t", nm+1);
-			}
-			for(nm=0; nm<11;nm++){
-				printf("%d\t", heap_place[nm]);
-			}*/
-			/*printf("\n\n");*/
 			dijkstra_u = dijkstra_identifier - 1;
-			//unvisited_nodes[dijkstra_u]=1;
 			if((*node_distance)[dijkstra_u]!=-1){
 				/*for each uv*/
 					for(links=(list[dijkstra_u]).link;links!=NULL; links=links->next){

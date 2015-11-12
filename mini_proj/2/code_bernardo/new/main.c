@@ -11,9 +11,10 @@ int main(int argc, char**argv){
 		exit(-1);
 	}
 	ficheiroIn = argv[1];
+	/*get graph into adjacency list*/
 	Read_file(ficheiroIn, &list, &size);
-	int*node_distance=malloc(size*sizeof(int));
-	int*node_hops=malloc(size*sizeof(int));
+	int*node_distance=malloc(size*sizeof(int)); /*used to know what type of route a node uses to reach destiny*/
+	int*node_hops=malloc(size*sizeof(int)); /*used to know how many hops a node take to reach the destiny*/
 	int*stat_hops=malloc(50*sizeof(int)); /*used to calc statistics*/
 	int be;
 	for(be=0; be<50;be++){
@@ -25,12 +26,11 @@ int main(int argc, char**argv){
 	for(colum=0; colum<size; colum++){
 		if((list[colum].link)!=NULL){ /*node exists*/
 			Dijkstra(list, colum+1, size, &node_distance, &node_hops);
-			printf("finished one dijkstra for node %d\n", colum+1);
-			for(be=0; be<size; be++){
+			/*for(be=0; be<size; be++){
 				if((list[be].link)!=NULL){
 					printf("%d\t%d\t%d\n", be+1, (node_distance)[be], (node_hops)[be]);
 				}
-			}
+			}*/
 			paths_count(list, size, node_distance, &ones, &twos, &threes, &unusable);
 			hops_count(&stat_hops, node_hops, size);
 		}

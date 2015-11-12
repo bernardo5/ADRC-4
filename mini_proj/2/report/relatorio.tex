@@ -77,27 +77,29 @@ A condição de substituição no vector \textit{node\_distance} em vez de ser o
 
 As funções \textit{NewHeap}, \textit{FixUp}, \textit{Insert}, \textit{RemoveMax} e \textit{HeapEmpty} são adjacentes ao uso de \textit{heaps} e, por isso, não achámos necessária a sua explicação.
 
+Relativamente à complexidade desta função, sendo esta composta pelas funções \textit{Initializa\_distance}, \textit{Heap\_empty}, \textit{Remove\_max}, um ciclo \textit{for} a percorrer as adjacências de um nó, e \textit{Fix\_up}, a complexidade será dada por: O(N)*O(log(N)) + O(M)*O(2log(N)) + O(N) = O(N)*O(log(N)) + O(M)*O(log(N)). Existindo mais arestas do que nós, a complexidade será O(M*log(N)) onde M é o número de ligações e N o número de nós do grafo.
+
 \section{Estatísticas}
 Para o cálculo das estatísticas pedidas, utilizámos as variáveis \textit{ones}, \textit{twos}, \textit{threes} e o vector \textit{stat\_hops}, que estão constantemente a ser atualizados no fim de cada iteração, recalculando o número de rotas \textit{customer}, \textit{peer}, \textit{provider} e o número de vezes que se chega ao destino em \textit{i} saltos, sendo \textit{i} o índice do vector \textit{stat\_hops}.
 \subsection{Função \textit{paths\_statistics}}
 O pseudo-código da função apresentada é o seguinte:
 
 \begin{algorithm}[H]
- \KwResult{estatísticas das rotas utilizadas}
+ \KwResult{estatísticas das rotas utilizadas (complexidade O(1))}
   stat\_customer=ones/total\_routes;
   
-  stat\_peer=twos/total\_routes;
+  stat\_peer=twos/total\_routes\;
   
-  stat\_provider=threes/total\_routes;
+  stat\_provider=threes/total\_routes\;
   
-  stat\_unusable=1-stat\_customer-stat\_peer-stat\_provider\;
+  stat\_unusable=unusable/total\_routes\;
  \caption{\textit{paths\_statistics}}
 \end{algorithm}
 \subsection{Função \textit{number\_hops\_statistics}}
 O pseudo-código da função apresentada é o seguinte:
 
 \begin{algorithm}[H]
- \KwResult{estatísticas para cada número de saltos}
+ \KwResult{estatísticas para cada número de saltos (complexidade O(1))}
  counts total number of hops\;
  
  \For{each hop number}{

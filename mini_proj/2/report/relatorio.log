@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.10.22)  12 NOV 2015 18:46
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.10.22)  12 NOV 2015 19:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -584,31 +584,31 @@ Package babel Info: Redefining portuges shorthand "|
 (babel)             in language append on input line 31.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language append on input line 38.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language append on input line 70.
-Package babel Info: Redefining portuges shorthand "|
-(babel)             in language append on input line 70.
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.70 E
-      ste algoritmo apesar de se basear no de \textit{Dijkstra} Ã© uma adapt...
-[1]
-Overfull \hbox (3.3075pt too wide) in paragraph at lines 74--75
+
+Overfull \hbox (3.3075pt too wide) in paragraph at lines 43--44
 []\T1/cmr/m/n/10 Em cada ite-ra-ção do al-go-ritmo cri-ado, para re-ti-rar o nó
  pre-ten-dido utilizaram-
  []
 
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language append on input line 77.
+(babel)             in language append on input line 46.
 Package babel Info: Redefining portuges shorthand "|
-(babel)             in language append on input line 77.
-[2]
+(babel)             in language append on input line 46.
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.46 
+      [1]
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language append on input line 82.
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language append on input line 84.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language append on input line 98.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language append on input line 98.
+ [2]
 Package babel Info: Redefining portuges shorthand "|
 (babel)             in language append on input line 98.
 Package babel Info: Redefining portuges shorthand "|
@@ -634,7 +634,7 @@ Here is how much of TeX's memory you used:
  11490 multiletter control sequences out of 15000+600000
  13971 words of font info for 30 fonts, out of 8000000 for 9000
  38 hyphenation exceptions out of 8191
- 36i,24n,38p,962b,514s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,24n,38p,962b,512s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/bernardo/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1200.600pk> </hom
 e/bernardo/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/bernar
 do/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/bernardo/.texm
@@ -646,7 +646,7 @@ c/ecrm1200.600pk> </home/bernardo/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti14
 40.600pk> </home/bernardo/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1000.600pk
 > </home/bernardo/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1440.600pk> </home
 /bernardo/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1728.600pk>
-Output written on relatorio.pdf (4 pages, 102178 bytes).
+Output written on relatorio.pdf (4 pages, 102093 bytes).
 PDF statistics:
  379 PDF objects out of 1000 (max. 8388607)
  103 compressed objects within 2 object streams

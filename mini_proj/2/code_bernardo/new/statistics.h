@@ -1,6 +1,6 @@
 #include "lista_adjacencias.h"
 
-void paths_count(int count_nodes, int*node_distance, float *ones, float* twos, float *threes, float*unusable);
+void paths_count(node*list, int count_nodes, int*node_distance, float *ones, float* twos, float *threes, float*unusable);
 
 void hops_count(int**stat_hops, int*node_hops, int size);
 

@@ -1,7 +1,7 @@
 #include "statistics.h"
 
 
-void paths_count(int count_nodes, int*node_distance, float *ones, float* twos, float *threes, float*unusable){
+void paths_count(node*list, int count_nodes, int*node_distance, float *ones, float* twos, float *threes, float*unusable){
 	int i;
 		
 	for(i=0; i<count_nodes; i++){
@@ -15,7 +15,7 @@ void paths_count(int count_nodes, int*node_distance, float *ones, float* twos, f
 					(*threes)++;
 				}else{
 					if(node_distance[i]==-1){
-						(*unusable)++;
+						if((list[i].link)!=NULL) (*unusable)++;
 					}
 				}
 			}

@@ -53,7 +53,7 @@ void Dijkstra(node*list, int destiny, int count_nodes, int**node_distance, int**
 							for(i=0; i<(h)->n_elements; i++)printf("%d\t", ((h)->heapdata)[i]);
 							printf("\n\n");*/
 			dijkstra_identifier= RemoveMax(heap, (*node_distance), &heap_place);
-			printf("node:%d position %d in heap\n", dijkstra_identifier, (heap_place)[dijkstra_identifier-1]);
+			//printf("node:%d position %d in heap\n", dijkstra_identifier, (heap_place)[dijkstra_identifier-1]);
     /* printf("heap after remove\n");*/
 			/*int nm;*/
 			/*for(nm=0; nm<11;nm++){

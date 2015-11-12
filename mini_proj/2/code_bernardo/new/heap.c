@@ -281,7 +281,7 @@ int RemoveMax(Heap * h, int *node_distance, int**heap_place)
     ((h)->heapdata)[0] = ((h)->heapdata)[(h)->n_elements - 1];
     //((h)->heapdata)[(h)->n_elements - 1] = t;
     (*heap_place)[((h)->heapdata)[(h)->n_elements - 1]-1]=0;
-   // (*heap_place)[t-1]=-1;
+    (*heap_place)[t-1]=-1;
     (h)->n_elements--;
     FixDown(h, 0, node_distance, &(*heap_place));
 	 //(*heap_place)[t-1]=-1;

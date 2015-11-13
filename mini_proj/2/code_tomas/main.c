@@ -14,9 +14,13 @@ int main(int argc, char**argv){
 	/*get graph into adjacency list*/
 	Read_file(ficheiroIn, &list, &size);
 	int*node_distance=malloc(size*sizeof(int)); /*used to know what type of route a node uses to reach destiny*/
+	if(node_distance==NULL)exit(-1);
 	int*node_hops=malloc(size*sizeof(int)); /*used to know how many hops a node take to reach the destiny*/
+	if(node_hops==NULL)exit(-1);
 	int*stat_hops=malloc(50*sizeof(int)); /*used to calc statistics*/
+	if(stat_hops==NULL)exit(-1);
 	int be;
+	
 	for(be=0; be<50;be++){
 		stat_hops[be]=0;
 	}

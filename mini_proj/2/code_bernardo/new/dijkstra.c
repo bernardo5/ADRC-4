@@ -19,7 +19,7 @@ void Initialize_distance_matrix(int count_nodes, int**node_distance, int**node_h
 			(*node_hops)[i]=0;
 		}
 		if((list[i].link)!=NULL) /*the node exists*/
-			Insert(h, i+1, (*node_distance), &(*heap_place));
+			Insert(h, i+1, (*node_distance), &(*heap_place), (*node_hops));
 	}	
 	return;
 }
@@ -49,7 +49,7 @@ void Dijkstra(node*list, int destiny, int count_nodes, int**node_distance, int**
 		heap=NewHeap(count_number_nodes(list, count_nodes));
 		Initialize_distance_matrix(count_nodes, &(*node_distance), &(*node_hops), list, destiny, heap, &heap_place);
 		while(HeapEmpty(heap)){
-			dijkstra_identifier= RemoveMax(heap, (*node_distance), &heap_place);
+			dijkstra_identifier= RemoveMax(heap, (*node_distance), &heap_place, (*node_hops));
 			//printf("removed %d from heap\n", dijkstra_identifier);
 			dijkstra_u = dijkstra_identifier - 1;
 			if((*node_distance)[dijkstra_u]!=-1){
@@ -71,8 +71,9 @@ void Dijkstra(node*list, int destiny, int count_nodes, int**node_distance, int**
 										//these 2 lines were outside the else
 										(*node_distance)[(links->identifier)-1] = min((*node_distance)[dijkstra_u],links->preference);
 							
-										FixUp(heap, heap_place[(links->identifier)-1], (*node_distance), &heap_place);
-									}					
+										
+									}
+									FixUp(heap, heap_place[(links->identifier)-1], (*node_distance), &heap_place, (*node_hops));					
 									
 								}
 							}		

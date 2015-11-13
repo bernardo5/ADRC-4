@@ -29,15 +29,15 @@ Heap *NewHeap(int size);
 
 /*void FreeHeap(Heap * h);*/
 
-void Insert(Heap * h, int element, int*node_distance, int**heap_place);
+void Insert(Heap * h, int element, int*node_distance, int**heap_place, int*node_hops);
 
-void FixUp(Heap * h, int k, int *node_distance, int**heap_place);
+void FixUp(Heap * h, int k, int *node_distance, int**heap_place, int*node_hops);
 
-int RemoveMax(Heap * h, int *node_distance, int**heap_place);
+int RemoveMax(Heap * h, int *node_distance, int**heap_place, int*node_hops);
 
 int PrintHeap(Heap * h);
 
-void FixDown(Heap * h, int k, int*node_distance, int**heap_place);
+void FixDown(Heap * h, int k, int*node_distance, int**heap_place, int *node_hops);
 
 /*void CleanHeap(Heap * h);*/
 

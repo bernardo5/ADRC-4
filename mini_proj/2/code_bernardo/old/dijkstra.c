@@ -8,97 +8,80 @@ int min(int i, int n){
 	}
 	return -1;
 }
+
+
 /*inserts a node in the dijkstra queue*/
-void insert(int identifier, node**list){
-	node *n;
-	n=(node*)malloc(sizeof(node));
+void insert(int identifier, dij_node**list){
+	dij_node *n;
+	n=(dij_node*)malloc(sizeof(dij_node));
 	n->identifier=identifier;
 	n->next=(*list);
-	n->link=NULL;
 	(*list)=n;
 	return;
 }
 
-void Initialize_distance_matrix(int**node_identifiers, int**node_distance, int**node_hops, node *list, int destiny, node**visited_nodes){
-	int i;
-	node*aux;
-	for(i=0, aux=list; aux!=NULL; aux=aux->next, i=i+1 ){
-		(*node_identifiers)[i]=aux->identifier;
-		(*node_distance)[i]=-1; /*infinity distance*/
-		(*node_hops)[i]=50000;
-		if((aux->identifier)==destiny){
-			(*node_distance)[i]=4;
-			(*node_hops)[i]=0;
-		}
-		insert(aux->identifier, &(*visited_nodes));
-	}	
-	return;
-}
-
-
-
-int unseen_nodes_list(int * node_visited, int colums){
-	int i;
-	for(i=0; i<colums;i++){
-		if(node_visited[colums]==0) return 1;
-	}
-	return 0;
-}
-
-int empty_queue(node*visited_nodes){
+int empty_queue(dij_node*visited_nodes){
 	if(visited_nodes==NULL) return 0;
 	return 1;
 }
 
-int identifier_smaller_distance(int*node_identifiers, int*node_distance, int*node_hops, int count_nodes, node*visited_nodes){
-	int i, position=-1;
+int identifier_smaller_distance(int**heap_place, node*list, int*node_distance, int*node_hops, int count_nodes, dij_node**visited_nodes){
+	int node_id;
 	int dist=-4;
-	int hops=50000;
-	node*aux;
-	/*loop to see which one has a smaller distance to destiny*/
-	for(aux=visited_nodes; aux!=NULL; aux=aux->next){
-		/*loop to get the colum of the selected item in the queue*/
-		for(i=0; (node_identifiers[i]!=(aux->identifier))&&(i<count_nodes); i++);
-		if(node_distance[i]>=dist){
-			if(node_hops[i]<hops){
-				dist=node_distance[i];
-				hops=node_hops[i];
-				position=i;
+	int hops=50001;
+	dij_node*aux_remove, *aux_remove_ant;
+	dij_node*aux=(*visited_nodes);
+	dij_node*aux_ant;
+	/*last element*/
+	if((*visited_nodes)->next==NULL){
+		node_id=(*visited_nodes)->identifier;
+		(*heap_place)[node_id-1]=-1;
+		aux_remove=(*visited_nodes);
+		free(aux_remove);
+		(*visited_nodes)=NULL;
+		return node_id;
+	}else{
+		/*start with first element*/
+		dist=node_distance[((*visited_nodes)->identifier)-1];
+		hops=node_hops[((*visited_nodes)->identifier)-1];
+		node_id=((*visited_nodes)->identifier);
+		
+		for(aux_ant=(*visited_nodes), aux=aux_ant->next; aux!=NULL; aux_ant=aux_ant->next, aux=aux->next){
+			if(node_distance[(aux->identifier)-1]>=dist){
+				if(node_hops[(aux->identifier)-1]<hops){
+					dist=node_distance[(aux->identifier)-1];
+					hops=node_hops[(aux->identifier)-1];
+					aux_remove=aux;
+					aux_remove_ant=aux_ant;
+					node_id=(aux->identifier);
+				}
 			}
 		}
+		(*heap_place)[node_id-1]=-1;
+		if(node_id!=((*visited_nodes)->identifier)){
+			aux_remove_ant->next=aux_remove->next;
+		}else{
+			aux_remove=(*visited_nodes);
+			(*visited_nodes)=(*visited_nodes)->next;
+		} 
+		free(aux_remove);
+		return node_id;
 	}
-	/*after the loop we get the colum of the vector that has the
-	 * best candidate for next iteration in dijkstra*/
-	return position;
 }
 
-void remove_element_from_queue(node**visited_nodes, int dijkstra_identifier){
-	node*aux=(*visited_nodes);
-	node*aux_ant;
-	/*remove first element case*/
-	if((aux->identifier)==dijkstra_identifier){
-		(*visited_nodes)=aux->next;
-		//free(aux);
-	}else{/*remove element from end or middle*/
-		aux_ant=aux;
-		aux=aux->next;
-		while(aux->identifier!=dijkstra_identifier){
-			aux=aux->next;
-			aux_ant=aux_ant->next;
+void Initialize_distance_matrix(int count_nodes, int**node_distance, int**node_hops, node *list, int destiny, dij_node ** visited_nodes, int**heap_place){
+	int i;
+	for(i=0; i<count_nodes; i++ ){
+		(*node_distance)[i]=-1; /*infinity distance*/
+		(*node_hops)[i]=50000;
+		if((i+1)==destiny){
+			(*node_distance)[i]=4;
+			(*node_hops)[i]=0;
 		}
-		aux_ant->next=aux->next;
-	}
-	free(aux);
-	
+		if((list[i].link)!=NULL) /*the node exists*/
+			insert(i+1, &(*visited_nodes));
+	}	
 	return;
-}
-
-int verify_node_unseen(int node_identifier, node*visited_nodes){
-	node*aux;
-	for(aux=visited_nodes; aux!=NULL; aux=aux->next){
-		if((aux->identifier)==node_identifier)return 1;
-	}
-	return 0;
 }
 
 void invert_weights(int**node_distance, int count_nodes){
@@ -113,44 +96,65 @@ void invert_weights(int**node_distance, int count_nodes){
 	
 }
 
-void Dijkstra(node*list, int destiny){
-	int count_nodes=0;
-	node*aux;
+void Dijkstra(node*list, int destiny, int count_nodes, int**node_distance, int**node_hops){
 	adj_node*links;
+	dij_node*visited_nodes=NULL;
 	int dijkstra_u=0;
 	int dijkstra_identifier;
-	for(aux=list; aux!=NULL; aux=aux->next)count_nodes=count_nodes+1;
-	int colum;
+	int i, *heap_place;
+	heap_place=malloc(count_nodes*sizeof(int));
+	for(i=0; i<count_nodes;i++) heap_place[i]=1;
 	if(count_nodes>0){
-		node*visited_nodes=NULL;
-		int*node_identifiers=malloc(count_nodes*sizeof(int));
-		int*node_distance=malloc(count_nodes*sizeof(int));
-		int*node_hops=malloc(count_nodes*sizeof(int));
-		Initialize_distance_matrix(&node_identifiers, &node_distance, &node_hops, list, destiny, &visited_nodes);
+		Initialize_distance_matrix(count_nodes, &(*node_distance), &(*node_hops), list, destiny, &visited_nodes, &heap_place);
+		/*dij_node*aux;
+		for(aux=visited_nodes; aux!=NULL; aux=aux->next) printf("%d\t", aux->identifier);
+		printf("\n\n");*/
 		while(empty_queue(visited_nodes)){
-			dijkstra_u=identifier_smaller_distance(node_identifiers, node_distance, node_hops, count_nodes, visited_nodes);
-			dijkstra_identifier=node_identifiers[dijkstra_u];
-			remove_element_from_queue(&visited_nodes, dijkstra_identifier);
-			if(node_distance[dijkstra_u]!=-1){
-				/*access node identifier adjency list*/				
-				for(aux=list;aux->identifier!=dijkstra_identifier;aux=aux->next);
+			dijkstra_identifier= identifier_smaller_distance(&heap_place, list, (*node_distance), (*node_hops), count_nodes, &visited_nodes);//RemoveMax(heap, (*node_distance), &heap_place);
+			//printf("removed %d from queue\n", dijkstra_identifier);
+			
+			/*printf("removed list\n");
+			for(i=0; i<count_nodes;i++)printf("%d\t", heap_place[i]);
+			printf("\n\n");
+			
+			printf("costs\n");
+			for(i=0; i<count_nodes;i++)printf("%d\t", (*node_distance)[i]);
+			printf("\n\n");*/
+			
+			
+		/*	printf("queue is:\n");
+			for(aux=visited_nodes; aux!=NULL; aux=aux->next) printf("%d\t", aux->identifier);
+			printf("\n\n");*/
+			
+			dijkstra_u = dijkstra_identifier - 1;
+			if((*node_distance)[dijkstra_u]!=-1){
 				/*for each uv*/
-					for(links=aux->link;links!=NULL; links=links->next){
-						if(verify_node_unseen(links->identifier, visited_nodes)){
-							for(colum=0; node_identifiers[colum]!=links->identifier; colum++);
-							if((node_distance[colum] < min(node_distance[dijkstra_u],links->preference))&&
-								((links->preference)<=node_distance[dijkstra_u])){
-								node_distance[colum] = min(node_distance[dijkstra_u],links->preference);
-								node_hops[colum]=node_hops[dijkstra_u]+1;
+					for(links=(list[dijkstra_u]).link;links!=NULL; links=links->next){
+						if(heap_place[(links->identifier)-1]!=-1){
+							if(((*node_distance)[(links->identifier)-1] <= min((*node_distance)[dijkstra_u],links->preference))&&
+																				((links->preference)<=(*node_distance)[dijkstra_u])){	
+								/*if it is a consecutive peer route, the route is not usable*/
+								if(!(((*node_distance)[dijkstra_u]==2)&&((links->preference)==2))){
+									
+									if(((*node_distance)[(links->identifier)-1])==min((*node_distance)[dijkstra_u],links->preference)){
+										/*same route type, chooses the one with less hops*/
+										if(((*node_hops)[(links->identifier)-1])>((*node_hops)[dijkstra_u]+1))
+											(*node_hops)[(links->identifier)-1]=(*node_hops)[dijkstra_u]+1;
+									}else{
+										/*changed route type so just updates the number of hops*/
+										(*node_hops)[(links->identifier)-1]=(*node_hops)[dijkstra_u]+1;
+									}					
+									(*node_distance)[(links->identifier)-1] = min((*node_distance)[dijkstra_u],links->preference);
+							
+									//FixUp(heap, heap_place[(links->identifier)-1], (*node_distance), &heap_place);
+								}
 							}		
 						}			
 					}
 			}
 		}
-		invert_weights(&node_distance, count_nodes);	
-		for(colum=0; colum<count_nodes; colum++){
-			printf("%d\t%d\t%d\n", node_identifiers[colum], node_distance[colum], node_hops[colum]);
-		}
+		invert_weights(&(*node_distance), count_nodes);	
 	}
+	free(heap_place);
 	return;
 }

@@ -224,8 +224,8 @@ void Insert(Heap * h, int element, int*node_distance, int**heap_place)
 
   (h)->n_elements++;
   (*heap_place)[element-1]=(h->n_elements)-1;
-  FixUp(h, (h)->n_elements - 1, node_distance, &(*heap_place));
-
+  FixUp(h, ((h)->n_elements) - 1, node_distance, &(*heap_place));
+//parentesis no 2 termo fix up
   return;
 }
 

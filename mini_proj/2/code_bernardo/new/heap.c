@@ -115,9 +115,14 @@ void FixDown(Heap * h, int k, int*node_distance, int**heap_place, int*node_hops)
   while ((2 * k + 1) < (h)->n_elements) {
     j = 2 * k + 1;
     if (((j + 1) < (h)->n_elements) &&
-        (node_distance[((h)->heapdata[j])-1]<node_distance[((h)->heapdata[j + 1])-1])){
-      /* second offspring is greater */
-      j++;
+        (node_distance[((h)->heapdata[j])-1]<=node_distance[((h)->heapdata[j + 1])-1])){
+      if(node_distance[((h)->heapdata[j])-1]==node_distance[((h)->heapdata[j + 1])-1]){
+		  if(node_hops[((h)->heapdata[j])-1]>node_hops[((h)->heapdata[j + 1])-1]) j++;
+	  }else{
+		 j++; 
+	  }
+      
+      
     }
     if (node_distance[((h)->heapdata[k])-1]>=node_distance[((h)->heapdata[j])-1]){
       /* Elements are in correct order. */

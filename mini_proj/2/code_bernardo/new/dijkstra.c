@@ -50,7 +50,6 @@ void Dijkstra(node*list, int destiny, int count_nodes, int**node_distance, int**
 		Initialize_distance_matrix(count_nodes, &(*node_distance), &(*node_hops), list, destiny, heap, &heap_place);
 		while(HeapEmpty(heap)){
 			dijkstra_identifier= RemoveMax(heap, (*node_distance), &heap_place, (*node_hops));
-			//printf("removed %d from heap\n", dijkstra_identifier);
 			dijkstra_u = dijkstra_identifier - 1;
 			if((*node_distance)[dijkstra_u]!=-1){
 				/*for each uv*/
@@ -68,7 +67,7 @@ void Dijkstra(node*list, int destiny, int count_nodes, int**node_distance, int**
 									}else{
 										/*changed route type so just updates the number of hops*/
 										(*node_hops)[(links->identifier)-1]=(*node_hops)[dijkstra_u]+1;
-										//these 2 lines were outside the else
+										//this line was outside the else
 										(*node_distance)[(links->identifier)-1] = min((*node_distance)[dijkstra_u],links->preference);
 							
 										

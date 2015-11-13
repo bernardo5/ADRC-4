@@ -37,7 +37,7 @@ int RemoveMax(Heap * h, int *node_distance, int**heap_place, int*node_hops);
 
 int PrintHeap(Heap * h);
 
-void FixDown(Heap * h, int k, int*node_distance, int**heap_place);
+void FixDown(Heap * h, int k, int*node_distance, int**heap_place, int *node_hops);
 
 /*void CleanHeap(Heap * h);*/
 

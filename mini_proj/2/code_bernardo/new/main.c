@@ -13,13 +13,12 @@ int main(int argc, char**argv){
 	ficheiroIn = argv[1];
 	/*get graph into adjacency list*/
 	Read_file(ficheiroIn, &list, &size);
-	//printf("enering malloc1\n");
 	int*node_distance=malloc(size*sizeof(int)); /*used to know what type of route a node uses to reach destiny*/
-	//printf("enering malloc2\n");
+	if(node_distance==NULL)exit(-1);
 	int*node_hops=malloc(size*sizeof(int)); /*used to know how many hops a node take to reach the destiny*/
-	//printf("enering malloc3\n");
+	if(node_hops==NULL)exit(-1);
 	int*stat_hops=malloc(50*sizeof(int)); /*used to calc statistics*/
-	//printf("exiting malloc1\n");
+	if(stat_hops==NULL)exit(-1);
 	int be;
 	
 	for(be=0; be<50;be++){

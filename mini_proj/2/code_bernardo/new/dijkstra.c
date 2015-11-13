@@ -43,6 +43,7 @@ void Dijkstra(node*list, int destiny, int count_nodes, int**node_distance, int**
 	Heap*heap;
 	int i, *heap_place;
 	heap_place=malloc(count_nodes*sizeof(int));
+	if(heap_place==NULL)exit(-1);
 	for(i=0; i<count_nodes;i++) heap_place[i]=-1;
 	if(count_nodes>0){
 		heap=NewHeap(count_number_nodes(list, count_nodes));
@@ -67,10 +68,12 @@ void Dijkstra(node*list, int destiny, int count_nodes, int**node_distance, int**
 									}else{
 										/*changed route type so just updates the number of hops*/
 										(*node_hops)[(links->identifier)-1]=(*node_hops)[dijkstra_u]+1;
-									}					
-									(*node_distance)[(links->identifier)-1] = min((*node_distance)[dijkstra_u],links->preference);
+										//these 2 lines were outside the else
+										(*node_distance)[(links->identifier)-1] = min((*node_distance)[dijkstra_u],links->preference);
 							
-									FixUp(heap, heap_place[(links->identifier)-1], (*node_distance), &heap_place);
+										FixUp(heap, heap_place[(links->identifier)-1], (*node_distance), &heap_place);
+									}					
+									
 								}
 							}		
 						}			

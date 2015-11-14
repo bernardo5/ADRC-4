@@ -90,10 +90,7 @@ void Dijkstra(node*list, int destiny, int count_nodes, int**node_distance, int**
 									}else{
 										/*changed route type so just updates the number of hops*/
 										(*node_hops)[(links->identifier)-1]=(*node_hops)[dijkstra_u]+1;
-										//this line was outside the else
 										(*node_distance)[(links->identifier)-1] = tab;
-							
-										
 									}
 									FixUp(heap, heap_place[(links->identifier)-1], (*node_distance), &heap_place, (*node_hops));					
 									

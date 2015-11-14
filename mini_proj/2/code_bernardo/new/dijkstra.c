@@ -106,5 +106,6 @@ void Dijkstra(node*list, int destiny, int count_nodes, int**node_distance, int**
 		invert_weights(&(*node_distance), count_nodes);	
 	}
 	free(heap_place);
+	FreeHeap(heap);
 	return;
 }

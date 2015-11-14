@@ -51,42 +51,30 @@ int HeapEmpty(Heap*h){
  *
  *****************************************************************************/
 
-void FixUp(Heap * h, int k, int *node_distance, int**heap_place, int*node_hops)
+void FixUp(Heap * h, int k, int *node_distance, int**heap_place)
 {
   int t;
-  while ((k > 0) && (node_distance[(((h)->heapdata)[(k - 1) / 2])-1]<=node_distance[(((h)->heapdata)[k])-1])) {
-//#ifdef DEMO
+  while ((k > 0) && (node_distance[(((h)->heapdata)[(k - 1) / 2])-1]<node_distance[(((h)->heapdata)[k])-1])) {
+#ifdef DEMO
     /* --------------------------------------------------- */
    /* printf("FixUp: heap[%d]: %d is smaller than offspring heap[%d]: %d\n",
            (k - 1) / 2, *((int *) (h->heapdata)[(k - 1) / 2]),
            k, *((int *) (h->heapdata)[k]));
     printf("\t=> exchange\n");*/
-//#endif
+#endif
     /*---------------------------------------------------------*/
-    if(node_distance[(((h)->heapdata)[(k - 1) / 2])-1]==node_distance[(((h)->heapdata)[k])-1]){ /*same route*/
-		if(node_hops[(((h)->heapdata)[(k - 1) / 2])-1]>node_hops[(((h)->heapdata)[k])-1]){ /*only changes to put first the one with less hops*/
-			t = ((h)->heapdata)[k];
-			((h)->heapdata)[k] = ((h)->heapdata)[(k - 1) / 2];
-			((h)->heapdata)[(k - 1) / 2] = t;
-			
-			(*heap_place)[(((h)->heapdata)[(k - 1) / 2])-1]=(k - 1) / 2;
-			(*heap_place)[(((h)->heapdata)[k])-1]=k;
-		}
-	}else{
-		t = ((h)->heapdata)[k];
-		((h)->heapdata)[k] = ((h)->heapdata)[(k - 1) / 2];
-		((h)->heapdata)[(k - 1) / 2] = t;
-		
-		(*heap_place)[(((h)->heapdata)[(k - 1) / 2])-1]=(k - 1) / 2;
-		(*heap_place)[(((h)->heapdata)[k])-1]=k;
-	}
+    t = ((h)->heapdata)[k];
+    ((h)->heapdata)[k] = ((h)->heapdata)[(k - 1) / 2];
+    ((h)->heapdata)[(k - 1) / 2] = t;
     
+    (*heap_place)[(((h)->heapdata)[(k - 1) / 2])-1]=(k - 1) / 2;
+    (*heap_place)[(((h)->heapdata)[k])-1]=k;
 
-//#ifdef DEMO
+#ifdef DEMO
     /* --------------------------------------------------- */
     /*printf("\t=> \n");
     PrintHeap(h);*/
-//#endif
+#endif
     /*---------------------------------------------------------*/
     k = (k - 1) / 2;
   }
@@ -107,47 +95,36 @@ void FixUp(Heap * h, int k, int *node_distance, int**heap_place, int*node_hops)
  *
  *****************************************************************************/
 
-void FixDown(Heap * h, int k, int*node_distance, int**heap_place, int*node_hops)
+void FixDown(Heap * h, int k, int*node_distance, int**heap_place)
 {
   int j;
   int t;
 
-  while ((2 * k + 1) < ((h)->n_elements)) { //AQUI!!!!!!!!!!!!!!!
+  while ((2 * k + 1) < (h)->n_elements) {
     j = 2 * k + 1;
-    if (((j + 1) < ((h)->n_elements)) &&
-        (node_distance[((h)->heapdata[j])-1]<=node_distance[((h)->heapdata[j + 1])-1])){
-      if(node_distance[((h)->heapdata[j])-1]==node_distance[((h)->heapdata[j + 1])-1]){
-		  if(node_hops[((h)->heapdata[j])-1]>node_hops[((h)->heapdata[j + 1])-1]) j++;
-	  }else{
-		 j++; 
-	  }
-      
-      
+    if (((j + 1) < (h)->n_elements) &&
+        (node_distance[((h)->heapdata[j])-1]<node_distance[((h)->heapdata[j + 1])-1])){
+      /* second offspring is greater */
+      j++;
     }
     if (node_distance[((h)->heapdata[k])-1]>=node_distance[((h)->heapdata[j])-1]){
       /* Elements are in correct order. */
 
-//#ifdef DEMO
+#ifdef DEMO
       /* --------------------------------------------------- */
      /* printf
           ("FixDown: Compare heap[%d]: %d with heap[%d]: %d => don't exchange\n",
            k, *((int *) h->heapdata[k]), j, *((int *) h->heapdata[j]));*/
-//#endif
+#endif
       /*---------------------------------------------------------*/
-      if(node_distance[((h)->heapdata[k])-1]==node_distance[((h)->heapdata[j])-1]){
-		  if(node_hops[((h)->heapdata[k])-1]<node_hops[((h)->heapdata[j])-1]) break; /*correct order if hops are less in father side*/
-	  }else{ /*diferent route types*/
-		break;  
-	  }
-      
-      
+      break;
     }
-//#ifdef DEMO
+#ifdef DEMO
     /* --------------------------------------------------- */
    /* printf("FixDown: heap[%d]: %d is smaller than offspring heap[%d]: %d\n",
            k, *((int *) (h->heapdata)[k]), j, *((int *) (h->heapdata)[j]));
     printf("\t=> exchange\n");*/
-//#endif
+#endif
     /*---------------------------------------------------------*/
 
     /* the 2 elements are not correctly sorted, it is
@@ -161,10 +138,10 @@ void FixDown(Heap * h, int k, int*node_distance, int**heap_place, int*node_hops)
     
     k = j;
 
-//#ifdef DEMO
+#ifdef DEMO
     /* --------------------------------------------------- */
    /* PrintHeap(h);*/
-//#endif
+#endif
     /*---------------------------------------------------------*/
   }
 
@@ -217,13 +194,13 @@ Heap *NewHeap(int size)
  *
  *****************************************************************************/
 
-void FreeHeap(Heap *h)
+/*void FreeHeap(Heap *h)
 {
     free(h->heapdata);
     free(h);
     
    return;
-}
+}*/
 
 /******************************************************************************
  * Insert()
@@ -237,7 +214,7 @@ void FreeHeap(Heap *h)
  *
  *****************************************************************************/
 
-void Insert(Heap * h, int element, int*node_distance, int**heap_place, int*node_hops)
+void Insert(Heap * h, int element, int*node_distance, int**heap_place)
 {
   if ((h)->n_elements == (h)->size) {
     printf("Heap full (size = %d) !\n", (h)->size);
@@ -247,7 +224,7 @@ void Insert(Heap * h, int element, int*node_distance, int**heap_place, int*node_
 
   (h)->n_elements++;
   (*heap_place)[element-1]=(h->n_elements)-1;
-  FixUp(h, ((h)->n_elements) - 1, node_distance, &(*heap_place), node_hops);
+  FixUp(h, ((h)->n_elements) - 1, node_distance, &(*heap_place));
 //parentesis no 2 termo fix up
   return;
 }
@@ -294,19 +271,19 @@ void Insert(Heap * h, int element, int*node_distance, int**heap_place, int*node_
  *
  *****************************************************************************/
 
-int RemoveMax(Heap * h, int *node_distance, int**heap_place, int *node_hops)
+int RemoveMax(Heap * h, int *node_distance, int**heap_place)
 {
   int t;
 
   if ((h)->n_elements > 0) {
 
     t = ((h)->heapdata)[0];
-    ((h)->heapdata)[0] = ((h)->heapdata)[((h)->n_elements) - 1]; //AQUI!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    ((h)->heapdata)[0] = ((h)->heapdata)[(h)->n_elements - 1];
     //((h)->heapdata)[(h)->n_elements - 1] = t;
-    (*heap_place)[(((h)->heapdata)[0])-1]=0;  //AQUI!!!!!!!!!!!!!!!!!!!
+    (*heap_place)[((h)->heapdata)[(h)->n_elements - 1]-1]=0;
     (*heap_place)[t-1]=-1;
-    ((h)->n_elements)--;  //AQUI!!!!!!!!!!!!!!!!!!!
-    FixDown(h, 0, node_distance, &(*heap_place), node_hops);
+    (h)->n_elements--;
+    FixDown(h, 0, node_distance, &(*heap_place));
 	 //(*heap_place)[t-1]=-1;
   /*  for(i=0; i<(h)->n_elements; i++)printf("%d\t", ((h)->heapdata)[i]);
     printf("\n\n");*/

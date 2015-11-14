@@ -11,6 +11,8 @@
 \usepackage{indentfirst}
 \usepackage[hypcap]{caption} % makes \ref point to top of figures and tables
 \usepackage[]{algorithm2e}
+\usepackage{tabularx}
+\usepackage{lscape}
 
 
 \begin{document}
@@ -127,90 +129,64 @@ Finalmente são feitas as estatísticas dos valores pretendidos (cálculo das pr
 O nosso programa tem assim complexidade O(L + NM*log(N) + 1), ou seja O(NM*log(N)).
 
 \subsection{Ficheiro \textit{NewLargeNetwork.txt}}
-As estatísticas (probabilidades) relativas ao ficheiro fornecido, \textit{NewLargeNetwork.txt} foram obtidas em sensivelmente quinze minutos e meio/dezasseis minutos, sendo os resultados os apresentados de seguida:
+As estatísticas (probabilidades) relativas ao ficheiro fornecido, \textit{NewLargeNetwork.txt} foram obtidas em sensivelmente quinze minutos e meio/dezasseis minutos, sendo os resultados os apresentados na tabela 1.
 
-\textbf{Unusable}: 0.000000
+O facto de as estatísticas das rotas \textit{peer} e \textit{provider} serem iguais, leva-nos a crer que o \textit{output} para este ficheiro não será o correcto. No entanto, durante o prazo estabelecido, não nos foi possível detectar o eventual \textit{bug}. O algoritmo atrás explicado, foi testado \textit{"for correctness"} para uma série de grafos, sendo os mais relevantes o do enunciado e os apresentados nas figuras de 1 a 6. Salientamos que para estes grafos o algoritmo produz os resultados correctos (confirmados por inspecção e descomentando um ciclo \textit{for} do ficheiro \textit{main.c} por forma a ver para cada destino qual o tipo de rota e o número de saltos para cada nó).
 
-\textbf{customer}: 0.260633
+Apresentamos na pasta "testes" os ficheiros dos grafos das figuras bem como o do enunciado do mini-projecto.
 
-\textbf{stat\_peer}:0.369683
+\begin{table}[h]
+\begin{tabularx}{\textwidth}{X X X X}
+  \textbf{Unusable}: 0.000000 & \textbf{7 hops statistics}=0.065785 & \textbf{17 hops statistics}=0.001464 & \textbf{27 hops statistics}= 0.000018 \\
+  \textbf{customer}: 0.260633 & \textbf{8 hops statistics}=0.037579 &  \textbf{18 hops statistics}=0.000845 & \textbf{28 hops statistics}=0.000006\\ 
+  \textbf{stat\_peer}: 0.369683 & \textbf{9 hops statistics}=0.021683 &  \textbf{19 hops statistics}=0.000455 & \textbf{29 hops statistics}=0.000003\\
+  \textbf{stat\_provider}: 0.369683 & \textbf{10 hops statistics}=0.013142  & \textbf{20 hops statistics}=0.000281 & \textbf{30 hops statistics}=0.000002\\  
+  \textbf{1 hops statistics}=0.000109 & \textbf{11 hops statistics}=0.008477 &  \textbf{21 hops statistics}=0.000265 & \textbf{31 hops statistics}=0.000001\\
+  \textbf{2 hops statistics}=0.030109 & \textbf{12 hops statistics}=0.005674 & \textbf{22 hops statistics}=0.000156 & \textbf{32 hops statistics}=0.000000\\
+  \textbf{3 hops statistics}=0.184297 & \textbf{13 hops statistics}=0.003632 & \textbf{23 hops statistics}=0.000090 & \textbf{33 hops statistics}=0.000000\\
+  \textbf{4 hops statistics}=0.290089 & \textbf{14 hops statistics}=0.002338 & \textbf{24 hops statistics}=0.000065 & \textbf{34 hops statistics}=0.000000\\
+  \textbf{5 hops statistics}=0.209614 & \textbf{15 hops statistics}=0.001904 & \textbf{25 hops statistics}=0.000043 & \textbf{35 hops statistics}=0.000000\\
+  \textbf{6 hops statistics}=0.119813 & \textbf{16 hops statistics}=0.002030 & \textbf{26 hops statistics}=0.000031 & \\
+\end{tabularx}
+ \caption{\textit{Output NewLargeNetwork.txt}}
+\end{table}
 
-\textbf{stat\_provider}:0.369683
+\pagebreak
 
-\textbf{1 hops statistics}=0.000109
+\begin{landscape}
 
-\textbf{2 hops statistics}=0.030085
-
-\textbf{3 hops statistics}=0.172279
-
-\textbf{4 hops statistics}=0.262936
-
-\textbf{5 hops statistics}=0.199478
-
-\textbf{6 hops statistics}=0.120699
-
-\textbf{7 hops statistics}=0.069815
-
-\textbf{8 hops statistics}=0.041970
-
-\textbf{9 hops statistics}=0.027374
-
-\textbf{10 hops statistics}=0.019916
-
-\textbf{11 hops statistics}=0.015402
-
-\textbf{12 hops statistics}=0.012309
-
-\textbf{13 hops statistics}=0.008652
-
-\textbf{14 hops statistics}=0.005382
-
-\textbf{15 hops statistics}=0.003668
-
-\textbf{16 hops statistics}=0.003259
-
-\textbf{17 hops statistics}=0.002308
-
-\textbf{18 hops statistics}=0.001342
-
-\textbf{19 hops statistics}=0.000788
-
-\textbf{20 hops statistics}=0.000526
-
-\textbf{21 hops statistics}=0.000434
-
-\textbf{22 hops statistics}=0.000352
-
-\textbf{23 hops statistics}=0.000224
-
-\textbf{24 hops statistics}=0.000219
-
-\textbf{25 hops statistics}=0.000179
-
-\textbf{26 hops statistics}=0.000108
-
-\textbf{27 hops statistics}=0.000081
-
-\textbf{28 hops statistics}=0.000039
-
-\textbf{29 hops statistics}=0.000033
-
-\textbf{30 hops statistics}=0.000017
-
-\textbf{31 hops statistics}=0.000008
-
-\textbf{32 hops statistics}=0.000004
-
-\textbf{33 hops statistics}=0.000002
-
-\textbf{34 hops statistics}=0.000001
-
-\textbf{35 hops statistics}=0.000000
-
-\textbf{36 hops statistics}=0.000000
-
-\textbf{37 hops statistics}=0.000000
+\begin{figure}[!htb]
+\minipage{0.32\textwidth}
+  \includegraphics[scale=0.3]{hops_verify.jpg}
+  \caption{teste de verificação de saltos}\label{fig:teste de verificação de saltos}
+\endminipage\hfill
+\minipage{0.32\textwidth}
+  \includegraphics[scale=0.3]{imp_link.jpg}
+  \caption{teste de caminho impossível}\label{fig:teste de caminho impossível}
+\endminipage\hfill
+\minipage{0.32\textwidth}%
+  \includegraphics[width=\linewidth]{peer_impossivel_txt.jpg}
+  \caption{teste de caminho peer impossível}\label{fig:teste de caminho peer impossível}
+\endminipage
+\end{figure}
 
 
+
+\begin{figure}[!htb]
+\minipage{0.32\textwidth}
+  \includegraphics[scale=0.3]{esquesito.jpg}
+  \caption{teste geral}\label{fig:teste geral}
+\endminipage\hfill
+\minipage{0.32\textwidth}
+  \includegraphics[scale=0.3]{tabela.jpg}
+  \caption{teste inicial}\label{fig:teste inicial}
+\endminipage\hfill
+\minipage{0.32\textwidth}%
+  \includegraphics[width=\linewidth]{many_providers.jpg}
+  \caption{vários providers}\label{fig:vários providers}
+\endminipage
+\end{figure}
+
+\end{landscape}
 
 \end{document}

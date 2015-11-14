@@ -9,6 +9,32 @@ int min(int i, int n){
 	return -1;
 }
 
+int table(int u, int uv){
+	if(u==4){
+		return uv;
+	}else{
+		if(u==3){
+			if(uv==3) return 3;
+			if(uv==2) return 2;
+			if(uv==1) return 1;
+		}else{
+			if(u==2){
+				if(uv==3) return -4;
+				if(uv==2) return -4;
+				if(uv==1) return 1;
+			}else{
+				if(u==1){
+					if(uv==3) return -4;
+					if(uv==2) return -4;
+					if(uv==1) return 1;
+				}
+			}
+		}
+	}
+	
+	
+}
+
 void Initialize_distance_matrix(int count_nodes, int**node_distance, int**node_hops, node *list, int destiny, Heap*h, int**heap_place){
 	int i;
 	for(i=0; i<count_nodes; i++ ){
@@ -41,7 +67,7 @@ void Dijkstra(node*list, int destiny, int count_nodes, int**node_distance, int**
 	int dijkstra_u=0;
 	int dijkstra_identifier;
 	Heap*heap;
-	int i, *heap_place;
+	int i, *heap_place, tab;
 	heap_place=malloc(count_nodes*sizeof(int));
 	if(heap_place==NULL)exit(-1);
 	for(i=0; i<count_nodes;i++) heap_place[i]=-1;
@@ -55,12 +81,9 @@ void Dijkstra(node*list, int destiny, int count_nodes, int**node_distance, int**
 				/*for each uv*/
 					for(links=(list[dijkstra_u]).link;links!=NULL; links=links->next){
 						if(heap_place[(links->identifier)-1]!=-1){
-							if(((*node_distance)[(links->identifier)-1] <= min((*node_distance)[dijkstra_u],links->preference))&&
-																				((links->preference)<=(*node_distance)[dijkstra_u])){	
-								/*if it is a consecutive peer route, the route is not usable*/
-								if(!(((*node_distance)[dijkstra_u]==2)&&((links->preference)==2))){
-									
-									if(((*node_distance)[(links->identifier)-1])==min((*node_distance)[dijkstra_u],links->preference)){
+							if((*node_distance)[(links->identifier)-1] <= (tab=table((*node_distance)[dijkstra_u], links->preference))){
+								
+									if(((*node_distance)[(links->identifier)-1])==tab){
 										/*same route type, chooses the one with less hops*/
 										if(((*node_hops)[(links->identifier)-1])>((*node_hops)[dijkstra_u]+1))
 											(*node_hops)[(links->identifier)-1]=(*node_hops)[dijkstra_u]+1;
@@ -68,13 +91,13 @@ void Dijkstra(node*list, int destiny, int count_nodes, int**node_distance, int**
 										/*changed route type so just updates the number of hops*/
 										(*node_hops)[(links->identifier)-1]=(*node_hops)[dijkstra_u]+1;
 										//this line was outside the else
-										(*node_distance)[(links->identifier)-1] = min((*node_distance)[dijkstra_u],links->preference);
+										(*node_distance)[(links->identifier)-1] = tab;
 							
 										
 									}
 									FixUp(heap, heap_place[(links->identifier)-1], (*node_distance), &heap_place, (*node_hops));					
 									
-								}
+								
 							}		
 						}			
 					}

@@ -63,20 +63,18 @@ O pseudo-código da função apresentada é o seguinte:
 			\For{each link}{
 				\If{link unseen}{
 					\If{route through new link is more or equally favorable than the stored route and route is usable}{
-						\If{no consecutive peer links}{
 
-							\eIf{keeps the route type}{
-								\If{reaches destiny node in less hops}{
-									Hops of new link = Hops of heap root+1\;
-								}
-							}{
+						\eIf{keeps the route type}{
+							\If{reaches destiny node in less hops}{
 								Hops of new link = Hops of heap root+1\;
-							}						
-						
+							}
+						}{
+							Hops of new link = Hops of heap root+1\;
 							Stored route = New route\;
+						}						
 												
-							FixUp heap in position of changed node\;
-						}
+						FixUp heap in position of changed node\;
+						
 						
 					}				
 				}			

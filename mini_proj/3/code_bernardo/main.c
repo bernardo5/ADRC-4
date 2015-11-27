@@ -1,9 +1,9 @@
-#include "file.h"
 #include "ford-folkerson.h"
 
 int main(int argc, char**argv){
 	char * ficheiroIn;
 	node * list;
+	int size;
 
 	if(argc<2){
 		printf("too few arguments\n");
@@ -12,9 +12,10 @@ int main(int argc, char**argv){
 
 	ficheiroIn = argv[1];
 
-	Read_file(ficheiroIn, &list);
-	
-	
+	size=Read_file(ficheiroIn, &list);
+	printf("size= %d\n", size);
+	int*parent=malloc(size*sizeof(int));
+	BFS(0, list, &parent, size);
 	
 	exit(0);
 }

@@ -91,7 +91,7 @@ int Read_file(char * ficheiroIn, node**list){
 	for(i=0; i < size; i++){
 		aux_node = (*list)[i];
 		printf("\nnode %d\n", i);
-		printf("minus adjacencia: %d capacity: %d\n", aux_node.minus->identifier, aux_node.minus->capacity);
+		printf("\tminus adjacencia: %d capacity: %d\n", aux_node.minus->identifier, aux_node.minus->capacity);
 		for(aux_adj_node = aux_node.plus; aux_adj_node != NULL; aux_adj_node = aux_adj_node->next){
 			printf("\tplus adjacencia: %d capacity: %d\t\n", aux_adj_node->identifier, aux_adj_node->capacity);
 		}

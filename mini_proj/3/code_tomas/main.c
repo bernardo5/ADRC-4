@@ -13,10 +13,11 @@ int main(int argc, char**argv){
 
 	
 	int size = Read_file(ficheiroIn, &list);
-	printf("\n SIZE : %d\n", size);
+	printf("\nSIZE : %d\n", size);
 	
 	int * parent = malloc(size*sizeof(int));
 	BFS(list, 0, &parent, size);
+	printf("path = %d\n", path(0, 3, parent));
 	
 	exit(0);
 }

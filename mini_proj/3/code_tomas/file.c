@@ -1,19 +1,33 @@
 #include "file.h"
 
+void create_link_entry_same(node**n, int initial_node){
+		adj_node * temp=(adj_node*)malloc(sizeof(adj_node));
+		
+		temp->identifier = initial_node;
+		temp->capacity=1;
+		
+		/*insertion in the beginning*/
+		temp->next = NULL;
+		((*n)[initial_node]).minus = temp; 
+
+		return;
+}
+
 void create_link_entry(node**n, int initial_node, int final_node){
 		adj_node * temp=(adj_node*)malloc(sizeof(adj_node));
 		
 		temp->identifier=final_node;
+		temp->capacity=2;
 		
 		/*insertion in the beginning*/
-		temp->next=((*n)[initial_node]).link;
-		((*n)[initial_node]).link=temp; 
+		temp->next=((*n)[initial_node]).plus;
+		((*n)[initial_node]).plus=temp; 
 
 		return;
 }
 
 int get_table_line(int * initial_node, int * final_node, FILE*fp){
-	if(fscanf(fp, "%d %d", initial_node, final_node)!=3){
+	if(fscanf(fp, "%d %d", initial_node, final_node)!=2){
 		return -1;
 	}
 	return 0;
@@ -40,7 +54,8 @@ void Read_file(char * ficheiroIn, node**list){
 	
 	int i=0;
 	for(i=0; i<100; i++){
-		((*list)[i]).link=NULL;
+		create_link_entry_same(&(*list), i);
+		((*list)[i]).plus=NULL;
 	}
     
     while(get_table_line(&initial_node, &final_node, fp)==0){
@@ -49,14 +64,18 @@ void Read_file(char * ficheiroIn, node**list){
 	
 	fclose(fp);
 	
-	node * aux_node;
+	node aux_node;
 	adj_node * aux_adj_node;
 	
-	for(aux_node = list; aux_node != NULL; aux_node = aux_node.next){
-		for(aux_adj_node = aux_node.link; aux_adj_node != NULL; aux_adj_node = aux_adj_node.next){
-			printf("%d -> %d\t", aux_node->identifier, aux_adj_node.identifier);
+	
+	//PRINT LISTA ADJACENCIAS
+	for(i=0; i < 4; i++){
+		aux_node = (*list)[i];
+		printf("\nnode %d\n", i);
+		printf("minus adjacencia: %d capacity: %d\n", aux_node.minus->identifier, aux_node.minus->capacity);
+		for(aux_adj_node = aux_node.plus; aux_adj_node != NULL; aux_adj_node = aux_adj_node->next){
+			printf("\tplus adjacencia: %d capacity: %d\t\n", aux_adj_node->identifier, aux_adj_node->capacity);
 		}
-		printf("\n");
 	}	
 	
 	return;

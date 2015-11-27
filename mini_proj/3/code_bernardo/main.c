@@ -1,4 +1,5 @@
 #include "file.h"
+#include "ford-folkerson.h"
 
 int main(int argc, char**argv){
 	char * ficheiroIn;
@@ -11,8 +12,9 @@ int main(int argc, char**argv){
 
 	ficheiroIn = argv[1];
 
-	
 	Read_file(ficheiroIn, &list);
+	
+	
 	
 	exit(0);
 }

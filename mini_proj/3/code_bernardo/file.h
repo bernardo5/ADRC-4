@@ -4,12 +4,13 @@
 
 typedef struct _node{
 	int identifier;
-	struct _node * next;
-	struct _adj_node * link;
+	struct _adj_node * minus;
+	struct _adj_node * plus;
 }node;
 
 typedef struct _adj_node{
 	int identifier;
+	int capacity;
 	struct _adj_node * next;
 }adj_node;
 

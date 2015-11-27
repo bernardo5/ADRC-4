@@ -1,4 +1,4 @@
-#include "file.h"
+#include "ford_fulkerson.h"
 
 int main(int argc, char**argv){
 	char * ficheiroIn;
@@ -12,7 +12,11 @@ int main(int argc, char**argv){
 	ficheiroIn = argv[1];
 
 	
-	Read_file(ficheiroIn, &list);
+	int size = Read_file(ficheiroIn, &list);
+	printf("\n SIZE : %d\n", size);
+	
+	int * parent = malloc(size*sizeof(int));
+	BFS(list, 0, &parent, size);
 	
 	exit(0);
 }

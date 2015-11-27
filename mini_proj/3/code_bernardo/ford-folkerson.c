@@ -10,7 +10,7 @@ element* FIFONew(int number, element *pNext){
 
 /*create a new FIFO*/
 FIFO* FIFOInit(){		
-	FIFO *pFIFO = (FIFO*) malloc(sizeof(F));
+	FIFO *pFIFO = (FIFO*) malloc(sizeof(FIFO));
 	pFIFO->first = pFIFO->last = NULL;
 	return pFIFO; 
 }
@@ -24,8 +24,8 @@ void FIFOPut(FIFO *pFIFO, int number){
 	}
 	/*o item é colocado no fim da lista*/
 	pFIFO->last->next = FIFONew(number, NULL);
-	pFIFO->ultimo = pFIFO->last->next;
-	return
+	pFIFO->last = pFIFO->last->next;
+	return;
 }
 
 /*Removes first FIFO element*/
@@ -46,6 +46,8 @@ void init_vector(int**vector, int size){
 
 
 void BFS(int initial, node*list, int **parent, int size){
+	element*aux_element;
+	adj_node*aux_adj_node;
 	int*discovered=malloc(size*sizeof(int));
 	FIFO* fifo=FIFOInit();
 	
@@ -53,8 +55,31 @@ void BFS(int initial, node*list, int **parent, int size){
 	init_vector(&discovered, size);
 	
 	discovered[initial]=1;
+	FIFOPut(fifo, initial);
 	
+	while((fifo->first)!=NULL){
+		for(aux_element = fifo->first; aux_element!=NULL ; aux_element = aux_element->next){
+			for(aux_adj_node = ((list)[aux_element->number]).plus; aux_adj_node != NULL; aux_adj_node = aux_adj_node->next){
+				if(discovered[aux_adj_node->identifier]==-1){
+					discovered[aux_adj_node->identifier] = 1;
+					(*parent)[aux_adj_node->identifier] = aux_element->number;
+					FIFOPut(fifo, aux_adj_node->identifier);
+				}
+			}
+			FIFOGet(fifo);
+		}
+	}
 	
 	
 	return;
+}
+
+int path(int * parent, int initial_node, int final_node){
+	int path=0;
+	int i=final_node;
+	while(parent[i]!=-1){
+		i=parent[i];
+	}
+	if(i==initial_node) path=1;
+	return path;
 }

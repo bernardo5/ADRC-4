@@ -11,10 +11,10 @@ int main(int argc, char**argv){
 		exit(-1);
 	}
 	
-	printf("Please choose a source and a destination.\n");
+	printf("PLEAS CHOOSE A SOURCE AND DESTINATION.\n");
 
 	if(scanf("%d %d", &initial_node, &final_node)!=2){
-		printf("ERROR: Specify a valid source and destination\n");
+		printf("ERROR: SPECIFY A VALID SOURCE AND DESTINATION\n");
 		exit(0);
 	}
 

@@ -21,6 +21,7 @@ void create_link_entry(node**n, int initial_node, int final_node){
 		/*insertion in the beginning*/
 		temp->next=((*n)[initial_node]).plus;
 		temp->capacity=2;
+		if(initial_node==final_node) temp->capacity=1;
 		((*n)[initial_node]).plus=temp; 
 		
 		return;

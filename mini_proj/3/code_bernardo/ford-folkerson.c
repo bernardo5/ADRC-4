@@ -110,3 +110,38 @@ int path(int * parent, int initial_node, int final_node){
 	if(i==initial_node) path=1;
 	return path;
 }
+
+void FordFulkerson(node**list, int size, int **parent, int initial_node, int final_node){	
+	int i;
+	adj_node*aux_adj_node;
+	BFS(initial_node, (*list), &(*parent), size);
+	while(path((*parent), initial_node, final_node)){
+		i=final_node;
+		while((*parent)[i]!=-1){
+			printf("\n node %d\n", i);
+			
+			
+			if((*list)[i].minus==NULL){
+				//remove from list plus
+				for(aux_adj_node=(*list)[i].plus; aux_adj_node!=NULL && aux_adj_node->identifier!=i; aux_adj_node=aux_adj_node->next);
+				aux_adj_node=aux_adj_node->next;
+				//insert in list minus
+				create_link_entry_same(&(*list), i);
+
+			//if not exists link from u+ to u-
+			}else{
+			
+				//insert in list plus
+				create_link_entry(&(*list), i, i);
+				//remove from list minus
+				(*list)[i].minus = (*list)[i].minus->next;
+			}
+			
+			
+			i=(*parent)[i];
+		}
+		BFS(initial_node, (*list), &(*parent), size);
+	}
+	
+	return;
+}

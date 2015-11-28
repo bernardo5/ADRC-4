@@ -19,6 +19,8 @@ void create_link_entry(node**n, int initial_node, int final_node){
 		temp->identifier=final_node;
 		temp->capacity=2;
 		
+		if(initial_node==final_node) temp->capacity=1;
+		
 		/*insertion in the beginning*/
 		temp->next=((*n)[initial_node]).plus;
 		((*n)[initial_node]).plus=temp; 
@@ -83,9 +85,8 @@ int Read_file(char * ficheiroIn, node**list){
 	
 	fclose(fp);
 	
-	node aux_node;
+	/*node aux_node;
 	adj_node * aux_adj_node;
-	
 	
 	//PRINT LISTA ADJACENCIAS
 	for(i=0; i < size; i++){
@@ -95,7 +96,7 @@ int Read_file(char * ficheiroIn, node**list){
 		for(aux_adj_node = aux_node.plus; aux_adj_node != NULL; aux_adj_node = aux_adj_node->next){
 			printf("\tplus adjacencia: %d capacity: %d\t\n", aux_adj_node->identifier, aux_adj_node->capacity);
 		}
-	}	
+	}*/
 	
 	return size;
 }

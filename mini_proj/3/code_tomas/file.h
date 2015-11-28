@@ -13,6 +13,8 @@ typedef struct _adj_node{
 	struct _adj_node * next;
 }adj_node;
 
+void create_link_entry_same(node**n, int initial_node);
+
 void create_link_entry(node**n, int initial_node, int final_node);
 
 int get_table_line(int * initial_node, int * final_node, FILE*fp);

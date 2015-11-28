@@ -2,6 +2,7 @@
 
 typedef struct _element{
 	int number;
+	int signal; /*0 if minus, 1 if plus*/
 	struct _element*next;	
 }element;
 
@@ -10,11 +11,16 @@ typedef struct _FIFO{
 	element*last;	
 }FIFO;
 
-element* FIFONew(int number, element *pNext);
+typedef struct _disc{
+	int minus;
+	int plus;
+}disc;
+
+element* FIFONew(int number, int signal, element *pNext);
 
 FIFO* FIFOInit();
 
-void FIFOPut(FIFO *pFIFO, int number);
+void FIFOPut(FIFO *pFIFO, int number, int signal);
 
 int FIFOGet(FIFO *pFIFO);
 

@@ -1,34 +1,6 @@
 #include "ford_fulkerson.h"
 
 
-void contiguous(node * list, int initial_node, int final_node){
-	
-	node aux_node;
-	adj_node * aux_adj_node;
-	
-	/****************************Verifcação de contiguidade para o initial node**********************************/
-	
-	aux_node = list[initial_node];
-	for(aux_adj_node = aux_node.plus; aux_adj_node!=NULL && aux_adj_node->identifier!=final_node;
-																aux_adj_node = aux_adj_node->next);
-	if(aux_adj_node!=NULL){
-		printf("THERE IS NO WAY OF SEPARATING NODE %d FROM NODE %d BECAUSE THEY ARE CONTIGUOUS\n", initial_node, final_node);
-		exit(0);
-	}
-	
-	/****************************Verifcação de contiguidade para o final node**********************************/
-	
-	aux_node = list[final_node];
-	for(aux_adj_node = aux_node.plus; aux_adj_node!=NULL && aux_adj_node->identifier!=initial_node;
-																aux_adj_node = aux_adj_node->next);
-	if(aux_adj_node!=NULL){
-		printf("THERE IS NO WAY OF SEPARATING NODE %d FROM NODE %d BECAUSE THEY ARE CONTIGUOUS\n", initial_node, final_node);
-		exit(0);
-	}
-	
-}
-
-
 int main(int argc, char**argv){
 	char * ficheiroIn;
 	node * list;

@@ -16,9 +16,6 @@ int main(int argc, char**argv){
 	printf("size= %d\n", size);
 	int*parent=malloc(size*sizeof(int));
 	//list[1].minus=NULL;
-	BFS(0, list, &parent, size);
-	printf("path %d\n", path(parent, 0, 3));
-	
 	FordFulkerson(&list, size, &parent, 0, 3);
 	exit(0);
 }

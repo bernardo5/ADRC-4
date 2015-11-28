@@ -55,7 +55,7 @@ void init_vector_disc(disc**vector, int size){
 }
 
 
-void BFS(int initial, node*list, int **parent, int size){
+disc* BFS(int initial, node*list, int **parent, int size){
 	element*aux_element;
 	adj_node*aux_adj_node;
 	disc*discovered=malloc(size*sizeof(disc));
@@ -98,7 +98,7 @@ void BFS(int initial, node*list, int **parent, int size){
 	for(i=0;i<size;i++) printf("\t %d", (*parent)[i]);
 	printf("\n");
 	
-	return;
+	return discovered;
 }
 
 int path(int * parent, int initial_node, int final_node){
@@ -113,8 +113,9 @@ int path(int * parent, int initial_node, int final_node){
 
 void FordFulkerson(node**list, int size, int **parent, int initial_node, int final_node){	
 	int i;
+	disc*discovered;
 	adj_node*aux_adj_node;
-	BFS(initial_node, (*list), &(*parent), size);
+	discovered=BFS(initial_node, (*list), &(*parent), size);
 	while(path((*parent), initial_node, final_node)){
 		i=final_node;
 		while((*parent)[i]!=-1){
@@ -122,9 +123,17 @@ void FordFulkerson(node**list, int size, int **parent, int initial_node, int fin
 			
 			
 			if((*list)[i].minus==NULL){
+				
 				//remove from list plus
-				for(aux_adj_node=(*list)[i].plus; aux_adj_node!=NULL && aux_adj_node->identifier!=i; aux_adj_node=aux_adj_node->next);
-				aux_adj_node=aux_adj_node->next;
+				//first of the list
+				if((*list)[i].plus->identifier==i) (*list)[i].plus = (*list)[i].plus->next;
+				//middle of the list
+				else{
+					for(aux_adj_node=(*list)[i].plus; aux_adj_node->next!=NULL && aux_adj_node->next->identifier!=i; 
+																		aux_adj_node=aux_adj_node->next);
+					aux_adj_node->next=aux_adj_node->next->next;
+				}
+				
 				//insert in list minus
 				create_link_entry_same(&(*list), i);
 
@@ -133,15 +142,23 @@ void FordFulkerson(node**list, int size, int **parent, int initial_node, int fin
 			
 				//insert in list plus
 				create_link_entry(&(*list), i, i);
+				
 				//remove from list minus
-				(*list)[i].minus = (*list)[i].minus->next;
+				(*list)[i].minus = NULL;
 			}
 			
 			
 			i=(*parent)[i];
 		}
-		BFS(initial_node, (*list), &(*parent), size);
+		discovered=BFS(initial_node, (*list), &(*parent), size);
 	}
+	
+	int d, n=0;
+	printf("\n DISCOVERED \n");
+	for(d=0;d<size;d++){
+		if(((((discovered[d]).minus)==1)&&(((discovered[d]).plus)==-1))||((((discovered[d]).minus)==-1)&&(((discovered[d]).plus)==1)))n++;
+	}
+	printf("%d nodes to remove to separate nodes %d and %d\n", n, initial_node, final_node);
 	
 	return;
 }

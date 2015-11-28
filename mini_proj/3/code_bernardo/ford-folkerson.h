@@ -26,4 +26,6 @@ int FIFOGet(FIFO *pFIFO);
 
 void init_vector(int**vector, int size);
 
-void BFS(int initial, node*list, int **parent, int size);
+disc* BFS(int initial, node*list, int **parent, int size);
+
+void FordFulkerson(node**list, int size, int **parent, int initial_node, int final_node);

@@ -1,23 +1,34 @@
 #include "ford_fulkerson.h"
 
+
 int main(int argc, char**argv){
 	char * ficheiroIn;
 	node * list;
+	int initial_node, final_node;
 
 	if(argc<2){
 		printf("too few arguments\n");
 		exit(-1);
 	}
+	
+	printf("Please choose a source and a destination.\n");
+
+	if(scanf("%d %d", &initial_node, &final_node)!=2){
+		printf("ERROR: Specify a valid source and destination\n");
+		exit(0);
+	}
 
 	ficheiroIn = argv[1];
-
 	
 	int size = Read_file(ficheiroIn, &list);
-	printf("\nSIZE : %d\n", size);
-	
+
+	contiguous(list, initial_node, final_node);
+
 	int * parent = malloc(size*sizeof(int));
-	BFS(list, 0, &parent, size);
-	printf("path = %d\n", path(0, 3, parent));
+	
+	int count_nodes = ford_fulkerson(&list, size, &parent, initial_node, final_node);
+	
+	printf("\nNODES NEEDED TO SPLIT NODE %d FROM NODE %d IS %d\n", initial_node, final_node, count_nodes);
 	
 	exit(0);
 }

@@ -129,8 +129,8 @@ int path(int initial_node, int final_node, int * parent){
 	return path;
 }
 
-int ford_fulkerson(node ** list, int size, int ** parent, int initial_node, int final_node){
-
+int ford_fulkerson(node ** list, int size, int ** parent, int initial_node, int final_node, char ** connectivity, int min){
+	
 	int i;
 	adj_node * aux_adj_node;
 
@@ -178,13 +178,32 @@ int ford_fulkerson(node ** list, int size, int ** parent, int initial_node, int 
 	*/
 	
 	int count_nodes=0;
+	char buffer[4];
 	
 	for(d=0;d<size;d++){
 		//IF NODE IS SPLITTING THE GRAPH
-		if((discovered[d]).minus != (discovered[d]).plus) count_nodes ++;
+		if((discovered[d]).minus != (discovered[d]).plus){
+			count_nodes ++;
+		} 
 	}
 	
-	printf("THE NUMBER OF NODES SEPARATING NODE %d FROM %d ARE %d\n", initial_node, final_node, count_nodes);
+	if(count_nodes < min){
+		
+		//ADD NODES NEEDED TO SPLIT GRAPH
+		bzero((*connectivity), 100);
+		
+		for(d=0;d<size;d++){
+		//IF NODE IS SPLITTING THE GRAPH
+			if((discovered[d]).minus != (discovered[d]).plus){
+				strcat((*connectivity), " ");
+				sprintf(buffer, "%d", d);
+				strcat((*connectivity), buffer);
+				bzero(buffer, 4);
+			} 
+		}
+	}
+	
+	//printf("THE NUMBER OF NODES SEPARATING NODE %d FROM %d ARE %d\n", initial_node, final_node, count_nodes);
 	
 	return count_nodes;
 }

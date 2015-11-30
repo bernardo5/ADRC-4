@@ -24,7 +24,7 @@ void FIFOPut(FIFO *pFIFO, int number, int signal);
 
 int FIFOGet(FIFO *pFIFO);
 
-void init_vector(int ** vector, int size);
+void init_vector(int ** vector, int size, int parameter);
 
 void init_vector_disc(disc**vector, int size);
 

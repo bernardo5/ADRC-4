@@ -39,11 +39,11 @@ int FIFOGet(FIFO *pFIFO){
 	return number; 
 } 
 
-void init_vector(int ** vector, int size){
+void init_vector(int ** vector, int size, int parameter){
 
 	int i;
-	
-	for(i=0;i<size;i++) (*vector)[i] = -1;
+
+	for(i=0;i<size;i++) (*vector)[i] = parameter;
 	
 	return;
 	
@@ -66,7 +66,7 @@ disc * BFS(node * list, int initial_node, int ** parent, int size){
 	FIFO * fifo = FIFOInit();
 	
 	init_vector_disc(&discovered, size);
-	init_vector(&(*parent), size);
+	init_vector(&(*parent), size, -1);
 	
 	(discovered[initial_node]).plus=1;
 	(discovered[initial_node]).minus=1;
@@ -137,7 +137,9 @@ int ford_fulkerson(node ** list, int size, int ** parent, int initial_node, int 
 	disc * discovered = BFS((*list), initial_node, &(*parent), size);
 
 	while(path(initial_node, final_node, (*parent))){
+		
 		i = final_node;
+		
 		while((*parent)[i]!=-1){
 			
 			//if not exists link from u- to u+
@@ -171,8 +173,9 @@ int ford_fulkerson(node ** list, int size, int ** parent, int initial_node, int 
 	}
 	
 	int d;
-	printf("\n DISCOVERED \n");
+	/*printf("\n DISCOVERED \n");
 	for(d=0;d<size;d++) printf("\tMINUS %d PLUS %d\n", (discovered[d]).minus, (discovered[d]).plus);
+	*/
 	
 	int count_nodes=0;
 	
@@ -180,6 +183,8 @@ int ford_fulkerson(node ** list, int size, int ** parent, int initial_node, int 
 		//IF NODE IS SPLITTING THE GRAPH
 		if((discovered[d]).minus != (discovered[d]).plus) count_nodes ++;
 	}
+	
+	printf("THE NUMBER OF NODES SEPARATING NODE %d FROM %d ARE %d\n", initial_node, final_node, count_nodes);
 	
 	return count_nodes;
 }

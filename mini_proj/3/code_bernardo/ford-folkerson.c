@@ -39,9 +39,9 @@ int FIFOGet(FIFO *pFIFO){
 	return number; 
 } 
 
-void init_vector(int**vector, int size){
+void init_vector(int**vector, int size, int parameter){
 	int i;
-	for(i=0; i<size; i++)(*vector)[i]=-1;
+	for(i=0; i<size; i++)(*vector)[i]=parameter;
 	return;
 }
 
@@ -61,7 +61,7 @@ disc* BFS(int initial, node*list, int **parent, int size){
 	disc*discovered=malloc(size*sizeof(disc));
 	FIFO* fifo=FIFOInit();
 	
-	init_vector(&(*parent), size);
+	init_vector(&(*parent), size, -1);
 	init_vector_disc(&discovered, size);
 	
 	(discovered[initial]).plus=1;
@@ -111,7 +111,7 @@ int path(int * parent, int initial_node, int final_node){
 	return path;
 }
 
-void FordFulkerson(node**list, int size, int **parent, int initial_node, int final_node){	
+int FordFulkerson(node**list, int size, int **parent, int initial_node, int final_node){	
 	int i;
 	disc*discovered;
 	adj_node*aux_adj_node;
@@ -160,5 +160,5 @@ void FordFulkerson(node**list, int size, int **parent, int initial_node, int fin
 	}
 	printf("%d nodes to remove to separate nodes %d and %d\n", n, initial_node, final_node);
 	
-	return;
+	return n;
 }

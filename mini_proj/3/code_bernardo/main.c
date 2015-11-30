@@ -43,11 +43,30 @@ int main(int argc, char**argv){
 		exit(-1);
 	}
 	
-	if(verify_join_nodes(list, initial_node, final_node)){
-		printf("nodes are connected, cannot take a node between them to separate them\n");
-	}else{
-		FordFulkerson(&list, size, &parent, initial_node, final_node);
+	int * node_statistics = malloc(size*sizeof(int));
+	
+	init_vector(&node_statistics, size, 0);
+	
+	int colum;
+	int row;
+	
+	for(colum=0; colum<size; colum++){
+		for(row=0; row<size; row++){
+			if(row!=colum){
+				if(verify_join_nodes(list, colum, row)){
+					(node_statistics[0]) ++;
+				}else{
+					(node_statistics[FordFulkerson(&list, size, &parent, colum, row)]) ++;
+					Read_file(ficheiroIn, &list);
+				}
+			}
+		}
 	}
+	
+	for(colum=0; colum<size; colum++){
+		printf("%d %d\n", colum, node_statistics[colum]);
+	}
+	
 	
 	exit(0);
 }

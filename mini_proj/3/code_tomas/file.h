@@ -23,4 +23,4 @@ void list_adj(node**list, int initial_node, int final_node);
 
 int Read_file(char * ficheiroIn, node**list);
 
-void contiguous(node * list, int initial_node, int final_node);
+int contiguous(node * list, int initial_node, int final_node);

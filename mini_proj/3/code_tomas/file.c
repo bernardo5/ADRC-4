@@ -101,7 +101,7 @@ int Read_file(char * ficheiroIn, node**list){
 	return size;
 }
 
-void contiguous(node * list, int initial_node, int final_node){
+int contiguous(node * list, int initial_node, int final_node){
 	
 	node aux_node;
 	adj_node * aux_adj_node;
@@ -113,7 +113,7 @@ void contiguous(node * list, int initial_node, int final_node){
 																aux_adj_node = aux_adj_node->next);
 	if(aux_adj_node!=NULL){
 		printf("THERE IS NO WAY OF SEPARATING NODE %d FROM NODE %d BECAUSE THEY ARE CONTIGUOUS\n", initial_node, final_node);
-		exit(0);
+		return 1;
 	}
 	
 	/****************************Verifcação de contiguidade para o final node**********************************/
@@ -122,7 +122,8 @@ void contiguous(node * list, int initial_node, int final_node){
 	for(aux_adj_node = aux_node.plus; aux_adj_node!=NULL && aux_adj_node->identifier!=initial_node;
 																aux_adj_node = aux_adj_node->next);
 	if(aux_adj_node!=NULL){
-		printf("THERE IS NO WAY OF SEPARATING NODE %d FROM NODE %d BECAUSE THEY ARE CONTIGUOUS\n", initial_node, final_node);
-		exit(0);
+		//printf("THERE IS NO WAY OF SEPARATING NODE %d FROM NODE %d BECAUSE THEY ARE CONTIGUOUS\n", initial_node, final_node);
+		return 1;
 	}
+	return 0;
 }

@@ -24,169 +24,23 @@
 
 \pagenumbering{arabic}
 \section{Descrição do problema}
-Neste mini-projecto, pretende-se a implementação de diversas funções relacionadas com o tipo de rota comercial eleita de cada nó de uma dada rede para um destino eleito.
+Neste mini-projeto pretende-se avaliar a conectividade de uma rede representada por um grafo, ou seja, determinar qual o número mínimo de nós que ao retirar não permitem que o grafo esteja ligado.
 
-Assim, a função \textit{Dijkstra} elege o tipo de rota e calcula o número de saltos necessários para chegar ao destino.
+Numa primeira fase, dado um par de nós do grafo, calcula-se o número mínimo de nós que é necessário retirar para que não haja nenhum caminho a ligar o par especificado. 
 
-O cálculo das estatísticas para as diferentes rotas e para os números de saltos até ao destino, é feito depois da função anterior ser corrida para todos os destinos possíveis no grafo. Este é feito pelas funções \textit{paths\_statistics} e \textit{number\_hops\_statistics}.
+Posteriormente, fez-se uma análise mais detalhada da rede, repetindo o processo anterior para todos os pares de nós de forma a armazenar a informação do número de nós que foi necessário retirar para cada par.  Com a informação anterior, torna-se possível calcular a probabilidade cumulativa do número de nós a separar um par de nós.
+
+Por fim, é verificado qual o número mínimo de nós que previne o grafo de ser conexo e é mostrado ao utilizador quais são os identificadores dos mesmos, por forma a que a informação do programa possa ser facilmente comprovada.
 
 \section{Abordagem ao problema}
-Decidimos utilizar um algoritmo baseado no algoritmo de \textit{Dijkstra} para a computação das rotas a utilizar dos diversos nós para um destino eleito. Como tal, foi necessário que o programa interpretasse os dados de entrada provenientes de um ficheiro de texto por forma a ficar com a topologia da rede. A topologia é armazenada numa lista de adjacências.
+Sendo do nosso conhecimento que o número mínimo de nós que separa a fonte do destino é igual ao número máximo de caminhos independentes entre a origem e o destino, é de notar que o problema em causa é bastante semelhante à determinação de quais as arestas de um grafo que previnem que este seja conexo. No caso anterior, o problema seria reduzido a um problema de fluxos. Ora recorrendo à técnica de \textit{vertex splitting} será possível resolver o problema de forma semelhante.
 
-Por questões de tempo de resolução do problema e tendo sido assegurado que o número de nós dos grafos não excederia o valor máximo de alocação de memória, a lista de adjacências criada tem por base um vector de ponteiros em que cada posição contém uma lista para as adjacências de cada nó.
+Ao dividir cada nó em dois, define-se $"$nó -$"$ como o nó que irá receber todas as ligações, que o nó respetivo do grafo inicial receberia, entre os restantes e ele mesmo e que apenas tem ligação ao nó com o mesmo identificador que ele ($"$nó +$"$). Define-se $"$nó +$"$ como o nó com o mesmo identificador que o nó que lhe deu origem, mantendo este as ligações entre este nó e todos os outros, que o nó respetivo do grafo inicial teria, recebendo apenas a ligação do respetivo $"$nó -$"$.
 
-Sendo as estatísticas calculadas depois de cada nó saber os caminhos a escolher tendo por base todos os destinos possíveis, após a leitura do ficheiro, o programa procede à realização da nossa função \textit{Dijkstra} para todos os destinos, no fim de cada iteração atualiza-se o número de rotas utilizadas de cada tipo e o número de saltos utilizados para chegar ao destino. No fim de todos os cálculos são então feitas as estatísticas, sendo posteriormente apresentadas ao utilizador.
+Colocando as arestas que ligam as extremidades $"$-$"$ e $"$+$"$  de cada nó com capacidade $"$1$"$ e todas as outras arestas, que já pertenciam ao grafo inicial, com capacidade infinita, aplicando o algoritmo de \textit{Ford-Fulkerson}, é-nos possível resolver o problema enunciado.
 
-\section{Função \textit{Dijkstra}}
-Este algoritmo apesar de se basear no de \textit{Dijkstra} é uma adaptação.
-
-Neste programa temos um vector \textit{heap\_place} que que contém a posição instantânea de cada nó no \textit{heap}. O vector \textit{node\_distance} contém o tipo de caminho para o nó corresponde à sua posição mais um, isto deve-se ao vector começar em zero e termos considerado que não existe identificador zero. O vector \textit{node\_hops} contém o número de saltos necessários até um destino para o nó corresponde à sua posição mais um.
-
-Em cada iteração do algoritmo criado, para retirar o nó pretendido utilizaram-se \textit{heaps}, de forma a melhorar a \textit{performance} do programa para ficheiros de dimensões elevadas. Uma alternativa seria percorrer uma lista com os nós todos, em busca do que tivesse a rota mais favorável, no entanto a complexidade seria O(n), em vez de O(1).
-
-A condição de substituição no vector \textit{node\_distance} em vez de ser o tradicional relaxamento de arestas de menor caminho passa a ser um relaxamento de arestas, em busca da melhor rota, não sendo estas somadas, mas considerando o pior caso, que irá definir a rota. Sempre que um valor do vector que controla as rotas é mudado, é necessário alterar a ordem dos nós dentro do acervo, usando a função \textit{FixUp}. Tradicionalmente, utiliza-se a função \textit{Heapify}, no entanto, devido ao elevado número de nós e ao facto de estarmos a utilizar o algoritmo para cada um deles, o \textit{FixUp} reduz, substancialmente, o número de operações sobre o acervo. No entanto é necessário um compromisso de memória gasta \textit{versus} tempo, sendo o tempo o facto preponderante no cálculo das rotas de \textit{AS's} optámos pela utilização de um vector que guarda a posição de cada nó no acervo.
-
-As funções \textit{NewHeap}, \textit{FixUp}, \textit{Insert}, \textit{RemoveMax} e \textit{HeapEmpty} são adjacentes ao uso de \textit{heaps} e, por isso, não achámos necessária a sua explicação.
-
-Relativamente à complexidade desta função, sendo esta composta pelas funções \textit{Initializa\_distance}, \textit{Heap\_empty}, \textit{Remove\_max}, um ciclo \textit{for} a percorrer as adjacências de um nó, e \textit{Fix\_up}, a complexidade será dada por: O(N)*O(log(N)) + O(M)*O(2log(N)) + O(N) = O(N)*O(log(N)) + O(M)*O(log(N)). Existindo mais arestas do que nós, a complexidade será O(M*log(N)) onde M é o número de ligações e N o número de nós do grafo.
-
-O pseudo-código da função apresentada é o seguinte:
-
-\begin{algorithm}[H]
-\KwResult{Vector with flags of paths and number of hops}
- Initialize variables\;
- 
- \eIf{there are nodes}{
- 	Create heap\;
- 	Initialize node distances, node hops and heap\;
-    \While{heap is not empty}{
-	    Remove heap root\;
-	    \If{root distance!=infinity}{
-			\For{each link}{
-				\If{link unseen}{
-					\If{route through new link is more or equally favorable than the stored route and route is usable}{
-
-						\eIf{keeps the route type}{
-							\If{reaches destiny node in less hops}{
-								Hops of new link = Hops of heap root+1\;
-							}
-						}{
-							Hops of new link = Hops of heap root+1\;
-							Stored route = New route\;
-						}						
-												
-						FixUp heap in position of changed node\;
-						
-						
-					}				
-				}			
-			}
-		}    
-    }
-    Invert flags of paths\;
- }
- 
- \caption{\textit{Dijkstra}}
-\end{algorithm}
-
-\section{Estatísticas}
-Para o cálculo das estatísticas pedidas, utilizámos as variáveis \textit{ones}, \textit{twos}, \textit{threes} e o vector \textit{stat\_hops}, que estão constantemente a ser atualizados no fim de cada iteração, recalculando o número de rotas \textit{customer}, \textit{peer}, \textit{provider} e o número de vezes que se chega ao destino em \textit{i} saltos, sendo \textit{i} o índice do vector \textit{stat\_hops}.
-\subsection{Função \textit{paths\_statistics}}
-O pseudo-código da função apresentada é o seguinte:
-
-\begin{algorithm}[H]
- \KwResult{estatísticas das rotas utilizadas (complexidade O(1))}
-  stat\_customer=ones/total\_routes;
-  
-  stat\_peer=twos/total\_routes\;
-  
-  stat\_provider=threes/total\_routes\;
-  
-  stat\_unusable=unusable/total\_routes\;
- \caption{\textit{paths\_statistics}}
-\end{algorithm}
-\subsection{Função \textit{number\_hops\_statistics}}
-O pseudo-código da função apresentada é o seguinte:
-
-\begin{algorithm}[H]
- \KwResult{estatísticas para cada número de saltos (complexidade O(1))}
- counts total number of hops\;
- 
- \For{each hop number}{
- 	prints ocurrencies/total\;
- }
- 
- \caption{\textit{number\_hops\_statistics}}
-\end{algorithm}
-
-\section{Considerações finais}
-No início do programa, este lê duas vezes o ficheiro que contém as ligações do grafo. Uma para saber qual o maior identificador dos nós e outra para armazenar o grafo sob a forma de lista de adjacências, já depois de a memória ter sido alocada (O(2L)=O(L), sendo L o número de linhas do ficheiro).
-
-Posteriormente, são descobertas os tipos de rotas de todos os nós do grafo para todos destinos, ou seja, é corrido o algoritmo da nossa função \textit{Dijkstra} N vezes. Para cada iteração, é contado o número de vezes que se utiliza cada tipo de rota e o número de saltos que foram necessários para chegar ao destino (O(2N) = O(N)).
-
-Finalmente são feitas as estatísticas dos valores pretendidos (cálculo das probabilidades de cada tipo de rota e do número de saltos para chegar ao destino) cujas funções têm complexidade O(1).
-
-O nosso programa tem assim complexidade O(L + NM*log(N) + 1), ou seja O(NM*log(N)).
-
-\subsection{Ficheiro \textit{NewLargeNetwork.txt}}
-As estatísticas (probabilidades) relativas ao ficheiro fornecido, \textit{NewLargeNetwork.txt} foram obtidas em sensivelmente quinze minutos e meio/dezasseis minutos, sendo os resultados os apresentados na tabela 1.
-
-O facto de as estatísticas das rotas \textit{peer} e \textit{provider} serem iguais, leva-nos a crer que o \textit{output} para este ficheiro não será o correcto. No entanto, durante o prazo estabelecido, não nos foi possível detectar o eventual \textit{bug}. O algoritmo atrás explicado, foi testado \textit{"for correctness"} para uma série de grafos, sendo os mais relevantes o do enunciado e os apresentados nas figuras de 1 a 6. Salientamos que para estes grafos o algoritmo produz os resultados correctos (confirmados por inspecção e descomentando um ciclo \textit{for} do ficheiro \textit{main.c} por forma a ver para cada destino qual o tipo de rota e o número de saltos para cada nó).
-
-Apresentamos na pasta "testes" os ficheiros dos grafos das figuras bem como o do enunciado do mini-projecto.
-
-\begin{table}[h]
-\begin{tabularx}{\textwidth}{X X X X}
-  \textbf{Unusable}: 0.000000 & \textbf{7 hops statistics}=0.065785 & \textbf{17 hops statistics}=0.001464 & \textbf{27 hops statistics}= 0.000018 \\
-  \textbf{customer}: 0.260633 & \textbf{8 hops statistics}=0.037579 &  \textbf{18 hops statistics}=0.000845 & \textbf{28 hops statistics}=0.000006\\ 
-  \textbf{stat\_peer}: 0.369683 & \textbf{9 hops statistics}=0.021683 &  \textbf{19 hops statistics}=0.000455 & \textbf{29 hops statistics}=0.000003\\
-  \textbf{stat\_provider}: 0.369683 & \textbf{10 hops statistics}=0.013142  & \textbf{20 hops statistics}=0.000281 & \textbf{30 hops statistics}=0.000002\\  
-  \textbf{1 hops statistics}=0.000109 & \textbf{11 hops statistics}=0.008477 &  \textbf{21 hops statistics}=0.000265 & \textbf{31 hops statistics}=0.000001\\
-  \textbf{2 hops statistics}=0.030109 & \textbf{12 hops statistics}=0.005674 & \textbf{22 hops statistics}=0.000156 & \textbf{32 hops statistics}=0.000000\\
-  \textbf{3 hops statistics}=0.184297 & \textbf{13 hops statistics}=0.003632 & \textbf{23 hops statistics}=0.000090 & \textbf{33 hops statistics}=0.000000\\
-  \textbf{4 hops statistics}=0.290089 & \textbf{14 hops statistics}=0.002338 & \textbf{24 hops statistics}=0.000065 & \textbf{34 hops statistics}=0.000000\\
-  \textbf{5 hops statistics}=0.209614 & \textbf{15 hops statistics}=0.001904 & \textbf{25 hops statistics}=0.000043 & \textbf{35 hops statistics}=0.000000\\
-  \textbf{6 hops statistics}=0.119813 & \textbf{16 hops statistics}=0.002030 & \textbf{26 hops statistics}=0.000031 & \\
-\end{tabularx}
- \caption{\textit{Output NewLargeNetwork.txt}}
-\end{table}
-
-\pagebreak
-
-\begin{landscape}
-
-\begin{figure}[!htb]
-\minipage{0.32\textwidth}
-  \includegraphics[scale=0.3]{hops_verify.jpg}
-  \caption{teste de verificação de saltos}\label{fig:teste de verificação de saltos}
-\endminipage\hfill
-\minipage{0.32\textwidth}
-  \includegraphics[scale=0.3]{imp_link.jpg}
-  \caption{teste de caminho impossível}\label{fig:teste de caminho impossível}
-\endminipage\hfill
-\minipage{0.32\textwidth}%
-  \includegraphics[width=\linewidth]{peer_impossivel_txt.jpg}
-  \caption{teste de caminho peer impossível}\label{fig:teste de caminho peer impossível}
-\endminipage
-\end{figure}
+\section{Função \textit{ford\_fulkerson}}
 
 
-
-\begin{figure}[!htb]
-\minipage{0.32\textwidth}
-  \includegraphics[scale=0.3]{esquesito.jpg}
-  \caption{teste geral}\label{fig:teste geral}
-\endminipage\hfill
-\minipage{0.32\textwidth}
-  \includegraphics[scale=0.3]{tabela.jpg}
-  \caption{teste inicial}\label{fig:teste inicial}
-\endminipage\hfill
-\minipage{0.32\textwidth}%
-  \includegraphics[width=\linewidth]{many_providers.jpg}
-  \caption{vários providers}\label{fig:vários providers}
-\endminipage
-\end{figure}
-
-\end{landscape}
 
 \end{document}

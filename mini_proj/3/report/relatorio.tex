@@ -40,7 +40,41 @@ Ao dividir cada nó em dois, define-se $"$nó -$"$ como o nó que irá receber t
 Colocando as arestas que ligam as extremidades $"$-$"$ e $"$+$"$  de cada nó com capacidade $"$1$"$ e todas as outras arestas, que já pertenciam ao grafo inicial, com capacidade infinita, aplicando o algoritmo de \textit{Ford-Fulkerson}, é-nos possível resolver o problema enunciado.
 
 \section{Função \textit{ford\_fulkerson}}
+Apesar da referência ao algoritmo com o mesmo nome da função, o nosso código é uma adaptação do algoritmo em questão.
+
+Tendo todas as arestas do grafo dado no ficheiro capacidade infinita e todas as arestas $"$internas$"$ de cada nó capacidade $"$1$"$, não foi necessário preocuparmo-nos com as atualizações dos fluxos. Apenas é necessário atualizar a rede residual no que respeita à inversão do sentido da aresta que liga os nós $-$ e $+$ de cada nó pertencente a dado caminho descoberto, garantindo assim que todos os caminhos descobertos em cada iteração são independentes.
+\vskip 5mm
+O pseudo-código da função será o seguinte:
+\vskip 2mm
+\begin{algorithm}[H]
+ \KwResult{number of nodes that separate the graph and its identifiers}
+	see if there's a path from source to destination\;
+	
+	\While{there's a path from source to destination}{
+		invert edge link between - and + node in each original node from path\;
+		
+		see if there's a path in new residual network\;
+	}
+	
+	see in discovered vector which nodes were only half discovered and count them\;
+	
+	\If{counted nodes are less than previous counts}{
+		pass to a string which nodes prevented the graph from being connex\;
+	}
+ \caption{Função \textit{ford\_fulkerson}}
+\end{algorithm}
+\vskip 5mm
+Para a realização desta função, realizámos sucessivas BFSs por forma a verificar se existia um caminho independente da origem para o destino. Esta função, irá retornar um vetor \textit{discovered} que indica quais os nós que foram descobertos e um vector \textit{parent} que indica através de que nó o nó em causa foi descoberto.
+
+Através desta informação, a função \textit{path} irá reconstruir o caminho da BFS começando pelo destino. Se conseguir chegar à origem significa que o algoritmo conseguiu identificar um caminho independente dos descobertos anteriormente pelo que é necessário alterar novamente a rede residual.
+
+Quando a função indica que não existe caminho entre os nós especificados, significa que se chegou a uma situação semelhante à ilustrada na figura 1. Nesse caso, nos nós da fronteira, onde se verifica qual o corte mínimo, a posição do vetor \textit{discovered} irá conter informação que apenas os nós $-$ foram descobertos ($"$\textit{half discovered}$"$).
 
 
+\begin{figure}[hb]
+  \centering
+  \includegraphics[scale=0.90]{slides.png}
+  \caption{}
+\end{figure}
 
 \end{document}

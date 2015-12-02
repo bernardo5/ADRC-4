@@ -3,9 +3,9 @@
 void cumulative_statistics(int * vector, int size){
 	
 	int i;
-	int cumulative = 0;
+	float cumulative = 0;
 	
-	printf("THERE ARE %d PAIRS OF NODES DIRECTLY CONNECTED\n", vector[0]/2);
+	//printf("THERE ARE %d PAIRS OF NODES DIRECTLY CONNECTED\n", vector[0]/2);
 	
 	for(i=1; i<size; i++){
 		cumulative = cumulative + vector[i];
@@ -14,7 +14,7 @@ void cumulative_statistics(int * vector, int size){
 	printf("THE CUMULATIVE DISTRIBUTION, FOR EVERY NATURAL \"K\" IS THE FOLLOWING:\n");
 	
 	for(i=1; i<size; i++){
-		printf("%d WITH PROBABILITY %d\n", i, vector[i]/cumulative);
+		printf("%d WITH PROBABILITY %f\n", i, vector[i]/cumulative);
 	}
 	
 }
@@ -28,7 +28,7 @@ int main(int argc, char**argv){
 	int initial_node, final_node;
 
 	if(argc<2){
-		printf("too few arguments\n");
+		printf("TOO FEW ARGUMENTS\n");
 		exit(-1);
 	}
 	
@@ -63,7 +63,8 @@ int main(int argc, char**argv){
 				printf("ERROR: SPECIFY A VALID SOURCE AND DESTINATION\n");
 				exit(0);
 			}
-			printf("for specified set of nodes, need to take %d nodes which are:%s\n", ford_fulkerson(&list, size, &parent, initial_node, final_node, &connectivity, min), connectivity);
+			if(contiguous(list, initial_node, final_node)!=0) printf("THERE IS NO WAY OF SEPARATING NODE %d FROM NODE %d BECAUSE THEY ARE CONTIGUOUS\n", initial_node, final_node);
+			else printf("FOR SPECIFIED SET OF NODES, IS NECESSARY TO TAKE %d NODE(S) WHICH IS/ARE:%s\n", ford_fulkerson(&list, size, &parent, initial_node, final_node, &connectivity, min), connectivity);
 			
 		}else{
 		
@@ -86,7 +87,7 @@ int main(int argc, char**argv){
 		}
 		
 		cumulative_statistics(node_statistics, size);
-		printf("IF YOU TAKE THE NODES%s THE GRAPH WILL SPLIT\n", connectivity);
+		printf("IF YOU TAKE THE NODE(S)%s THE GRAPH WILL SPLIT\n", connectivity);
 	}
 	
 	exit(0);

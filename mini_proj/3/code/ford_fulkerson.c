@@ -105,12 +105,6 @@ disc * BFS(node * list, int initial_node, int ** parent, int size){
 		}
 	}
 	
-	/*//PRINT DISCOVERED
-	int i;
-	printf("\n DISCOVERED \n");
-	for(i=0;i<size;i++) printf("\tMINUS %d PLUS %d\n", (discovered[i]).minus, (discovered[i]).plus);
-	*/
-	
 	return discovered;
 	
 }
@@ -173,14 +167,12 @@ int ford_fulkerson(node ** list, int size, int ** parent, int initial_node, int 
 	}
 	
 	int d;
-	/*printf("\n DISCOVERED \n");
-	for(d=0;d<size;d++) printf("\tMINUS %d PLUS %d\n", (discovered[d]).minus, (discovered[d]).plus);
-	*/
 	
 	int count_nodes=0;
 	char buffer[4];
 	
 	for(d=0;d<size;d++){
+		
 		//IF NODE IS SPLITTING THE GRAPH
 		if((discovered[d]).minus != (discovered[d]).plus){
 			count_nodes ++;
@@ -189,10 +181,11 @@ int ford_fulkerson(node ** list, int size, int ** parent, int initial_node, int 
 	
 	if(count_nodes < min){
 		
-		//ADD NODES NEEDED TO SPLIT GRAPH
+		//ADD TO NODES NEEDED TO SPLIT GRAPH
 		bzero((*connectivity), 100);
 		
 		for(d=0;d<size;d++){
+			
 		//IF NODE IS SPLITTING THE GRAPH
 			if((discovered[d]).minus != (discovered[d]).plus){
 				strcat((*connectivity), " ");
@@ -202,8 +195,6 @@ int ford_fulkerson(node ** list, int size, int ** parent, int initial_node, int 
 			} 
 		}
 	}
-	
-	//printf("THE NUMBER OF NODES SEPARATING NODE %d FROM %d ARE %d\n", initial_node, final_node, count_nodes);
 	
 	return count_nodes;
 }

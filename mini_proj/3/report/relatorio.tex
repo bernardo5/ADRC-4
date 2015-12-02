@@ -68,7 +68,7 @@ Para a realização desta função, realizámos sucessivas BFSs por forma a veri
 
 Através desta informação, a função \textit{path} irá reconstruir o caminho da BFS começando pelo destino. Se conseguir chegar à origem significa que o algoritmo conseguiu identificar um caminho independente dos descobertos anteriormente pelo que é necessário alterar novamente a rede residual.
 
-Quando a função indica que não existe caminho entre os nós especificados, significa que se chegou a uma situação semelhante à ilustrada na figura 1. Nesse caso, nos nós da fronteira, onde se verifica qual o corte mínimo, a posição do vetor \textit{discovered} irá conter informação que apenas os nós $-$ foram descobertos ($"$\textit{half discovered}$"$).
+Quando a função indica que não existe caminho entre os nós especificados, significa que se chegou a uma situação semelhante à ilustrada na figura 1, em que o nó mais à esquerda é a origem e o mais à direita o destino. Nesse caso, nos nós da fronteira, onde se verifica qual o corte mínimo, a posição do vetor \textit{discovered} irá conter informação que apenas os nós $-$ foram descobertos ($"$\textit{half discovered}$"$).
 
 
 \begin{figure}[hb]
@@ -76,5 +76,29 @@ Quando a função indica que não existe caminho entre os nós especificados, si
   \includegraphics[scale=0.90]{slides.png}
   \caption{}
 \end{figure}
+
+Este resultado deve-se à sucessiva inversão de arestas $"$interiores$"$, até que a dado ponto seja impossível chegar desde a origem ao destino. Os nós $"$\textit{half discovered}$"$ serão os nós necessários para retirar para que o não seja descoberto nenhum caminho da origem para o destino.
+
+Está também nesta função a terceira parte do projeto, em que nos é pedido para calcular a conetividade do grafo e fornecer os nós que separam o grafo. Esta parte de código encontra-se contemplada no \textit{if} final da função, em que, caso o número de nós necessário retirar para separar um nó de outro seja inferior ao número de nós da iteração anterior, atualiza-se a \textit{string} que contém os índices desses nós, passando a conter apenas os que separaram o grafo nesta iteração. A conetividade é, simplesmente, o número de nós a retirar mínimo após corrido o programa para todos os pares de nós do grafo.
+
+\section{Função \textit{cumulative\_statistics}}
+Esta função destina-se à segunda parte do projeto, em que é necessário calcular a distribuição cumulativa do número mínimo de nós a serem retirados. Não se irá apresentar pseudo-código dada a simplicidade da função.
+
+Ao correr cada iteração da função \textit{ford\_fulkerson} é armazenado num vetor o número de vezes que determinado número de nós é necessário retirar para separar dada origem e destino. Após concluídas todas as iterações ficamos com um vetor que, em cada posição, contém o número de vezes que se necessitou de retirar o valor do índice de cada posição do vetor. %rever linguagem
+
+Após a obtenção do vetor das estatísticas, é calculado na função \textit{cumulative\_statistics} as ocorrências totais de cada número de nós a serem retirados. É, depois, impresso no terminal a divisão das ocorrências de cada índice do vetor pelo valor total das ocorrências, é omitida a posição 0 desse vetor, visto que as estatísticas de nenhum nó ser necessário retirar não é interessante para o projeto, apesar de se ter em conta nas ocorrências totais.
+
+\section{Considerações Finais}
+Com a resolução deste mini-projeto conseguimos compreender melhor o algoritmo de \textit{Ford Fulkerson} que, apesar de adaptado, esteve bastante presente na nossa implementação, bem como algoritmos previamente estudados como a \textit{BFS (Breadth First Search)} e, finalmente, o teorema do \textit{max flow min cut}, dado recentemente nas aulas teóricas.
+
+Existem no entanto, algumas limitações do programa, especificadas no enunciado, como a existência de um máximo de 100 nós com índices entre 0 e 99. Assumimos também que não pode existir nó 1 se não existir nó 0, pois apesar de o programa correr corretamente e o número de nós a retirar ser correto, as estatísticas não irão ser as corretas, visto que o programa assume que existe uma ligação do nó 0, que está em falta no ficheiro de entrada, para todos os outros nós do grafo.
+
+De forma a tornar o programa mais \textit{user friendly} criou-se um menu inicial em que o utilizador escolhe um de dois modos de funcionamento do programa:
+
+\begin{enumerate}
+	\item No primeiro modo o utilizador escolhe uma origem e um destino, existentes no grafo, o programa irá retornar o número de nós necessários para os separar e qual esse conjunto de nós.
+	\item No segundo modo o utilizador não introduz quaisquer \textit{inputs}, o programa irá correr, automaticamente, para todos os pares de nós, calculando a distribuição cumulativa, o número mínimo de nós a retirar para que o grafo seja conexo e, finalmente, o conjunto dos nós a retirar para que tal aconteça.
+\end{enumerate}
+
 
 \end{document}

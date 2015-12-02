@@ -65,7 +65,7 @@ int main(int argc, char**argv){
 				exit(0);
 			}
 			if(contiguous(list, initial_node, final_node)!=0) printf("THERE IS NO WAY OF SEPARATING NODE %d FROM NODE %d BECAUSE THEY ARE CONTIGUOUS\n", initial_node, final_node);
-			else printf("FOR SPECIFIED SET OF NODES, IS NECESSARY TO TAKE %d NODE(S) WHICH IS/ARE:%s\n", ford_fulkerson(&list, size, &parent, initial_node, final_node, &connectivity, min), connectivity);
+			else printf("FOR SPECIFIED SET OF NODES, IS NECESSARY TO TAKE %d NODE(S) WHICH IS/ARE:%s\n", ford_fulkerson(&list, size, &parent, initial_node, final_node, &connectivity, &min), connectivity);
 			
 		//STATISTICS
 		}else if(option == 2){
@@ -73,14 +73,14 @@ int main(int argc, char**argv){
 			int colum;
 			int row;
 			
-			
 			for(colum=0; colum<size; colum++){
 				for(row=0; row<size; row++){
 					if(row!=colum){
 						if(contiguous(list, colum, row)!=0){
 							(node_statistics[0]) ++;
 						}else{
-							(node_statistics[ford_fulkerson(&list, size, &parent, colum, row, &connectivity, min)]) ++;
+							min = ford_fulkerson(&list, size, &parent, colum, row, &connectivity, &min);
+							(node_statistics[min]) ++;
 							Read_file(ficheiroIn, &list);
 						}
 					}

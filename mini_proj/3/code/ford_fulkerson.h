@@ -32,4 +32,4 @@ disc * BFS(node * list, int initial_node, int ** parent, int size);
 
 int path(int initial_node, int final_node, int * parent);
 
-int ford_fulkerson(node ** list, int size, int ** parent, int initial_node, int final_node, char ** connectivity, int min);
+int ford_fulkerson(node ** list, int size, int ** parent, int initial_node, int final_node, char ** connectivity, int * min);

@@ -123,7 +123,7 @@ int path(int initial_node, int final_node, int * parent){
 	return path;
 }
 
-int ford_fulkerson(node ** list, int size, int ** parent, int initial_node, int final_node, char ** connectivity, int min){
+int ford_fulkerson(node ** list, int size, int ** parent, int initial_node, int final_node, char ** connectivity, int * min){
 	
 	int i;
 	adj_node * aux_adj_node;
@@ -179,7 +179,9 @@ int ford_fulkerson(node ** list, int size, int ** parent, int initial_node, int 
 		} 
 	}
 	
-	if(count_nodes < min){
+	if(count_nodes < (*min)){
+		
+		(*min) = count_nodes;
 		
 		//ADD TO NODES NEEDED TO SPLIT GRAPH
 		bzero((*connectivity), 100);

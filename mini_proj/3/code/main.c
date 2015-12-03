@@ -54,7 +54,7 @@ int main(int argc, char**argv){
 		int * parent = malloc(size*sizeof(int));
 
 		/**********************************************************************/
-		int min = 100;	
+		int min = 100, nod=0;	
 		
 		//ONE SOURCE ONE DESTINATION
 		if(option == 1){
@@ -79,8 +79,8 @@ int main(int argc, char**argv){
 						if(contiguous(list, colum, row)!=0){
 							(node_statistics[0]) ++;
 						}else{
-							min = ford_fulkerson(&list, size, &parent, colum, row, &connectivity, &min);
-							(node_statistics[min]) ++;
+							nod = ford_fulkerson(&list, size, &parent, colum, row, &connectivity, &min);
+							(node_statistics[nod]) ++;
 							Read_file(ficheiroIn, &list);
 						}
 					}

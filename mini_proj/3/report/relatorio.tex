@@ -96,6 +96,23 @@ Quando o vetor fica com os valores finais relativos à rede dada no ficheiro, é
 \section{Considerações Finais}
 Com a resolução deste mini-projeto conseguimos compreender melhor o algoritmo de \textit{Ford Fulkerson} que, apesar de adaptado, esteve bastante presente na nossa implementação, bem como algoritmos previamente estudados como a \textit{BFS (Breadth First Search)} e, finalmente, o teorema do \textit{max flow min cut}, dado recentemente nas aulas teóricas.
 
+Para testar \textit{for correctness} o nosso código, utilizámos uma série de grafos, sendo os mais relevantes os apresentados nas figuras 1, 2, 3 e 4.
+
+\begin{figure}[!htb]
+\minipage{0.32\textwidth}
+   \includegraphics[width=\textwidth]{esquesito.png}
+    \caption{É preciso tirar 2 nós (ex. tirar nós 1 e 3) para separar o grafo}
+\endminipage\hfill
+\minipage{0.32\textwidth}
+   \includegraphics[width=\textwidth]{esquesito1.png}
+    \caption{É preciso tirar só 1 nó (nó 0) para separar o grafo}
+\endminipage\hfill
+\minipage{0.32\textwidth}%
+  \includegraphics[scale=0.3]{grafo_pequeno.png}
+  \caption{É preciso tirar só 1 nó (nó 1) para separar o grafo}
+\endminipage
+\end{figure}
+
 Existem no entanto, algumas limitações do programa, especificadas no enunciado, como a existência de um máximo de 100 nós com índices entre 0 e 99. Assumimos também que não pode existir nó 1 se não existir nó 0, pois apesar de o programa correr corretamente e o número de nós a retirar ser correto, as estatísticas não irão ser as corretas, visto que o programa assume que existe uma ligação do nó 0, que está em falta no ficheiro de entrada, para todos os outros nós do grafo.
 
 De forma a tornar o programa mais \textit{user friendly} criou-se um menu inicial em que o utilizador escolhe um de dois modos de funcionamento do programa:
@@ -106,7 +123,5 @@ De forma a tornar o programa mais \textit{user friendly} criou-se um menu inicia
 \end{enumerate}
 
 A complexidade geral do programa será assim, considerando o pior caso, O(n)[\textit{complexidade da função "init\_vector"}]+O(n\textsuperscript{2})[\textit{repetição de "ford\_folkerson$"$ para todos os pares de nós do grafo}]*O(m)[\textit{Complexidade da função "ford\_folkerson"}] +O(n) [\textit{Complexidade da função "cumulative\_statistics"}]. A complexidade final será entao O(mn\textsuperscript{2}), sendo \textit{m} o número de arestas e \textit{n} o número de nós.
-
-Para testar \textit{for correctness} o nosso código, utilizámos uma série de grafos, sendo os mais relevantes os apresentados nas figuras 1, 2, 3, 4 e 5.
 
 \end{document}

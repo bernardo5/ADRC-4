@@ -48,7 +48,8 @@ Tendo todas as arestas do grafo dado no ficheiro capacidade infinita e todas as 
 O pseudo-código da função será o seguinte:
 \vskip 2mm
 \begin{algorithm}[H]
- \KwResult{number of nodes that separate the graph and its identifiers}
+ \KwResult{number of nodes that separate the graph and its identifiers;}
+ 	\vskip 1mm
 	see if there's a path from source to destination\;
 	
 	\While{there's a path from source to destination}{
@@ -65,11 +66,11 @@ O pseudo-código da função será o seguinte:
  \caption{Função \textit{ford\_fulkerson}}
 \end{algorithm}
 \vskip 5mm
-Para a realização desta função, realizámos sucessivas BFSs por forma a verificar se existia um caminho independente da origem para o destino. Esta função, irá retornar um vetor \textit{discovered} que indica quais os nós que foram descobertos e um vector \textit{parent} que indica através de que nó o nó em causa foi descoberto.
+Para a realização desta função, realizámos sucessivas BFSs por forma a verificar se existia um caminho independente da origem para o destino. Esta função, irá retornar um vetor \textit{discovered} que indica quais os nós que foram descobertos e um vector \textit{parent} que indica através de que nó, o nó em causa foi descoberto.
 
 Através desta informação, a função \textit{path} irá reconstruir o caminho da BFS começando pelo destino. Se conseguir chegar à origem significa que o algoritmo conseguiu identificar um caminho independente dos descobertos anteriormente pelo que é necessário alterar novamente a rede residual.
 
-Quando a função indica que não existe caminho entre os nós especificados, significa que se chegou a uma situação semelhante à ilustrada na figura 1, em que o nó mais à esquerda é a origem e o mais à direita o destino. Nesse caso, nos nós da fronteira, onde se verifica qual o corte mínimo, a posição do vetor \textit{discovered} irá conter informação que apenas os nós $-$ foram descobertos ($"$\textit{half discovered}$"$).
+Quando a função indica que não existe caminho entre os nós especificados, significa que se chegou a uma situação semelhante à ilustrada na figura 1, em que o nó mais à esquerda é a origem e o mais à direita o destino. Nesse caso, nos nós da fronteira, onde se verifica qual o corte mínimo, a posição do vetor \textit{discovered} irá conter informação que apenas os nós $"$-$"$ foram descobertos ($"$\textit{half discovered}$"$).
 
 
 \begin{figure}[hb]
@@ -80,7 +81,7 @@ Quando a função indica que não existe caminho entre os nós especificados, si
 
 Este resultado deve-se à sucessiva inversão de arestas $"$interiores$"$, até que a dado ponto seja impossível chegar desde a origem ao destino. Os nós $"$\textit{half discovered}$"$ serão os nós necessários para retirar para que o não seja descoberto nenhum caminho da origem para o destino.
 
-Está também nesta função a terceira parte do projeto, em que nos é pedido para calcular a conetividade do grafo e fornecer os nós que separam o grafo. Esta parte de código encontra-se contemplada no \textit{if} final da função, em que, caso o número de nós que é necessário retirar para separar um nó de outro seja inferior ao número de nós da iteração anterior, atualiza-se a \textit{string} que contém os indentificadores desses nós, passando a conter apenas os que separaram o grafo nesta iteração. A conetividade é, simplesmente, o número de nós a retirar mínimo após corrido o programa para todos os pares de nós do grafo.
+Esta função contém também a terceira parte do projeto, em que nos é pedido para calcular a conetividade do grafo e fornecer os nós que separam o grafo. Esta parte de código encontra-se contemplada no \textit{if} final da função, em que, caso o número de nós que é necessário retirar para separar um nó de outro seja inferior ao número de nós da iteração anterior, atualiza-se a \textit{string} que contém os indentificadores desses nós, passando a conter apenas os que separaram o grafo nesta iteração. A conetividade é, simplesmente, o número mínimo de nós a retirar após corrido o programa para todos os pares de nós do grafo.
 
 No que respeita à complexidade do algoritmo, tal como o algoritmo original, terá uma complexidade O(mf). No algoritmo original, \textit{m} representa as arestas do grafo e \textit{f} o fluxo máximo encontrado (para as inversões) que neste caso é unitário, ficando a complexidade simplificada para O(m).
 

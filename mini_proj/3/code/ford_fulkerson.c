@@ -177,14 +177,9 @@ int ford_fulkerson(node ** list, int size, int ** parent, int initial_node, int 
 		if((discovered[d]).minus != (discovered[d]).plus){
 			count_nodes ++;
 		} 
-	}
-	
-	printf("min=%d\n", *min);
-	printf("count_nodes=%d\n", count_nodes);
-	
+	}	
 	
 	if(count_nodes < (*min)){
-		printf("new string\n");
 		(*min) = count_nodes;
 		
 		//ADD TO NODES NEEDED TO SPLIT GRAPH
